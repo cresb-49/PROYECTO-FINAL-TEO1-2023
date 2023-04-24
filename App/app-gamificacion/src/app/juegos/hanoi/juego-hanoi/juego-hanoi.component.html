@@ -1,0 +1,7 @@
+<h1>Torre de Hanoi</h1>
+<div id="contenedorTorres" class="contenedorTorres">
+    <ng-template ngFor let-torre [ngForOf]="torres">
+        <app-torre-hanoi [torre]="torre" [altura]="generarTorres()" [cantidadTorres]="parametros.torres" [movimientoDisco]="movimientoDisco" [torres]="torres"></app-torre-hanoi>
+    </ng-template>
+</div>
+
