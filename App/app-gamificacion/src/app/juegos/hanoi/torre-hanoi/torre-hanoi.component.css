@@ -1,0 +1,11 @@
+.torre {
+    border: 1px solid;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 400px;
+    border-radius: 5px;
+    background-color: rgb(187, 236, 238);
+    margin: 5px;
+}

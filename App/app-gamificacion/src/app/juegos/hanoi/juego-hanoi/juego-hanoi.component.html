@@ -1,0 +1,19 @@
+<h1>Torre de Hanoi</h1>
+<div *ngIf="estadisticaHanoi.terminado">
+    Juego Terminado
+    <button (click)="registrarPartida()">Registrar Partida</button>
+</div>
+<div id="contenedorTorres" class="contenedorTorres">
+    <ng-template ngFor let-torre [ngForOf]="torres">
+        <app-torre-hanoi [torre]="torre" [altura]="generarTorres()" [cantidaDiscos]="parametros.discos"
+            [movimientoDisco]="movimientoDisco" [torres]="torres" [estadisticas]="estadisticaHanoi"></app-torre-hanoi>
+    </ng-template>
+</div>
+
+<p>Movimientos esperados: {{estadisticaHanoi.movExperados}}, movimientos realizados: {{estadisticaHanoi.movimientos.length}}</p>
+<h3>Movimientos</h3>
+<ng-template ngFor let-mov [ngForOf]="this.estadisticaHanoi.movimientos">
+    <ul>
+        <li>{{mov}}</li>
+    </ul>
+</ng-template>
