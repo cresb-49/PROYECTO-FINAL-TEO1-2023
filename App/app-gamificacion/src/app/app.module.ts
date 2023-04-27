@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { JuegoHanoiComponent } from './juegos/hanoi/juego-hanoi/juego-hanoi.component';
 import { DiscoHanoiComponent } from './juegos/hanoi/disco-hanoi/disco-hanoi.component';
 import { TorreHanoiComponent } from './juegos/hanoi/torre-hanoi/torre-hanoi.component';
+import { JuegoCrucigramaComponent } from './juegos/crucigrama/juego-crucigrama/juego-crucigrama.component';
 
 
 @NgModule({
@@ -13,7 +14,8 @@ import { TorreHanoiComponent } from './juegos/hanoi/torre-hanoi/torre-hanoi.comp
     AppComponent,
     JuegoHanoiComponent,
     DiscoHanoiComponent,
-    TorreHanoiComponent
+    TorreHanoiComponent,
+    JuegoCrucigramaComponent
   ],
   imports: [
     BrowserModule,
