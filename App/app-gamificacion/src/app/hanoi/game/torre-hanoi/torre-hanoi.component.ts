@@ -1,6 +1,6 @@
 import { Component, ElementRef, Input, ViewChild } from '@angular/core';
-import { Torre } from '../models/Torre';
-import { EstadisticaHanoi } from '../models/EstadisticaHanoi';
+import { Torre } from '../../models/Torre';
+import { EstadisticaHanoi } from '../../models/EstadisticaHanoi';
 
 
 @Component({

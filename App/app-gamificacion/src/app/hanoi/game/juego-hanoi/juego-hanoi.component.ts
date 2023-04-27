@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { Hanoi } from '../models/Hanoi';
-import { Torre } from '../models/Torre';
-import { Disco } from '../models/Disco';
-import { EstadisticaHanoi } from '../models/EstadisticaHanoi';
+import { Hanoi } from '../../models/Hanoi';
+import { Torre } from '../../models/Torre';
+import { Disco } from '../../models/Disco';
+import { EstadisticaHanoi } from '../../models/EstadisticaHanoi';
 
 @Component({
   selector: 'app-juego-hanoi',

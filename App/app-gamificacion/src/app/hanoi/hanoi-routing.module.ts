@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { MainComponent } from './pages/main/main.component';
-import { JuegoHanoiComponent } from './juego-hanoi/juego-hanoi.component';
+import { JuegoHanoiComponent } from './game/juego-hanoi/juego-hanoi.component';
 import { PrincipalComponent } from './pages/principal/principal.component';
 
 const routes: Routes = [
