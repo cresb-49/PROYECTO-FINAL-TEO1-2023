@@ -1,0 +1,46 @@
+<div style="margin: 1%;">
+    <div class="row contenedor-principal">
+        <div class="col bordes-juegos-right ">
+            <div class="row d-flex justify-content-center align-items-center" style="height: 700px;">
+                <img *ngIf="imagen === 0" src="../../../assets/torres-de-hanoi.jpg" class="imagenJuego" alt="Imagen Juego">
+                <img *ngIf="imagen === 1" src="../../../assets/ahorcado.png" class="imagenJuego" alt="Imagen Juego">
+                <img *ngIf="imagen === 2" src="../../../assets/crucigrama.png" class="imagenJuego" alt="Imagen Juego">
+            </div>
+            <div class="row bordes-juegos-top d-flex justify-content-center align-items-center" style="height: 100px;">
+                <div class="col-6 d-flex justify-content-center align-items-center">
+                    <button class="btn button-play">Play</button>
+                </div>
+                <div class="col-6 d-flex justify-content-center align-items-center">
+                    <input class="input-code form-control" type="number" name="codigo" id="codigo">
+                </div>
+            </div>
+        </div>
+        <div class="col bordes-juegos-right">
+            <div class="row d-flex justify-content-center align-items-center" style="height: 700px;">
+                {{desc}}
+            </div>
+            <div class="row bordes-juegos-top" style="height: 100px;">
+                <div class="col-4 d-flex justify-content-center align-items-center">
+                    Me Gusta
+                </div>
+                <div class="col bordes-juegos-left d-flex justify-content-center align-items-center">
+                    <textarea name="comentarios" id="comentarios" cols="30" class="text-comentario"></textarea>
+                    <button class="btn btn-enviar">enviar</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-3">
+            <div class="row d-flex justify-content-center align-items-center" style="height: 100px;">
+                Informacion de gusta
+            </div>
+            <div class="row bordes-juegos-top d-flex justify-content-center align-items-center" style="height: 700px;">
+                <div class="contenedorComentarios">
+                    <ng-template ngFor let-comentario [ngForOf]="comentarios">
+                        //TODO:Import del componente comentarios
+                        Comentarios del juego
+                    </ng-template>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,59 @@
+.bordes-juegos-top{
+    border-top: 7px solid #E0F04F;
+}
+.bordes-juegos-btm{
+    border-bottom: 7px solid #E0F04F;
+}
+.bordes-juegos-left{
+    border-left: 7px solid #E0F04F;
+}
+.bordes-juegos-right{
+    border-right: 7px solid #E0F04F;
+}
+
+.contenedor-principal{
+    border: 7px solid #E0F04F;
+    background: #22E685;
+    border-radius: 7px;
+}
+
+.button-play{
+    background: #E0F04F;
+    border: 4px solid #69D957;
+    width: 300px;
+    height: 50px;
+    font-size: 25px;
+}
+
+.input-code{
+    background: #E0F04F;
+    border: 4px solid #69D957;
+    border-radius: 7px;
+    height: 50px;
+    width: 300px;
+}
+
+.imagenJuego{
+    height: 95%;
+    border-radius: 7px;
+}
+
+.btn-enviar{
+    background: #E0F04F;
+    height: 80px;
+    border: 4px solid #69D957;
+    border-radius: 0px 7px 7px 0px;
+}
+
+.text-comentario{
+    height: 80px;
+    width: 350px;
+    background: #E0F04F;
+    border: 4px solid #69D957;
+    resize: none;
+}
+
+.contenedorComentarios{
+    display: flex;
+    flex-direction: column;
+}

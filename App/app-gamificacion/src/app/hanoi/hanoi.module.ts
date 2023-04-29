@@ -7,7 +7,7 @@ import { DiscoHanoiComponent } from './game/disco-hanoi/disco-hanoi.component';
 import { JuegoHanoiComponent } from './game/juego-hanoi/juego-hanoi.component';
 import { TorreHanoiComponent } from './game/torre-hanoi/torre-hanoi.component';
 import { PrincipalComponent } from './pages/principal/principal.component';
-
+import { PreviewGameComponent } from '../shared/preview-game/preview-game.component';
 
 @NgModule({
   declarations: [
@@ -16,6 +16,7 @@ import { PrincipalComponent } from './pages/principal/principal.component';
     DiscoHanoiComponent,
     TorreHanoiComponent,
     PrincipalComponent,
+    PreviewGameComponent
   ],
   imports: [
     CommonModule,
