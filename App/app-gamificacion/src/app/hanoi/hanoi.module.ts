@@ -8,6 +8,7 @@ import { JuegoHanoiComponent } from './game/juego-hanoi/juego-hanoi.component';
 import { TorreHanoiComponent } from './game/torre-hanoi/torre-hanoi.component';
 import { PrincipalComponent } from './pages/principal/principal.component';
 import { PreviewGameComponent } from '../shared/preview-game/preview-game.component';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -15,12 +16,12 @@ import { PreviewGameComponent } from '../shared/preview-game/preview-game.compon
     JuegoHanoiComponent,
     DiscoHanoiComponent,
     TorreHanoiComponent,
-    PrincipalComponent,
-    PreviewGameComponent
+    PrincipalComponent
   ],
   imports: [
     CommonModule,
-    HanoiRoutingModule
+    HanoiRoutingModule,
+    SharedModule
   ]
 })
 export class HanoiModule { }
