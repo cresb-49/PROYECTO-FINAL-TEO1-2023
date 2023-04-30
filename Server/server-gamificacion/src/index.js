@@ -37,6 +37,7 @@ async function start() {
 //Rutas de la api
 app.use('/api',require('./routes/usuario'));
 app.use('/api',require('./routes/juego'));
+app.use('/api',require('./routes/comentario'));
 
 //Inicio de la conexion con la base de datos
 start()

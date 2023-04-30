@@ -9,7 +9,7 @@ const registro = async (req, res) => {
     });
     try {
         await insert.save();
-        res.status(200).json({ mensaje: 'Se registro con exito el usuario' });
+        res.status(200).json({ mensaje: 'Se registró con éxito el usuario' });
     } catch (error) {
         res.state(409).json({ error: error.message });
     }
