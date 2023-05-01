@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { MainComponent } from './pages/main/main.component';
 import { PrincipalComponent } from './pages/principal/principal.component';
+import { JuegoComponent } from './pages/juego/juego.component';
 
 const routes: Routes = [
   {
@@ -9,6 +10,7 @@ const routes: Routes = [
     component: MainComponent,
     children: [
       { path: "principal", component: PrincipalComponent },
+      { path: "juego", component: JuegoComponent },
       { path: "**", redirectTo: "principal" }
     ]
   }
