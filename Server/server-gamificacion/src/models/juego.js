@@ -2,10 +2,27 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const model = mongoose.model;
 
-const juegoSchema = new Schema({
-    nombre:String,
-    autores:String,
-    partidas:Array
+const like = new Schema({
+    usuario: String,
+    like: Boolean
+}, {
+    versionKey: false,
+    _id: false
 });
 
-module.exports = model('juego',juegoSchema);
+const juegoSchema = new Schema({
+    codigo: {
+        type: String,
+        unique: true
+    },  
+    nombre: String,
+    autores: String,
+    like: {
+        type: [like],
+        default: []
+    }
+}, {
+    versionKey: false
+});
+
+module.exports = model('juego', juegoSchema);
