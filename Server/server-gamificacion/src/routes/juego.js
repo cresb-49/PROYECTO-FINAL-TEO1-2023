@@ -3,8 +3,14 @@ const router = express.Router();
 
 const juegoController = require('../controllers/juego');
 
-router.get('/juego',juegoController.getJuego);
+router.get('/juego', juegoController.getJuego);
 
-router.get('/juegos',juegoController.getJuegos);
+router.get('/juegos', juegoController.getJuegos);
+
+router.post('/juego/like', juegoController.valorizarJuego);
+
+router.get('/juego/like', juegoController.isLike);
+
+router.delete('/juego/like', juegoController.elimimarLike);
 
 module.exports = router;
