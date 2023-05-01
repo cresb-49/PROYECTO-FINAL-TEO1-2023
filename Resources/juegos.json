@@ -1,0 +1,20 @@
+[
+    {
+        "codigo": "J00001",
+        "nombre": "Torre de Hanoi",
+        "autores": "Carlos",
+        "like": []
+    },
+    {
+        "codigo": "J00002",
+        "nombre": "Ahorcado",
+        "autores": "Oscar",
+        "like": []
+    },
+    {
+        "codigo": "J00003",
+        "nombre": "Crucigrama",
+        "autores": "Fernando",
+        "like": []
+    }
+]
