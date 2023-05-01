@@ -1,4 +1,4 @@
-const ENCRYPT_VALUE = 'SLIURNVIGSLVGNSTUIGREVGSYEFVSFSGVBSGKF';
+const ENCRYPT_VALUE = 10;
 const bycrypt = require('bcryptjs');
 
 
