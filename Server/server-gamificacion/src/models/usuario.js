@@ -8,4 +8,6 @@ const usuarioSchema =new Schema({
     rol:String
 })
 
+usuarioSchema.index({username: 1}, {unique: true});
+
 module.exports = model('usuario',usuarioSchema);

@@ -3,8 +3,8 @@ const bycrypt = require('bcryptjs');
 
 
 const encrypt = async (text) => {
-    const hash = await bycrypt.hash(text, ENCRYPT_VALUE);
-    return hash;
+    const value = await bycrypt.hash(text, ENCRYPT_VALUE, salt);
+    return value;
 }
 
 const compare = async (password, hashPassword) => {
