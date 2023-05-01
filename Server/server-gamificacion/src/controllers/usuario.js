@@ -2,7 +2,6 @@ const usuario = require('../models/usuario');
 const encrypt = require('../helpers/encrypt');
 
 const registro = async (req, res) => {
-    console.log(req.body);
     const insert = new usuario({
         username: req.body.username,
         password: await encrypt.encrypt(req.body.password),
@@ -12,7 +11,7 @@ const registro = async (req, res) => {
         await insert.save();
         res.status(200).json({ mensaje: 'Se registró con éxito el usuario' });
     } catch (error) {
-        res.state(409).json({ error: error.message });
+        res.status(409).json({ error: error.message });
     }
 }
 
@@ -25,7 +24,7 @@ const login = async (req, res) => {
         } else {
             const isCorrect = await encrypt.compare(req.body.password, result.password);
             if (isCorrect) {
-                res.status(200).json({ mensaje: 'Sesión iniciada' });
+                res.status(200).json({ mensaje: 'Sesión iniciada', usuario: result });
             } else {
                 res.status(409).json({ error: `Password incorrecta` });
             }

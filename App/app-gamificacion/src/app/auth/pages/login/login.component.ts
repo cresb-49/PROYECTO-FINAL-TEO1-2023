@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-login',
@@ -46,11 +47,30 @@ export class LoginComponent {
         username,
         password
       }
-
       this.authService.login(body)
         .subscribe({
-          next: (result: any) => { console.log(result); },
-          error: (error: any) => { console.log(error.error); }
+          next: (result: any) => {
+            localStorage.setItem("usuario", JSON.stringify(result.usuario))
+            setTimeout(() => {
+              this.router.navigate(['']);
+            }, 0);
+            setTimeout(() => {
+              Swal.fire({
+                position: 'top-end',
+                icon: 'success',
+                title: result.mensaje,
+                showConfirmButton: false,
+                timer: 1500
+              })
+            }, 500);
+          },
+          error: (error: any) => {
+            Swal.fire({
+              icon: 'error',
+              title: 'Error',
+              text: error.error.error
+            })
+          }
         });
     }
   }

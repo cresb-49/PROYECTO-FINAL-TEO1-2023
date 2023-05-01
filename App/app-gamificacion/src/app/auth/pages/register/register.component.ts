@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-register',
@@ -51,11 +52,24 @@ export class RegisterComponent {
         password,
         rol
       }
-
       this.authService.register(body)
         .subscribe({
-          next: (result: any) => { console.log(result); },
-          error: (error: any) => { console.log(error); }
+          next: (result: any) => {
+            Swal.fire({
+              icon: 'success',
+              title: 'Usuario creado',
+              text: result.mensaje
+            });
+            this.miFormulario.reset();
+            this.router.navigate(['/auth/login']);
+          },
+          error: (error: any) => {
+            Swal.fire({
+              icon: 'error',
+              title: 'Error al crear usuario',
+              text: error.error.error
+            })
+          }
         });
     }
   }
