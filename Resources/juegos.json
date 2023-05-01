@@ -16,5 +16,11 @@
         "nombre": "Crucigrama",
         "autores": "Fernando",
         "like": []
+    },
+    {
+        "codigo": "J00004",
+        "nombre": "Sopa de Letras",
+        "autores": "Fernando,Oscar,Carlos",
+        "like": []
     }
 ]
