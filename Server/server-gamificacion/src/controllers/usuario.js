@@ -2,6 +2,7 @@ const usuario = require('../models/usuario');
 const encrypt = require('../helpers/encrypt');
 
 const registro = async (req, res) => {
+    console.log(req.body);
     const insert = new usuario({
         username: req.body.username,
         password: await encrypt.encrypt(req.body.password),
