@@ -2,7 +2,8 @@
     <div class="row contenedor-principal">
         <div class="col bordes-juegos-right ">
             <div class="row d-flex justify-content-center align-items-center" style="height: 700px;">
-                <img *ngIf="imagen === 0" src="../../../assets/torres-de-hanoi.jpg" class="imagenJuego" alt="Imagen Juego">
+                <img *ngIf="imagen === 0" src="../../../assets/torres-de-hanoi.jpg" class="imagenJuego"
+                    alt="Imagen Juego">
                 <img *ngIf="imagen === 1" src="../../../assets/ahorcado.png" class="imagenJuego" alt="Imagen Juego">
                 <img *ngIf="imagen === 2" src="../../../assets/crucigrama.png" class="imagenJuego" alt="Imagen Juego">
             </div>
@@ -23,21 +24,22 @@
                 <div class="col-4 d-flex justify-content-center align-items-center">
                     Me Gusta
                 </div>
-                <div class="col bordes-juegos-left d-flex justify-content-center align-items-center">
-                    <textarea name="comentarios" id="comentarios" cols="30" class="text-comentario"></textarea>
+                <div class="col-4 bordes-juegos-left d-flex align-items-center">
+                    <textarea name="comentarios" placeholder="Deja un comentario" id="comentarios" cols="30"
+                        class="text-comentario"></textarea>
                     <button class="btn btn-enviar">enviar</button>
                 </div>
             </div>
         </div>
         <div class="col-3">
             <div class="row d-flex justify-content-center align-items-center" style="height: 100px;">
-                Informacion de gusta
+                Cantidad de Me Gusta y No Me Gusta
             </div>
             <div class="row bordes-juegos-top d-flex justify-content-center align-items-center" style="height: 700px;">
                 <div class="contenedorComentarios">
+                    //TODO: Import del componente comentarios<br>
                     <ng-template ngFor let-comentario [ngForOf]="comentarios">
-                        //TODO:Import del componente comentarios
-                        Comentarios del juego
+                        Comentario<br>
                     </ng-template>
                 </div>
             </div>
