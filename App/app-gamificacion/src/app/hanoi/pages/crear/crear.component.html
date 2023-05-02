@@ -1,0 +1,46 @@
+<div class="container contenedor">
+    <h3>Juego Personalizado Torres de Hanoi</h3>
+    <p>Para realizar una partida personalizada de este juego se debe de seleccionar la cantidad de torreas y discos
+        pertenecientes al disco, ya creado este juego debemos de compartir el codigo del juego generado para poder
+        registrar resultados</p>
+    <div class="mb-3 form-crear">
+        <div class="input-group mb-3">
+            <label class="input-group-text" for="inputDiscos">Cantidad de Discos</label>
+            <select class="form-select" id="inputDiscos" [(ngModel)]="cantidadDiscos">
+                <option *ngFor="let numd of numeroDiscos" [ngValue]="numd">
+                    {{numd.value}}
+                </option>
+            </select>
+        </div>
+        <div class="input-group mb-3">
+            <label class="input-group-text" for="inputTorres">Cantidad de Torres</label>
+            <select class="form-select" id="inputTorres" [(ngModel)]="cantidadTorres">
+                <option *ngFor="let numt of numeroTorres" [ngValue]="numt">
+                    {{numt.value}}
+                </option>
+            </select>
+        </div>
+        <button class="btn btn-crear" (click)="generarPartida()">Crear</button>
+    </div>
+    <h4>Previsualización</h4>
+    <p><strong>Cantidad de Torres: </strong>{{cantidadTorres.value}}</p>
+    <p><strong>Cantidad de Discos: </strong>{{cantidadDiscos.value}}</p>
+    <div class="previa" [ngStyle]="{'height':  ((cantidadDiscos.value*32)+20+25)+'px'}">
+        <div *ngFor="let t of numeroTorresRen">
+            <div *ngIf=" t.value <= cantidadTorres.value">
+                <div class="torre" [ngStyle]="{'height':  ((cantidadDiscos.value*32)+25)+'px'}">
+                    Torre #{{t.value}}
+                    <div *ngIf="t.value === 1">
+                        <div *ngFor="let d of numeroDiscosRen">
+                            <div *ngIf=" d.value <= cantidadDiscos.value">
+                                <div class="disco"[ngStyle]="{'width': d.value === 9 ? '390px' : d.value === 8 ? '351px' : d.value === 7 ? '312px' : d.value === 6 ? '273px' : d.value === 5 ? '234px' : d.value === 4 ? '195px' : d.value === 3 ? '156px' : d.value === 2 ? '117px' : '78px'}">
+                                    Disco #{{d.value}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
