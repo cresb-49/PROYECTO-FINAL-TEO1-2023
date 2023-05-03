@@ -1,0 +1,44 @@
+<header>
+    <h1>Juego de Ahorcado</h1>
+</header>
+<main>
+    <img id="imagen" [src]="srcImagen" alt="Ahorcado" />
+    <div>
+        <p id="palabra_a_adivinar">
+        </p>
+        <button class="btn btn-primary" (click)="obtenerPalabra()" [disabled]="botonDesabilitado">Obtener palabra</button>
+        <button class="btn btn-danger float-end" (click)="terminarJuego()" [disabled]="botonDesabilitado">Terminar Juego</button>
+            
+        <p id="resultado"></p>
+
+        <div id="letras">
+            <button class="btn btn-success" (click)="clickTecla('a', $event)">a</button>
+            <button class="btn btn-success" (click)="clickTecla('b', $event)">b</button>
+            <button class="btn btn-success" (click)="clickTecla('c', $event)">c</button>
+            <button class="btn btn-success" (click)="clickTecla('d', $event)">d</button>
+            <button class="btn btn-success" (click)="clickTecla('e', $event)">e</button>
+            <button class="btn btn-success" (click)="clickTecla('f', $event)">f</button>
+            <button class="btn btn-success" (click)="clickTecla('g', $event)">g</button>
+            <button class="btn btn-success" (click)="clickTecla('h', $event)">h</button>
+            <button class="btn btn-success" (click)="clickTecla('i', $event)">i</button>
+            <button class="btn btn-success" (click)="clickTecla('j', $event)">j</button>
+            <button class="btn btn-success" (click)="clickTecla('k', $event)">k</button>
+            <button class="btn btn-success" (click)="clickTecla('l', $event)">l</button>
+            <button class="btn btn-success" (click)="clickTecla('m', $event)">m</button>
+            <button class="btn btn-success" (click)="clickTecla('n', $event)">n</button>
+            <button class="btn btn-success" (click)="clickTecla('ñ', $event)">ñ</button>
+            <button class="btn btn-success" (click)="clickTecla('o', $event)">o</button>
+            <button class="btn btn-success" (click)="clickTecla('p', $event)">p</button>
+            <button class="btn btn-success" (click)="clickTecla('q', $event)">q</button>
+            <button class="btn btn-success" (click)="clickTecla('r', $event)">r</button>
+            <button class="btn btn-success" (click)="clickTecla('s', $event)">s</button>
+            <button class="btn btn-success" (click)="clickTecla('t', $event)">t</button>
+            <button class="btn btn-success" (click)="clickTecla('u', $event)">u</button>
+            <button class="btn btn-success" (click)="clickTecla('v', $event)">v</button>
+            <button class="btn btn-success" (click)="clickTecla('w', $event)">w</button>
+            <button class="btn btn-success" (click)="clickTecla('x', $event)">x</button>
+            <button class="btn btn-success" (click)="clickTecla('y', $event)">y</button>
+            <button class="btn btn-success" (click)="clickTecla('z', $event)">z</button>
+        </div>
+    </div>
+</main>
