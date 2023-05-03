@@ -20,7 +20,7 @@ const registarComentario = async (req, res) => {
 const obtenerComentarios = async (req, res) => {
     const filler = { juego: req.query.juego };
     try {
-        const result = comentario.find(filler);
+        const result = await comentario.find(filler);
         res.status(200).json(result);
     } catch (error) {
         res.status(409).json({ error: error.message });

@@ -21,9 +21,8 @@
                 {{desc}}
             </div>
             <div class="row bordes-juegos-top" style="height: 100px;">
-                <div class="col-4 d-flex justify-content-center align-items-center">
-                    Me Gusta
-                </div>
+                <button type="button" (click)="onMeGusta()" class="col-2 btn btn-gusta">Me Gusta</button>
+                <button type="button" (click)="onNoMeGusta()" class="col-2 btn btn-gusta">No Me Gusta</button>
                 <div class="col-4 bordes-juegos-left d-flex align-items-center">
                     <textarea name="comentarios" placeholder="Deja un comentario" id="comentarios" cols="30"
                         class="text-comentario"></textarea>
@@ -37,9 +36,14 @@
             </div>
             <div class="row bordes-juegos-top d-flex justify-content-center align-items-center" style="height: 700px;">
                 <div class="contenedorComentarios">
-                    //TODO: Import del componente comentarios<br>
+                    Comentarios<br>
                     <ng-template ngFor let-comentario [ngForOf]="comentarios">
-                        Comentario<br>
+                        <div class="card">
+                            <div class="container">
+                                <h4><b>{{comentario.usuario}}</b></h4>
+                                <p>{{comentario.comentario}}</p>
+                            </div>
+                        </div>
                     </ng-template>
                 </div>
             </div>

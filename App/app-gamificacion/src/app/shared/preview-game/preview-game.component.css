@@ -1,23 +1,26 @@
-.bordes-juegos-top{
+.bordes-juegos-top {
     border-top: 7px solid #E0F04F;
 }
-.bordes-juegos-btm{
+
+.bordes-juegos-btm {
     border-bottom: 7px solid #E0F04F;
 }
-.bordes-juegos-left{
+
+.bordes-juegos-left {
     border-left: 7px solid #E0F04F;
 }
-.bordes-juegos-right{
+
+.bordes-juegos-right {
     border-right: 7px solid #E0F04F;
 }
 
-.contenedor-principal{
+.contenedor-principal {
     border: 7px solid #E0F04F;
     background: #22E685;
     border-radius: 7px;
 }
 
-.button-play{
+.button-play {
     background: #E0F04F;
     border: 4px solid #69D957;
     width: 300px;
@@ -25,7 +28,7 @@
     font-size: 25px;
 }
 
-.input-code{
+.input-code {
     background: #E0F04F;
     border: 4px solid #69D957;
     border-radius: 7px;
@@ -33,19 +36,24 @@
     width: 300px;
 }
 
-.imagenJuego{
+.imagenJuego {
     height: 95%;
     border-radius: 7px;
 }
 
-.btn-enviar{
+.btn-enviar {
     background: #E0F04F;
     height: 80px;
     border: 4px solid #69D957;
     border-radius: 0px 7px 7px 0px;
 }
 
-.text-comentario{
+.btn-gusta {
+    background-color: #E0F04F;
+    color: #000000;
+}
+
+.text-comentario {
     height: 80px;
     width: 350px;
     background: #E0F04F;
@@ -53,7 +61,22 @@
     resize: none;
 }
 
-.contenedorComentarios{
+.contenedorComentarios {
     display: flex;
     flex-direction: column;
+}
+
+.card {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    transition: 0.3s;
+    border-radius: 5px;
+    margin-top: 1%
+}
+
+.card:hover {
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+}
+
+.container {
+    padding: 5px 16px;
 }
