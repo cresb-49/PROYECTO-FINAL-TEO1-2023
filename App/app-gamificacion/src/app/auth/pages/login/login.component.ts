@@ -52,7 +52,7 @@ export class LoginComponent {
           next: (result: any) => {
             localStorage.setItem("usuario", JSON.stringify(result.usuario))
             setTimeout(() => {
-              this.router.navigate(['']);
+              this.router.navigate(['/']);
             }, 0);
             setTimeout(() => {
               Swal.fire({
@@ -63,6 +63,9 @@ export class LoginComponent {
                 timer: 1500
               })
             }, 500);
+            setTimeout(() => {
+              window.location.reload();
+            }, 2000);
           },
           error: (error: any) => {
             Swal.fire({
