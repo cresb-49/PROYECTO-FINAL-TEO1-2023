@@ -35,13 +35,15 @@ async function start() {
 }
 
 //Rutas de la api
-app.use('/api',require('./routes/usuario'));
-app.use('/api',require('./routes/juego'));
-app.use('/api',require('./routes/comentario'));
+app.use('/api', require('./routes/usuario'));
+app.use('/api', require('./routes/juego'));
+app.use('/api', require('./routes/comentario'));
+app.use('/api', require('./routes/modeloPartida'));
+app.use('/api', require('./routes/resultadoPartida'));
 
 //Inicio de la conexion con la base de datos
 start()
 
 //Inicio dels servidor con el puerto configurado
 app.listen(PORT)
-console.log("Listening to port: ",PORT)
+console.log("Listening to port: ", PORT)
