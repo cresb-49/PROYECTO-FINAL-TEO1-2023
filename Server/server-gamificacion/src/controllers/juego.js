@@ -126,6 +126,6 @@ module.exports = {
     getJuego: getJuego,
     getJuegos: getJuegos,
     valorizarJuego: valorizarJuego,
-    isLike, isLike,
+    isLike: isLike,
     elimimarLike: elimimarLike
 }
