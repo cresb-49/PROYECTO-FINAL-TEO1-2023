@@ -3,6 +3,7 @@ import { Hanoi } from '../../models/Hanoi';
 import { Torre } from '../../models/Torre';
 import { Disco } from '../../models/Disco';
 import { EstadisticaHanoi } from '../../models/EstadisticaHanoi';
+import { JuegoHanoi } from '../../models/JuegoHanoi';
 
 @Component({
   selector: 'app-juego-hanoi',
@@ -13,11 +14,8 @@ export class JuegoHanoiComponent {
 
   contador: number = 1;
   torres: Torre[] = [];
-  parametros: Hanoi = {
-    codigo: '123456',
-    torres: 4,
-    discos: 2
-  }
+  juegoHanoi!: JuegoHanoi;
+
 
   estadisticaHanoi: EstadisticaHanoi = {
     movimientos: [],
@@ -26,13 +24,13 @@ export class JuegoHanoiComponent {
   }
 
   public iniciar(): void {
-    this.estadisticaHanoi.movExperados = Math.pow(2, this.parametros.discos) - 1;
-    for (let index = 1; index <= this.parametros.torres; index++) {
+    this.estadisticaHanoi.movExperados = Math.pow(2, this.juegoHanoi.hanoi.discos) - 1;
+    for (let index = 1; index <= this.juegoHanoi.hanoi.torres; index++) {
       this.torres.push(new Torre(('Torre #' + index), []));
     }
     let discos: Disco[] = [];
     let contador: number = 10;
-    for (let index = 0; index < this.parametros.discos; index++) {
+    for (let index = 0; index < this.juegoHanoi.hanoi.discos; index++) {
       discos.push(new Disco(contador));
       contador--;
     }
@@ -40,7 +38,7 @@ export class JuegoHanoiComponent {
   }
 
   public generarTorres(): number {
-    let altura = (59 * this.parametros.discos) + 65;
+    let altura = (59 * this.juegoHanoi.hanoi.discos) + 65;
     return altura;
   }
 
@@ -82,6 +80,7 @@ export class JuegoHanoiComponent {
   }
 
   ngOnInit() {
+    this.juegoHanoi = new JuegoHanoi('xxxxx', new Hanoi(4, 2));
     this.iniciar();
   }
 }
