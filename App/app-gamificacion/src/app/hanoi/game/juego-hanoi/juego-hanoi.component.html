@@ -5,7 +5,7 @@
 </div>
 <div id="contenedorTorres" class="contenedorTorres">
     <ng-template ngFor let-torre [ngForOf]="torres">
-        <app-torre-hanoi [torre]="torre" [altura]="generarTorres()" [cantidaDiscos]="parametros.discos"
+        <app-torre-hanoi [torre]="torre" [altura]="generarTorres()" [cantidaDiscos]="juegoHanoi.hanoi.discos"
             [movimientoDisco]="movimientoDisco" [torres]="torres" [estadisticas]="estadisticaHanoi"></app-torre-hanoi>
     </ng-template>
 </div>
