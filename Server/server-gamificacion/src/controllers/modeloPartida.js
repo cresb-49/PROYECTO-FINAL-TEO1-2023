@@ -1,3 +1,4 @@
+const { generarCodigoJuegos } = require('../helpers/funciones');
 const modeloPartida = require('../models/modeloPartida');
 
 const registroModelo = async (req, res) => {
@@ -7,8 +8,15 @@ const registroModelo = async (req, res) => {
             usuario: req.body.usuario,
             data: req.body.data
         }
+        let partida;
+        let nuevoCodigo = "";
+        do {
+            nuevoCodigo = generarCodigoJuegos();
+            partida = await modeloPartida.findOne({ "codigo": nuevoCodigo });
+        } while (partida != undefined);
+
         const modelo = new modeloPartida({
-            codigo: "", //TODO: Generacion del codigo de partida
+            codigo: nuevoCodigo, //TODO: Generacion del codigo de partida
             juego: data.juego,
             usuario: data.usuario,
             data: data.data

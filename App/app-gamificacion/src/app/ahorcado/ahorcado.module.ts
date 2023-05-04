@@ -7,6 +7,7 @@ import { PrincipalComponent } from './pages/principal/principal.component';
 import { JuegoComponent } from './pages/juego/juego.component';
 import { CrearComponent } from './pages/crear/crear.component';
 import { FormsModule } from '@angular/forms';
+import { SharedModule } from '../shared/shared.module';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { FormsModule } from '@angular/forms';
   imports: [
     CommonModule,
     AhorcadoRoutingModule,
-    FormsModule
+    FormsModule,
+    SharedModule
   ]
 })
 export class AhorcadoModule { }
