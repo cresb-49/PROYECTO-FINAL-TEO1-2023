@@ -13,7 +13,7 @@ export class JuegoComponent implements OnInit {
 
   palabras = [
     'manzana',
-    'perro'
+    'computadora'
   ];
 
   numeroPalabra = 0;
@@ -31,6 +31,7 @@ export class JuegoComponent implements OnInit {
   ngOnInit(): void {
     this.cambiarEstadoBotones(true);
     this.numeroPalabra = 0;
+    
   }
 
   obtenerPalabra() {
@@ -72,7 +73,7 @@ export class JuegoComponent implements OnInit {
           icon: 'error',
           title: 'Perdiste',
           text: `La palabra era: ${this.palabraActual}`
-        })
+        });
         this.finalizarJuego();
       } else if (this.cantidadAciertos == this.palabraActual.length) {
         let punteo = 100 - (this.cantidadErrores * 15);
