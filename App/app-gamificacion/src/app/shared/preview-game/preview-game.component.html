@@ -21,12 +21,17 @@
                 {{desc}}
             </div>
             <div class="row bordes-juegos-top" style="height: 100px;">
-                <button type="button" (click)="onMeGusta()" class="col-2 btn btn-gusta">Me Gusta</button>
-                <button type="button" (click)="onNoMeGusta()" class="col-2 btn btn-gusta">No Me Gusta</button>
+                <button type="button" (click)="onMeGusta(true)" class="col-2 btn btn-gusta">
+                    <div *ngIf="likeUsuario !== null && likeUsuario">Quitar </div>Me Gusta
+                </button>
+                <button type="button" (click)="onMeGusta(false)" class="col-2 btn btn-gusta">
+                    <div *ngIf="likeUsuario !== null && !likeUsuario">Quitar </div>
+                    No Me Gusta
+                </button>
                 <div class="col-4 bordes-juegos-left d-flex align-items-center">
-                    <textarea name="comentarios" placeholder="Deja un comentario" id="comentarios" cols="30"
-                        class="text-comentario"></textarea>
-                    <button class="btn btn-enviar">enviar</button>
+                        <input name="comentarios" placeholder="Deja un comentario" id="comentarios" cols="30"
+                            type="text" class="text-comentario" [(ngModel)]="comentarioUsuario" />
+                        <button class="btn btn-enviar" (click)="guardarComentario()">Publicar</button>
                 </div>
             </div>
         </div>
@@ -37,6 +42,8 @@
             <div class="row bordes-juegos-top d-flex justify-content-center align-items-center" style="height: 700px;">
                 <div class="contenedorComentarios">
                     Comentarios<br>
+                        
+                    <div *ngIf="comentarios.length === 0">Aun no hay comentarios, se el primero el publicar uno!</div>
                     <ng-template ngFor let-comentario [ngForOf]="comentarios">
                         <div class="card">
                             <div class="container">

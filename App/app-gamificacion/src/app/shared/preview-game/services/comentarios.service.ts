@@ -19,4 +19,11 @@ export class ComentariosService {
     public obtenerComentarios(codigoJuego: string) {
         return this.httpClient.get<Comentario[]>(this.API_ENDPOINT+"/comentarios?juego="+codigoJuego)
     }
+
+    /**
+     * publicarComentario
+     */
+    public publicarComentario(username:string, comentario:string, juego:string) {
+        return this.httpClient.post<Object>(this.API_ENDPOINT+"/comentario", {usuario:username, comentario:comentario, juego:juego})
+    }
 }
