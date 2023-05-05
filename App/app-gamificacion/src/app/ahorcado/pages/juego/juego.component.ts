@@ -1,7 +1,8 @@
 import { ViewEncapsulation } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import Swal from 'sweetalert2';
+import { AhorcadoService } from '../../services/ahorcado.service';
 
 @Component({
   selector: 'app-juego',
@@ -23,15 +24,45 @@ export class JuegoComponent implements OnInit {
   cantidadAciertos: number = 0;
   srcImagen = `../../../../assets/img${this.cantidadErrores}.png`;
   punteoTotal: number = 0;
+  codigoJuego = "";
 
-  constructor(private router: Router) {
-    
+  constructor(private router: Router, private route: ActivatedRoute, private ahorcadoService: AhorcadoService) {
+
   }
 
   ngOnInit(): void {
     this.cambiarEstadoBotones(true);
     this.numeroPalabra = 0;
-    
+
+    this.route.queryParams.subscribe((params: any) => {
+      this.codigoJuego = params.codigo;
+    });
+
+    this.ahorcadoService.obtenerPartida(this.codigoJuego, "J00002")
+      .subscribe({
+        next: (result: any) => {
+          if (result) {
+            this.palabras = result.data.palabras
+            Swal.fire({
+              icon: 'success',
+              title: 'Comienza el juego',
+              showConfirmButton: true
+            });
+          }
+        },
+        error: (error: any) => {
+          this.router.navigate(["/ahorcado/principal"]);
+          Swal.fire({
+            icon: 'error',
+            title: 'Error al buscar buscar la partida',
+            text: error.error.error,
+            showConfirmButton: true
+          });
+        }
+      });
+
+
+
   }
 
   obtenerPalabra() {
@@ -116,7 +147,7 @@ export class JuegoComponent implements OnInit {
     }
   }
 
-  terminarJuego(){
+  terminarJuego() {
     this.router.navigate(['/ahorcado']);
   }
 }
