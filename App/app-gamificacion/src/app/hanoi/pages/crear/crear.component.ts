@@ -70,36 +70,47 @@ export class CrearComponent {
 
   generarPartida() {
     let torre = new Hanoi(this.cantidadTorres.value, this.cantidadDiscos.value);
-    const body = {
-      juego: 'J00001',
-      usuario: JSON.parse(localStorage.getItem('usuario')!).username,
-      data: torre
-    }
-    this.hanoiService.registarJuegoPersonalizado(body)
-      .subscribe({
-        next: (result: any) => {
-          Swal.fire(
-            {
-              title: 'Juego creado',
-              text: 'Se creo con exito el juego personalizado',
-              icon: 'success',
-              confirmButtonText: 'Salir'
-            }
-          )
-          console.log(result);
-        },
-        error: (error: any) => {
-          Swal.fire(
-            {
-              title: 'Error',
-              text: error.error.error,
-              icon: 'error',
-              confirmButtonText: 'Salir'
-            }
-          )
-          console.log(error.error.error);//TODO: Verificar la informacion de error
+    const usuario = this.hanoiService.getUsuaio();
+    if (usuario !== null) {
+      const body = {
+        juego: 'J00001',
+        usuario: usuario.username,
+        data: torre
+      }
+      this.hanoiService.registarJuegoPersonalizado(body)
+        .subscribe({
+          next: (result: any) => {
+            Swal.fire(
+              {
+                title: 'Juego creado',
+                text: 'Se creo con exito el juego personalizado',
+                icon: 'success',
+                confirmButtonText: 'Salir'
+              }
+            )
+            console.log(result);
+          },
+          error: (error: any) => {
+            Swal.fire(
+              {
+                title: 'Error',
+                text: error.error.error,
+                icon: 'error',
+                confirmButtonText: 'Salir'
+              }
+            )
+            console.log(error.error.error);//TODO: Verificar la informacion de error
+          }
+        });
+    } else {
+      Swal.fire(
+        {
+          title: 'Error',
+          text: 'No se puede crear la partida porque no eres un usuario logeado',
+          icon: 'error',
+          confirmButtonText: 'Salir'
         }
-      })
-
+      )
+    }
   }
 }
