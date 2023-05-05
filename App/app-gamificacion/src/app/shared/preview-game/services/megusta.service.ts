@@ -17,7 +17,7 @@ export class MeGustaService {
      * @returns Array de Comentario
      */
     public obtenerMeGusta(usuario: string, codigoJuego: string) {
-        return this.httpClient.get<MeGusta>(this.API_ENDPOINT+"?juego="+codigoJuego+"&usuario="+usuario)
+        return this.httpClient.get<Object>(this.API_ENDPOINT+"?juego="+codigoJuego+"&usuario="+usuario)
     }
     
     /**
@@ -27,5 +27,15 @@ export class MeGustaService {
      */
     public publicarMeGusta(meGusta: MeGusta) {
         return this.httpClient.post<Object>(this.API_ENDPOINT, meGusta);
+    }
+    
+    /**
+     * Remueve el like o dislike del usuario del juego
+     * @param username 
+     * @param juego 
+     * @returns 
+     */
+    public removerMeGusta(username: string, codigoJuego: string) {
+        return this.httpClient.delete<Object>(this.API_ENDPOINT, {body: {juego: codigoJuego, usuario: username}})
     }
 }
