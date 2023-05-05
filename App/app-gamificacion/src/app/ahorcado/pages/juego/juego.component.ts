@@ -60,9 +60,6 @@ export class JuegoComponent implements OnInit {
           });
         }
       });
-
-
-
   }
 
   obtenerPalabra() {
