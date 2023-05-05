@@ -24,8 +24,14 @@ export class CrearComponent {
         const nuevaPalabra = this.palabraActual.replace(/\s+/g, '');
         const palabraSinNumeros = nuevaPalabra.replace(/[0-9]/g, "");
         const palabraSinEspeciales = palabraSinNumeros.replace(/[^\w\s]/gi, "");
-        if (palabraSinEspeciales != "") {
-          this.palabras.push(palabraSinEspeciales.toLowerCase());
+        const repeticion = this.palabras.includes(palabraSinEspeciales.toLocaleLowerCase());
+        if (repeticion == false) {
+          if (palabraSinEspeciales != "") {
+            this.palabras.push(palabraSinEspeciales.toLowerCase());
+          }
+        } else {
+          this.alertDisabled = false;
+          setTimeout(() => { this.alertDisabled = true }, 1500)
         }
         this.palabraActual = "";
       } else {
@@ -56,8 +62,8 @@ export class CrearComponent {
       this.ahorcadoService.registrarPartida(body)
         .subscribe({
           next: (result: any) => {
-            this.borrarLista();
             if (result) {
+              this.borrarLista();
               Swal.fire({
                 icon: 'success',
                 title: 'Juego Creado',
