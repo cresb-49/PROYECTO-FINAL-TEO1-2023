@@ -12,52 +12,25 @@
 	<div class="contenedor2">
 		<div class="container">
 			<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-				<div class="col">
+				<div class="col" *ngFor="let juego of juegos">
 					<div class="card shadow-sm">
-						<img src="../../../../assets/ahorcado.png" alt="imagenJuego" class="bd-placeholder-img card-img-top" width="100%" height="225">
+						<img src="../../../../assets/ahorcado.png" alt="imagenJuego"
+							class="bd-placeholder-img card-img-top" width="100%" height="225">
 						<div class="card-body">
 							<p class="card-text">Esta es una tarjeta más amplia con texto de apoyo a continuación como
 								una introducción natural a contenido adicional. Este contenido es un poco más largo.</p>
 							<div class="d-flex justify-content-between align-items-center">
 								<div class="btn-group">
-									<button type="button" class="btn btn-sm btn-outline-secondary">Ver</button>
-									<button type="button" class="btn btn-sm btn-outline-secondary">Editar</button>
+									<button *ngIf="usuario===0||usuario===2" type="button"
+										class="btn btn-sm btn-outline-secondary"
+										(click)="ejecutarJuego(juego.codigo)">Jugar</button>
+									<button *ngIf="usuario===1" type="button" class="btn btn-sm btn-outline-secondary"
+										(click)="crearJuego(juego.codigo)">Crear</button>
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
-				<div class="col">
-					<div class="card shadow-sm">
-						<img src="../../../../assets/torres-de-hanoi.jpg" alt="imagenJuego" class="bd-placeholder-img card-img-top" width="100%" height="225">
-						<div class="card-body">
-							<p class="card-text">Esta es una tarjeta más amplia con texto de apoyo a continuación como
-								una introducción natural a contenido adicional. Este contenido es un poco más largo.</p>
-							<div class="d-flex justify-content-between align-items-center">
-								<div class="btn-group">
-									<button type="button" class="btn btn-sm btn-outline-secondary">Ver</button>
-									<button type="button" class="btn btn-sm btn-outline-secondary">Editar</button>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col">
-					<div class="card shadow-sm">
-						<img src="../../../../assets/crucigrama.png" alt="imagenJuego" class="bd-placeholder-img card-img-top" width="100%" height="225">
-						<div class="card-body">
-							<p class="card-text">Esta es una tarjeta más amplia con texto de apoyo a continuación como
-								una introducción natural a contenido adicional. Este contenido es un poco más largo.</p>
-							<div class="d-flex justify-content-between align-items-center">
-								<div class="btn-group">
-									<button type="button" class="btn btn-sm btn-outline-secondary">Ver</button>
-									<button type="button" class="btn btn-sm btn-outline-secondary">Editar</button>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				
 			</div>
 		</div>
 	</div>
