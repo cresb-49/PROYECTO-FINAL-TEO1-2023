@@ -13,4 +13,6 @@ router.get('/juego/like', juegoController.isLike);
 
 router.delete('/juego/like', juegoController.elimimarLike);
 
+router.get('/juego/imagen', juegoController.obtenerImagenJuego)
+
 module.exports = router;

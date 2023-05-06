@@ -32,10 +32,32 @@ export class MainComponent {
 
   ejecutarJuego(codigo: string) {
     console.log(codigo);
+    
+    if (codigo === 'J00001') {
+      this.router.navigate(['/hanoi/principal']);
+    } else if (codigo === "J00002") {
+      this.router.navigate(['/ahorcado/principal']);
+    } else if (codigo === 'J00003') {
+      this.router.navigate(['/crusigrama/principal']);
+    } else if (codigo === 'J00004') {
+      this.router.navigate(['/sopa/principal']);
+    } else {
+      this.router.navigate(['/principal'])
+    }
   }
 
   crearJuego(codigo: string) {
-    console.log(codigo);
+    if (codigo === 'J00001') {
+      this.router.navigate(['/hanoi/crear']);
+    } else if (codigo === "J00002") {
+      this.router.navigate(['/ahorcado/crear']);
+    } else if (codigo === 'J00003') {
+      this.router.navigate(['/crusigrama/crear']);
+    } else if (codigo === 'J00004') {
+      this.router.navigate(['/sopa/crear']);
+    } else {
+      this.router.navigate(['/principal'])
+    }
   }
 
   cargarJuegos() {

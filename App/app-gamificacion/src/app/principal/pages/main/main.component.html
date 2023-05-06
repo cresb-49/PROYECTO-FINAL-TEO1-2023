@@ -14,7 +14,7 @@
 			<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
 				<div class="col" *ngFor="let juego of juegos">
 					<div class="card shadow-sm">
-						<img src="../../../../assets/ahorcado.png" alt="imagenJuego"
+						<img [src]="'http://localhost:5000/api/juego/imagen?juego='+juego.codigo" alt="imagenJuego"
 							class="bd-placeholder-img card-img-top" width="100%" height="225">
 						<div class="card-body">
 							<p class="card-text">Esta es una tarjeta más amplia con texto de apoyo a continuación como
@@ -23,9 +23,9 @@
 								<div class="btn-group">
 									<button *ngIf="usuario===0||usuario===2" type="button"
 										class="btn btn-sm btn-outline-secondary"
-										(click)="ejecutarJuego(juego.codigo)">Jugar</button>
-									<button *ngIf="usuario===1" type="button" class="btn btn-sm btn-outline-secondary"
 										(click)="crearJuego(juego.codigo)">Crear</button>
+									<button *ngIf="usuario===1" type="button" class="btn btn-sm btn-outline-secondary"
+										(click)="ejecutarJuego(juego.codigo)">Jugar</button>
 								</div>
 							</div>
 						</div>
