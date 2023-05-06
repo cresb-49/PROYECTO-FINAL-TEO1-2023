@@ -26,5 +26,8 @@ export class AhorcadoService {
     return this.http.post(`${this.baseUrl}/modelo`, body);
   }
 
+  obtenerPartida(codigo: string, juego: string){
+    return this.http.get(`${this.baseUrl}/modelo?codigo=${codigo}&juego=${juego}`);
+  }
   
 }

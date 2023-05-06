@@ -74,12 +74,13 @@ const isLike = async (req, res) => {
             if (foundLike) {
                 res.status(200).json(foundLike);
             } else {
-                res.status(409).json({ usuario: user, like: null });
+                res.status(200).json({ usuario: user, like: null });
             }
         } else {
             res.status(409).json({ error: `No existe el juego ${fillterJuego.codigo}` });
         }
     } catch (error) {
+    console.log(error)
         res.status(409).json({ error: error.message });
     }
 }
