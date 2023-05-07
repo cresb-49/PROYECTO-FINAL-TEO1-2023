@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { AhorcadoService } from '../../services/ahorcado.service';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-juego',
@@ -25,6 +26,8 @@ export class JuegoComponent implements OnInit {
   srcImagen = `../../../../assets/img${this.cantidadErrores}.png`;
   punteoTotal: number = 0;
   codigoJuego = "";
+  palabrasEntontradas = 0;
+  palabrasFalladas = 0;
 
   constructor(private router: Router, private route: ActivatedRoute, private ahorcadoService: AhorcadoService) {
 
@@ -102,10 +105,12 @@ export class JuegoComponent implements OnInit {
           title: 'Perdiste',
           text: `La palabra era: ${this.palabraActual}`
         });
+        this.palabrasFalladas++;
         this.finalizarJuego();
       } else if (this.cantidadAciertos == this.palabraActual.length) {
         let punteo = 100 - (this.cantidadErrores * 15);
         this.punteoTotal += punteo;
+        this.palabrasEntontradas++;
         Swal.fire({
           position: 'top-end',
           icon: 'success',
@@ -131,7 +136,29 @@ export class JuegoComponent implements OnInit {
           title: 'Termino el juego',
           text: 'Tu puntuacion es de: ' + this.punteoTotal,
         });
-        this.router.navigate(["/ahorcado"])
+        this.ahorcadoService.obtenerUsuario();
+        const usuario = this.ahorcadoService.getUsuario();
+        const fechaActual = moment().format("YYYY-MM-DD");
+        const data = {
+          palabrasEncontradas: this.palabrasEntontradas,
+          palabrasFalladas: this.palabrasFalladas,
+          punteo: this.punteoTotal
+        }
+        const resultadoBody = {
+          codigo: this.codigoJuego,
+          juego: "J00002",
+          usuario: usuario.username,
+          fecha: fechaActual,
+          data
+        }
+        this.ahorcadoService.guardarResultado(resultadoBody)
+          .subscribe({
+            next: (resultado: any) => { console.log(resultado); },
+            error: (error: any) => { console.log(error); }
+          });
+        this.palabrasEntontradas = 0;
+        this.palabrasFalladas = 0;
+        this.router.navigate(["/ahorcado"]);
       }, 1500)
       this.numeroPalabra = 0;
     }

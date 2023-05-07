@@ -1,12 +1,22 @@
 const usuario = require('../models/usuario');
 const encrypt = require('../helpers/encrypt');
+const moment = require('moment/moment');
 
 const registro = async (req, res) => {
     const insert = new usuario({
         username: req.body.username,
         password: await encrypt.encrypt(req.body.password),
         perfil: "../../assets/imageNotFound.webp",
-        rol: req.body.rol
+        rol: req.body.rol,
+        data: {
+            logros: [
+                {
+                    id: "L00001",
+                    nombre: "Crea tu cuenta",
+                    fecha: moment().format("YYYY-MM-DD")
+                }
+            ]
+        }
     });
     try {
         await insert.save();
@@ -36,10 +46,11 @@ const login = async (req, res) => {
 }
 
 const modificar = async (req, res) => {
-    const { nuevoUsername, usernameAnterior, perfil } = req.body;
+    const { nuevoUsername, usernameActual, perfil } = req.body;
+    
     try {
         const result = await usuario.updateOne(
-            { username: usernameAnterior },
+            { username: usernameActual },
             { $set: { username: nuevoUsername, perfil: perfil } }
         );
         res.status(200).json(result);

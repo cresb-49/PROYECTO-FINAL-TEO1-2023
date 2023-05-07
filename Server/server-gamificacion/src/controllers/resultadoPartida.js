@@ -1,19 +1,23 @@
 const resultadoPartida = require('../models/resultadoPartida');
 
 const registarPartida = async (req, res) => {
+        console.log('Partida');
     try {
         const data = {
             codigo: req.body.codigo,
             juego: req.body.juego,
             usuario: req.body.usuario,
+            fecha: req.body.fecha,
             data: req.body.data
         }
         const resultPartida = new resultadoPartida({
             codigo: data.codigo,
             juego: data.juego,
             usuario: data.usuario,
+            fecha: data.fecha,
             data: data.data
         });
+        console.log('PR');
         const result = await resultPartida.save();
         res.status(200).json(result);
     } catch (error) {

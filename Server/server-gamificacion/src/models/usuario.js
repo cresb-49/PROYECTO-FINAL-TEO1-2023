@@ -6,7 +6,8 @@ const usuarioSchema = new Schema({
     username: String,
     password: String,
     perfil: String,
-    rol: String
+    rol: String,
+    data: []
 }, {
     versionKey: false
 });

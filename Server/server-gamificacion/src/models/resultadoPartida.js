@@ -7,6 +7,7 @@ const resultadoPartidaSchema = new Schema(
         codigo: String,
         juego: String,
         usuario: String,
+        fecha: String,
         data: Object
     },
     {

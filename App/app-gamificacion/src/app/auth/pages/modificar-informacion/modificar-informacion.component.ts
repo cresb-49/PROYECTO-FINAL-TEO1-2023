@@ -82,7 +82,7 @@ export class ModificarInformacionComponent {
       const { username } = this.miFormulario.value;
       const body = {
         nuevoUsername: username,
-        usernameAnterior: this.usuario.username,
+        usernameActual: this.usuario.username,
         perfil: this.imagenPerfil
       }
       this.authService.modificar(body)
@@ -108,7 +108,6 @@ export class ModificarInformacionComponent {
         });
     }
   }
-
   modificarPassword() {
     if (this.miFormularioPass.invalid) {
       Swal.fire({
