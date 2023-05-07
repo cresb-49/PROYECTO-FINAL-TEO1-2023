@@ -1,0 +1,11 @@
+<h1>Sopa de Letras</h1>
+<table style="background-color: #22E685;">
+    <tr *ngFor="let fila of tablero">
+        <td *ngFor="let dato of fila">
+            <button class="btn" style="width: 50px;" [style.background]="dato.includes(' ')? 'yellow': 'green'">{{dato}}</button>
+        </td>
+    </tr>
+</table>
+<input [(ngModel)]="palabra"/>
+<button (click)="onIngresarPalabra()">Ingresar Palabra</button>
+<div style="background-color:#22E685">Palabras Encontradas: {{palabrasEncontradas.length}} de {{palabras.length}}</div>
