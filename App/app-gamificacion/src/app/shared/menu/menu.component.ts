@@ -6,37 +6,44 @@ import { Router } from '@angular/router';
   templateUrl: './menu.component.html',
   styleUrls: ['./menu.component.css']
 })
-export class MenuComponent implements OnInit{
+export class MenuComponent implements OnInit {
 
   usuario: any;
 
   nombre = () => {
-    if(this.usuario){
+    if (this.usuario) {
       return this.usuario.username;
     } else {
       return 'Guest';
     }
   }
 
-  constructor(private router: Router){}
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
     const jsonUsuario = localStorage.getItem("usuario");
-    if(jsonUsuario){
+    if (jsonUsuario) {
       this.usuario = JSON.parse(jsonUsuario);
     }
   }
 
 
-  inicio(){
+  inicio() {
     this.router.navigate(["/principal"]);
   }
 
-  login(){
+  login() {
     this.router.navigate(["/auth/login"]);
-  } 
+  }
 
-  salir(){
+  verInformacion() {
+    const jsonUser = localStorage.getItem('usuario');
+    if (jsonUser) {
+      this.router.navigate(["/auth/informacion"]);
+    }
+  }
+
+  salir() {
     this.router.navigate(['/principal'])
     localStorage.removeItem("usuario");
     this.usuario = null;

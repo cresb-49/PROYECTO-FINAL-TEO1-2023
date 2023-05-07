@@ -1,0 +1,16 @@
+.container {
+    background-color: white;
+    margin: 5px;
+    width: 500px;
+}
+
+.containerpadre {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 700px;
+}
+
+button{
+    width: 100%;
+}

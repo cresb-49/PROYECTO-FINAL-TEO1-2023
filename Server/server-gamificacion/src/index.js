@@ -16,8 +16,8 @@ const corsOptions = {
 }
 
 const app = express();
-app.use(bp.json());
-app.use(bp.urlencoded({ extended: true }));
+app.use(bp.json({limit: "2mb"}));
+app.use(bp.urlencoded({ extended: true, limit: "2mb" }));
 app.use(cors(corsOptions));
 
 

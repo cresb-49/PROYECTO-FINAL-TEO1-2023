@@ -5,6 +5,7 @@ const registro = async (req, res) => {
     const insert = new usuario({
         username: req.body.username,
         password: await encrypt.encrypt(req.body.password),
+        perfil: "../../assets/imageNotFound.webp",
         rol: req.body.rol
     });
     try {

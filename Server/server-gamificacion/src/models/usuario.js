@@ -5,6 +5,7 @@ const model = mongoose.model;
 const usuarioSchema = new Schema({
     username: String,
     password: String,
+    perfil: String,
     rol: String
 }, {
     versionKey: false
