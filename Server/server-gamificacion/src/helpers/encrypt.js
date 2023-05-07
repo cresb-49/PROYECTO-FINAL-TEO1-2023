@@ -4,6 +4,7 @@ const bycrypt = require('bcryptjs');
 
 const encrypt = async (text) => {
     const value = await bycrypt.hash(text, ENCRYPT_VALUE);
+    console.log(value);
     return value;
 }
 

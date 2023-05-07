@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-modificar-informacion',
@@ -12,14 +13,20 @@ export class ModificarInformacionComponent {
   usuario: any;
   imagenPerfil: string = "../../assets/imageNotFound.webp";
   MAXIMO_TAMANIO_BYTES = 1000000;
+  hiddenInfo: boolean = false;
+  hiddenPass: boolean = true;
+
 
   miFormulario: FormGroup = this.fb.group({
-    username: ["", [Validators.required]],
-    password: ["", [Validators.minLength(6)]],
-    confirm: ["", [Validators.minLength(6)]],
-  })
+    username: ["", [Validators.required]]
+  });
 
-  constructor(private fb: FormBuilder, private router: Router) { }
+  miFormularioPass: FormGroup = this.fb.group({
+    password: ["", [Validators.minLength(6), Validators.required]],
+    confirm: ["", [Validators.minLength(6), Validators.required]],
+  });
+
+  constructor(private fb: FormBuilder, private router: Router, private authService: AuthService) { }
 
   ngOnInit(): void {
     const jsonUsuario = localStorage.getItem('usuario');
@@ -28,9 +35,7 @@ export class ModificarInformacionComponent {
     }
 
     this.miFormulario.setValue({
-      username: this.usuario.username,
-      password: "",
-      confirm: ""
+      username: this.usuario.username
     });
 
     if (this.usuario.perfil) {
@@ -60,6 +65,11 @@ export class ModificarInformacionComponent {
     }
   }
 
+  cambiarHidden() {
+    this.hiddenInfo = !this.hiddenInfo;
+    this.hiddenPass = !this.hiddenPass;
+  }
+
   guardar() {
     if (this.miFormulario.invalid) {
       Swal.fire({
@@ -69,24 +79,71 @@ export class ModificarInformacionComponent {
       });
       return;
     } else {
-      
-      const { confirm, password, username } = this.miFormulario.value;
-      if (password != "" && confirm != "") {
-        const body = {
-          nuevoUsarname: username,
-          passwordAnterior: confirm,
-          nuevaPassword: password,
-          usernameAnterior: this.usuario.username,
-          perfil: this.imagenPerfil
-        }
-        console.log(body);
+      const { username } = this.miFormulario.value;
+      const body = {
+        nuevoUsername: username,
+        usernameAnterior: this.usuario.username,
+        perfil: this.imagenPerfil
+      }
+      this.authService.modificar(body)
+        .subscribe({
+          next: (result: any) => {
+            if (result.modifiedCount == 1) {
+              Swal.fire({
+                icon: 'success',
+                title: 'Se modificaron tus datos',
+                text: "Tus datos han sido modificados correctamente",
+                showConfirmButton: false,
+                timer: 1500
+              });
+              this.usuario.username = username;;
+              this.usuario.perfil = this.imagenPerfil;
+              localStorage.setItem("usuario", JSON.stringify(this.usuario));
+              setTimeout(() => {
+                window.location.reload();
+              }, 1500)
+            }
+          },
+          error: (error: any) => { console.log(error); }
+        });
+    }
+  }
+
+  modificarPassword() {
+    if (this.miFormularioPass.invalid) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: "No has llenado todos los campos. Recueda que el minimo de caracteres es de 6",
+      });
+      return;
+    } else {
+      const { confirm, password } = this.miFormularioPass.value;
+      const body = {
+        passwordActual: confirm,
+        nuevaPassword: password,
+        username: this.usuario.username,
+      }
+
+      if (confirm === password) {
+        Swal.fire({
+          icon: 'warning',
+          title: 'Error',
+          text: "Las contraseñas son iguales",
+        });
       } else {
-        const body = {
-          nuevoUsarname: username,
-          usernameAnterior: this.usuario.username,
-          perfil: this.imagenPerfil
-        }
-        console.log(body);
+        this.authService.modificarPassword(body)
+          .subscribe({
+            next: (result: any) => {
+              if (result.modifiedCount == 1) {
+                Swal.fire({
+                  icon: 'success',
+                  title: 'Constraseña modificada'
+                });
+              }
+            },
+            error: (error: any) => { console.log(error); }
+          });
       }
     }
   }

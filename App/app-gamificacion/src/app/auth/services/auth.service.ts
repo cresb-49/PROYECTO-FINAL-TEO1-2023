@@ -17,4 +17,12 @@ export class AuthService {
   register(body: any){
     return this.http.post(`${this.baseUrl}/registro`, body);
   }
+
+  modificar(body: any){
+    return this.http.put(`${this.baseUrl}/modificar`, body);
+  }
+
+  modificarPassword(body: any){
+    return this.http.put(`${this.baseUrl}/modificarPassword`, body);
+  }
 }

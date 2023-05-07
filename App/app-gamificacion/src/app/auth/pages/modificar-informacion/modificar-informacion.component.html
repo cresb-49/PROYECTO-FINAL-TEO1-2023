@@ -1,5 +1,5 @@
 <div class="container">
-    <div class="row">
+    <div class="row" [hidden] = "hiddenInfo">
         <div class="col-sm-8">
             <h1>Modifica tus datos</h1>
             <form [formGroup]="miFormulario" (ngSubmit)="guardar()">
@@ -7,15 +7,8 @@
                     <label for="nombre">Username:</label>
                     <input type="text" class="form-control" formControlName="username">
                 </div>
-                <div class="form-group">
-                    <label for="descripcion">Ingresa tu contraseña actual:</label>
-                    <input type="password" class="form-control" formControlName="confirm">
-                </div>
-                <div class="form-group">
-                    <label for="descripcion">Ingresa tu nueva contraseña:</label>
-                    <input type="password" class="form-control" formControlName="password">
-                </div>
                 <button type="submit" class="btn btn-primary mt-3">Modificar Informacion</button>
+                <button type="button" class="btn btn-primary mt-3 mx-3" (click)="cambiarHidden()">Modificar Constraseña</button>
             </form>
         </div>
         <div class="col-sm-4">
@@ -26,6 +19,23 @@
                 <input type="file" class="form-control" id="miInput" name="imagen" accept="image/*"
                     (change)="onChange($event)">
             </div>
+        </div>
+    </div>
+    <div class="row" [hidden] = "hiddenPass">
+        <div class="col">
+            <h1>Modificar constraseña</h1>
+            <form [formGroup]="miFormularioPass" (ngSubmit)="modificarPassword()">
+                <div class="form-group">
+                    <label for="descripcion">Ingresa tu contraseña actual:</label>
+                    <input type="password" class="form-control" formControlName="confirm">
+                </div>
+                <div class="form-group">
+                    <label for="descripcion">Ingresa tu nueva contraseña:</label>
+                    <input type="password" class="form-control" formControlName="password">
+                </div>
+                <button type="submit" class="btn btn-primary mt-3">Modificar Constraseña</button>
+                <button type="button" class="btn btn-primary mt-3 mx-3" (click)="cambiarHidden()">Modificar Informacion</button>
+            </form>
         </div>
     </div>
 </div>

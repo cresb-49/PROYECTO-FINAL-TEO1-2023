@@ -27,7 +27,7 @@ const obtenerPartida = async (req, res) => {
             codigo: req.query.codigo,
             juego: req.query.juego
         }
-        const resultPartida = await resultadoPartida.findOne({ usuario: data.usuario, codigo: data.codigo, juego: data.juego });
+        const resultPartida = await resultadoPartida.find({ usuario: data.usuario, codigo: data.codigo, juego: data.juego });
         if (resultPartida) {
             res.status(200).json(resultPartida);
         } else {

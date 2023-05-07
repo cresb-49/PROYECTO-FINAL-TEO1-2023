@@ -7,4 +7,8 @@ router.post('/registro', usuariocontroller.registro);
 
 router.post('/login', usuariocontroller.login);
 
+router.put('/modificar', usuariocontroller.modificar);
+
+router.put('/modificarPassword', usuariocontroller.modificarPassword);
+
 module.exports = router;
