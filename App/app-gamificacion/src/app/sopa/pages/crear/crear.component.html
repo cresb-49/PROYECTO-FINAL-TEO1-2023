@@ -1,0 +1,11 @@
+<div>
+    <h3>Palabras de la Sopa de Letras</h3>
+    <input [(ngModel)]="palabra"/>
+    <button (click)="agregarPalabra()">Agregar Palabra</button>
+    <table>
+        <tr *ngFor="let palabra of palabras">
+            {{palabra}}
+        </tr>
+    </table>
+    <button (click)="onCrearJuego()">Crear Juego</button>
+</div>
