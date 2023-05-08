@@ -1,5 +1,6 @@
 import { AfterContentInit, AfterViewInit, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { SesionService } from 'src/app/services/sesion.service';
 
 @Component({
   selector: 'app-menu',
@@ -11,14 +12,14 @@ export class MenuComponent implements OnInit {
   usuario: any;
 
   nombre = () => {
-    if (this.usuario) {
-      return this.usuario.username;
+    if (this.sesionService.verificarSesion()) {
+      return this.sesionService.obtenerUsername()
     } else {
-      return 'Guest';
+      return 'Guest'
     }
   }
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private sesionService: SesionService) { }
 
   ngOnInit(): void {
     const jsonUsuario = localStorage.getItem("usuario");
@@ -37,8 +38,7 @@ export class MenuComponent implements OnInit {
   }
 
   verInformacion() {
-    const jsonUser = localStorage.getItem('usuario');
-    if (jsonUser) {
+    if (this.sesionService.verificarSesion()) {
       this.router.navigate(["/auth/informacion"]);
     }
   }
@@ -47,5 +47,6 @@ export class MenuComponent implements OnInit {
     this.router.navigate(['/principal'])
     localStorage.removeItem("usuario");
     this.usuario = null;
+    this.sesionService.cerrarSesion()
   }
 }
