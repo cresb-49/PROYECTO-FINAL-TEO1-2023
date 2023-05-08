@@ -51,7 +51,7 @@ export class CrearComponent {
 
   crearPartida() {
     if (this.palabras.length > 0) {
-      this.ahorcadoService.obtenerServicio();
+      this.ahorcadoService.obtenerUsuario();
       const usuario = this.ahorcadoService.getUsuario();
       const body = {
         juego: "J00002",

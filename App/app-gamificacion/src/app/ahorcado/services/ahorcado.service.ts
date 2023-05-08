@@ -11,23 +11,32 @@ export class AhorcadoService {
 
   constructor(private http: HttpClient) { }
 
-  obtenerServicio(){
+  obtenerUsuario() {
     const jsonUsuario = localStorage.getItem("usuario");
-    if(jsonUsuario){
+    if (jsonUsuario) {
       this.usuario = JSON.parse(jsonUsuario);
     }
   }
 
-  getUsuario(){
+  getUsuario() {
     return this.usuario;
   }
 
-  registrarPartida(body: any){
+  registrarPartida(body: any) {
     return this.http.post(`${this.baseUrl}/modelo`, body);
   }
 
-  obtenerPartida(codigo: string, juego: string){
+  obtenerPartida(codigo: string, juego: string) {
     return this.http.get(`${this.baseUrl}/modelo?codigo=${codigo}&juego=${juego}`);
   }
-  
+
+  guardarResultado(body: any) {
+    return this.http.post(`${this.baseUrl}/partida`, body);
+  }
+
+  obtenerLogros(){
+    this.obtenerUsuario();
+    
+  }
+
 }

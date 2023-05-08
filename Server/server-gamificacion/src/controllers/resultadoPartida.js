@@ -1,19 +1,23 @@
 const resultadoPartida = require('../models/resultadoPartida');
 
 const registarPartida = async (req, res) => {
+    console.log('Partida');
     try {
         const data = {
             codigo: req.body.codigo,
             juego: req.body.juego,
             usuario: req.body.usuario,
+            fecha: req.body.fecha,
             data: req.body.data
         }
         const resultPartida = new resultadoPartida({
             codigo: data.codigo,
             juego: data.juego,
             usuario: data.usuario,
+            fecha: data.fecha,
             data: data.data
         });
+        console.log('PR');
         const result = await resultPartida.save();
         res.status(200).json(result);
     } catch (error) {
@@ -27,7 +31,7 @@ const obtenerPartida = async (req, res) => {
             codigo: req.query.codigo,
             juego: req.query.juego
         }
-        const resultPartida = await resultadoPartida.findOne({ usuario: data.usuario, codigo: data.codigo, juego: data.juego });
+        const resultPartida = await resultadoPartida.find({ usuario: data.usuario, codigo: data.codigo, juego: data.juego });
         if (resultPartida) {
             res.status(200).json(resultPartida);
         } else {
@@ -38,7 +42,38 @@ const obtenerPartida = async (req, res) => {
     }
 }
 
+const estadisticasGenerales = async (req, res) => {
+    try {
+        const { username } = req.query;
+        const partidasJugadas = await resultadoPartida.countDocuments({ usuario: username });
+        const partidasJuego = await resultadoPartida.aggregate([
+            {
+                $match: {
+                    usuario: username
+                }
+            },
+            {
+                $group: {
+                    _id: "$juego",
+                    partidas: {
+                        $sum: 1
+                    }
+                }
+            },
+            {
+                $sort: {
+                    partidas: -1
+                }
+            }
+        ]);
+        res.status(200).json({generales: partidasJugadas, juegos: partidasJuego});
+    } catch (error) {
+        res.status(409).json({ error: error.message });
+    }
+}
+
 module.exports = {
     registarPartida: registarPartida,
-    obtenerPartida: obtenerPartida
+    obtenerPartida: obtenerPartida,
+    estadisticasGenerales: estadisticasGenerales
 }
