@@ -9,6 +9,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { InformacionUsuarioComponent } from './pages/informacion-usuario/informacion-usuario.component';
 import { ModificarInformacionComponent } from './pages/modificar-informacion/modificar-informacion.component';
 import { EstadisticasComponent } from './pages/estadisticas/estadisticas.component';
+import { NgChartsModule } from 'ng2-charts';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { EstadisticasComponent } from './pages/estadisticas/estadisticas.compone
   imports: [
     CommonModule,
     AuthRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgChartsModule
   ]
 })
 export class AuthModule { }
