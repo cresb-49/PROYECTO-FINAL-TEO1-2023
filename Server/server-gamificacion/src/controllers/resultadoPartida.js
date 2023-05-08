@@ -45,7 +45,6 @@ const obtenerPartida = async (req, res) => {
 const estadisticasGenerales = async (req, res) => {
     try {
         const { username } = req.query;
-        console.log(username);
         const partidasJugadas = await resultadoPartida.countDocuments({ usuario: username });
         const partidasJuego = await resultadoPartida.aggregate([
             {
