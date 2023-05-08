@@ -8,6 +8,7 @@ import { RegisterComponent } from './pages/register/register.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { InformacionUsuarioComponent } from './pages/informacion-usuario/informacion-usuario.component';
 import { ModificarInformacionComponent } from './pages/modificar-informacion/modificar-informacion.component';
+import { EstadisticasComponent } from './pages/estadisticas/estadisticas.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { ModificarInformacionComponent } from './pages/modificar-informacion/mod
     LoginComponent,
     RegisterComponent,
     InformacionUsuarioComponent,
-    ModificarInformacionComponent
+    ModificarInformacionComponent,
+    EstadisticasComponent
   ],
   imports: [
     CommonModule,

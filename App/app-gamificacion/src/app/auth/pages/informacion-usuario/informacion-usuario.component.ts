@@ -6,23 +6,27 @@ import { Router } from '@angular/router';
   templateUrl: './informacion-usuario.component.html',
   styleUrls: ['./informacion-usuario.component.css']
 })
-export class InformacionUsuarioComponent implements OnInit{
+export class InformacionUsuarioComponent implements OnInit {
 
-  usuario:any
+  usuario: any
 
-  constructor(private router:Router){
+  constructor(private router: Router) {
 
   }
 
   ngOnInit(): void {
     const jsonUser = localStorage.getItem('usuario');
-    if(jsonUser){
+    if (jsonUser) {
       this.usuario = JSON.parse(jsonUser)
     }
   }
 
-  modificarInformacion(){
-    this.router.navigate(["/auth/modificar"])
+  modificarInformacion() {
+    this.router.navigate(["/auth/modificar"]);
+  }
+
+  verEstadisticas() {
+    this.router.navigate(["/auth/estadisticas"]);
   }
 
 

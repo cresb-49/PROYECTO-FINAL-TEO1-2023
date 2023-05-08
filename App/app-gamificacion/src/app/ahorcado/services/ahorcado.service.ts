@@ -34,4 +34,9 @@ export class AhorcadoService {
     return this.http.post(`${this.baseUrl}/partida`, body);
   }
 
+  obtenerLogros(){
+    this.obtenerUsuario();
+    
+  }
+
 }

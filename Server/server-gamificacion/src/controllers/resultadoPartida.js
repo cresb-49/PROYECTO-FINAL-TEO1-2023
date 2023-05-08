@@ -1,7 +1,7 @@
 const resultadoPartida = require('../models/resultadoPartida');
 
 const registarPartida = async (req, res) => {
-        console.log('Partida');
+    console.log('Partida');
     try {
         const data = {
             codigo: req.body.codigo,
@@ -42,7 +42,39 @@ const obtenerPartida = async (req, res) => {
     }
 }
 
+const estadisticasGenerales = async (req, res) => {
+    try {
+        const { username } = req.query;
+        console.log(username);
+        const partidasJugadas = await resultadoPartida.countDocuments({ usuario: username });
+        const partidasJuego = await resultadoPartida.aggregate([
+            {
+                $match: {
+                    usuario: username
+                }
+            },
+            {
+                $group: {
+                    _id: "$juego",
+                    partidas: {
+                        $sum: 1
+                    }
+                }
+            },
+            {
+                $sort: {
+                    partidas: -1
+                }
+            }
+        ]);
+        res.status(200).json({generales: partidasJugadas, juegos: partidasJuego});
+    } catch (error) {
+        res.status(409).json({ error: error.message });
+    }
+}
+
 module.exports = {
     registarPartida: registarPartida,
-    obtenerPartida: obtenerPartida
+    obtenerPartida: obtenerPartida,
+    estadisticasGenerales: estadisticasGenerales
 }
