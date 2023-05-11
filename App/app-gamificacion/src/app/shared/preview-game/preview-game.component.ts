@@ -12,8 +12,6 @@ import { FormsModule } from '@angular/forms';
   styleUrls: ['./preview-game.component.css']
 })
 export class PreviewGameComponent implements OnInit {
-  //0 -> hanoi , 1-> ahorcado , 2-> crucigrama
-  @Input() imagen = 0;
   @Input() juego: string | null = null;
   @Input() desc = 'Descripcion default del componenete asignamos el valor al input desc';
   @Input() infoLike = null;

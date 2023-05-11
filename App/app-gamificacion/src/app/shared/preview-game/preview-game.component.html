@@ -2,10 +2,7 @@
     <div class="row contenedor-principal">
         <div class="col bordes-juegos-right ">
             <div class="row d-flex justify-content-center align-items-center" style="height: 700px;">
-                <img *ngIf="imagen === 0" src="../../../assets/torres-de-hanoi.jpg" class="imagenJuego"
-                    alt="Imagen Juego">
-                <img *ngIf="imagen === 1" src="../../../assets/ahorcado.png" class="imagenJuego" alt="Imagen Juego">
-                <img *ngIf="imagen === 2" src="../../../assets/crucigrama.png" class="imagenJuego" alt="Imagen Juego">
+                <img [src]="'http://localhost:5000/api/juego/imagen?juego='+juego" class="imagenJuego" alt="Imagen Juego">
             </div>
             <div class="row bordes-juegos-top d-flex justify-content-center align-items-center" style="height: 100px;">
                 <div class="col-6 d-flex justify-content-center align-items-center">
@@ -29,9 +26,9 @@
                     No Me Gusta
                 </button>
                 <div class="col-4 bordes-juegos-left d-flex align-items-center">
-                        <input name="comentarios" placeholder="Deja un comentario" id="comentarios" cols="30"
-                            type="text" class="text-comentario" [(ngModel)]="comentarioUsuario" />
-                        <button class="btn btn-enviar" (click)="guardarComentario()">Publicar</button>
+                    <input name="comentarios" placeholder="Deja un comentario" id="comentarios" cols="30" type="text"
+                        class="text-comentario" [(ngModel)]="comentarioUsuario" />
+                    <button class="btn btn-enviar" (click)="guardarComentario()">Publicar</button>
                 </div>
             </div>
         </div>
@@ -42,7 +39,7 @@
             <div class="row bordes-juegos-top d-flex justify-content-center align-items-center" style="height: 700px;">
                 <div class="contenedorComentarios">
                     Comentarios<br>
-                        
+
                     <div *ngIf="comentarios.length === 0">Aun no hay comentarios, se el primero el publicar uno!</div>
                     <ng-template ngFor let-comentario [ngForOf]="comentarios">
                         <div class="card">
