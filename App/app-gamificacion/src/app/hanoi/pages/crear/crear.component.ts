@@ -3,6 +3,7 @@ import { Hanoi } from '../../models/Hanoi'
 import { Router } from '@angular/router';
 import { HanoiService } from '../../services/hanoi.service';
 import Swal from 'sweetalert2'
+import { SesionService } from 'src/app/services/sesion.service';
 
 @Component({
   selector: 'app-crear',
@@ -18,7 +19,7 @@ export class CrearComponent {
   public numeroDiscos!: any[];
   public numeroDiscosRen!: any[];
 
-  constructor(private router: Router, private hanoiService: HanoiService) {
+  constructor(private router: Router, private hanoiService: HanoiService, private sesionService: SesionService) {
     this.numeroDiscos = [
       { id: 1, value: 2 },
       { id: 2, value: 3 },
@@ -70,7 +71,10 @@ export class CrearComponent {
 
   generarPartida() {
     let torre = new Hanoi(this.cantidadTorres.value, this.cantidadDiscos.value);
-    const usuario = this.hanoiService.getUsuaio();
+    const usuario = {
+      username: this.sesionService.obtenerUsername(),
+      rol: this.sesionService.obtenerRol()
+    };
     if (usuario !== null) {
       const body = {
         juego: 'J00001',

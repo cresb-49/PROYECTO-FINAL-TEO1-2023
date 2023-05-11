@@ -21,10 +21,10 @@
 								una introducción natural a contenido adicional. Este contenido es un poco más largo.</p>
 							<div class="d-flex justify-content-between align-items-center">
 								<div class="btn-group">
-									<button *ngIf="usuario===0||usuario===2" type="button"
-										class="btn btn-sm btn-outline-secondary"
+									<button *ngIf="usuario===2" type="button" class="btn btn-sm btn-outline-secondary"
 										(click)="crearJuego(juego.codigo)">Crear</button>
-									<button *ngIf="usuario===1" type="button" class="btn btn-sm btn-outline-secondary"
+									<button *ngIf="usuario===0||usuario===1" type="button"
+										class="btn btn-sm btn-outline-secondary"
 										(click)="ejecutarJuego(juego.codigo)">Jugar</button>
 								</div>
 							</div>

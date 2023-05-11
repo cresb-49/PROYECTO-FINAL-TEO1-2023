@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { PrincipalService } from '../../services/principal.service';
 import Swal from 'sweetalert2'
+import { SesionService } from 'src/app/services/sesion.service';
 
 @Component({
   selector: 'app-main',
@@ -11,34 +12,34 @@ import Swal from 'sweetalert2'
 export class MainComponent {
   usuario: number = 0;
   juegos!: Array<any>;
-  constructor(private router: Router, private principalService: PrincipalService) { }
+  constructor(private router: Router, private principalService: PrincipalService, private sesionService: SesionService) { }
 
   ngOnInit() {
-    let usuario = this.getUsuaio();
-    if (usuario) {
-      this.usuario = parseInt(usuario.rol);
+    if (this.sesionService.verificarSesion()) {
+      let rol = this.sesionService.obtenerRol();
+      if (rol) {
+        this.usuario = parseInt(rol);
+      } else {
+        Swal.fire({
+          title: 'Error',
+          text: 'Error en la session de la pagina',
+          icon: 'error',
+          confirmButtonText: 'Salir'
+        });
+      }
     }
     this.cargarJuegos();
   }
-
-  getUsuaio() {
-    const jsonUsuario = localStorage.getItem("usuario");
-    let usuario = null;
-    if (jsonUsuario) {
-      usuario = JSON.parse(jsonUsuario);
-    }
-    return usuario;
-  }
-
+  
   ejecutarJuego(codigo: string) {
     console.log(codigo);
-    
+
     if (codigo === 'J00001') {
       this.router.navigate(['/hanoi/principal']);
     } else if (codigo === "J00002") {
       this.router.navigate(['/ahorcado/principal']);
     } else if (codigo === 'J00003') {
-      this.router.navigate(['/crusigrama/principal']);
+      this.router.navigate(['/crucigrama/principal']);
     } else if (codigo === 'J00004') {
       this.router.navigate(['/sopa/principal']);
     } else {
