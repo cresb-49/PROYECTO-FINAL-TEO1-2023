@@ -14,7 +14,7 @@
             </button>
         </div>
         <div class="col-3">
-            <button class="btn btn-warning">
+            <button class="btn btn-warning" (click)="verEstadisticasAhorcado()">
                 Ahorcado
             </button>
         </div>
@@ -28,5 +28,29 @@
                 Sopa de letras
             </button>
         </div>
+    </div>
+
+    <h1>
+        Logros:
+    </h1>
+    <div>
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Id</th>
+                    <th scope="col">Logro</th>
+                    <th scope="col">Fecha de Obtencion</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of usuario?.data.logros; let i = index;">
+                    <td>{{i+1}}</td>
+                    <td>{{item.id}}</td>
+                    <td>{{item.nombre}}</td>
+                    <td>{{item.fecha}}</td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 </div>

@@ -85,7 +85,6 @@ const modificarPassword = async (req, res) => {
 const obtenerUsuario = async (req, res) => {
     const filler1 = { username: req.query.username };
     try {
-        console.log(filler1);
         const result = await usuario.findOne(filler1);
         if (result == undefined) {
             res.status(409).json({ error: `No existe el usuario "${filler1.username}"` });

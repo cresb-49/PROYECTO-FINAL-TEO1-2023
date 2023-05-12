@@ -40,7 +40,14 @@ export class AuthService {
     return this.http.get(`${this.baseUrl}/estadisticasGenerales?username=${username}`);
   }
 
+
   obtenerUsuarioDB(username: string) {
     return this.http.get(`${this.baseUrl}/usuario?username=${username}`);
+  }
+
+
+  obtenerPartidasPorJuego(username: string) {
+    console.log('us', username);
+    return this.http.get(`${this.baseUrl}/partidasPorJuego?username=${username}&juego=J00002`);
   }
 }

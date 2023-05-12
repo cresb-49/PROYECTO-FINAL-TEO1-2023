@@ -7,7 +7,7 @@ const usuarioSchema = new Schema({
     password: String,
     perfil: String,
     rol: String,
-    data: []
+    data: Object
 }, {
     versionKey: false
 });

@@ -10,6 +10,7 @@ import { InformacionUsuarioComponent } from './pages/informacion-usuario/informa
 import { ModificarInformacionComponent } from './pages/modificar-informacion/modificar-informacion.component';
 import { EstadisticasComponent } from './pages/estadisticas/estadisticas.component';
 import { NgChartsModule } from 'ng2-charts';
+import { AhorcadoComponent } from './pages/estadisticas/ahorcado/ahorcado.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { NgChartsModule } from 'ng2-charts';
     RegisterComponent,
     InformacionUsuarioComponent,
     ModificarInformacionComponent,
-    EstadisticasComponent
+    EstadisticasComponent,
+    AhorcadoComponent
   ],
   imports: [
     CommonModule,

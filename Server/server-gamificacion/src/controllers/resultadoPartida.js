@@ -24,6 +24,7 @@ const registarPartida = async (req, res) => {
         res.status(409).json({ error: error.message });
     }
 }
+
 const obtenerPartida = async (req, res) => {
     try {
         const data = {
@@ -31,12 +32,27 @@ const obtenerPartida = async (req, res) => {
             codigo: req.query.codigo,
             juego: req.query.juego
         }
-        const resultPartida = await resultadoPartida.find({ usuario: data.usuario, codigo: data.codigo, juego: data.juego });
+        const resultPartida = await resultadoPartida.findOne({ usuario: data.usuario, codigo: data.codigo, juego: data.juego });
         if (resultPartida) {
             res.status(200).json(resultPartida);
         } else {
             res.status(409).json(`No existe un juego para el codigo ${data.codigo} en el juego ${juego}`);
         }
+    } catch (error) {
+        res.status(409).json({ error: error.message });
+    }
+}
+
+//DOC
+const obtenerPartidasPorJuego = async (req, res) => {
+    try {
+        const data = {
+            usuario: req.query.username,
+            juego: req.query.juego
+        }
+        const resultPartida = await resultadoPartida.find({ usuario: data.usuario, juego: data.juego }).sort("-fecha").limit(15);
+        res.status(200).json(resultPartida);
+
     } catch (error) {
         res.status(409).json({ error: error.message });
     }
@@ -66,7 +82,39 @@ const estadisticasGenerales = async (req, res) => {
                 }
             }
         ]);
-        res.status(200).json({generales: partidasJugadas, juegos: partidasJuego});
+        res.status(200).json({ generales: partidasJugadas, juegos: partidasJuego });
+    } catch (error) {
+        res.status(409).json({ error: error.message });
+    }
+}
+
+//DOC
+const estadisticasAhorcado = async (req, res) => {
+    try {
+        const { username } = req.query;
+        const estadisticas = await resultadoPartida.aggregate([
+            { $match: { usuario: username, juego: "J00002" } },
+            { $unwind: "$data" },
+            {
+                $project: {
+                    _id: 0,
+                    palabrasEncontradas: "$data.palabrasEncontradas",
+                    palabrasFalladas: "$data.palabrasFalladas",
+                    punteo: "$data.punteo"
+                }
+            },
+            {
+                $group: {
+                    _id: "$usuario",
+                    palabrasEncontradas: { $sum: "$palabrasEncontradas" },
+                    palabrasFalladas: { $sum: "$palabrasFalladas" },
+                    punteo: { $sum: "$punteo" },
+                }
+            },
+            { $sort: { palabrasEncontradas: -1 } },
+            { $limit: 10 }
+        ]);
+        res.status(200).json(estadisticas);
     } catch (error) {
         res.status(409).json({ error: error.message });
     }
@@ -75,5 +123,7 @@ const estadisticasGenerales = async (req, res) => {
 module.exports = {
     registarPartida: registarPartida,
     obtenerPartida: obtenerPartida,
-    estadisticasGenerales: estadisticasGenerales
+    estadisticasGenerales: estadisticasGenerales,
+    obtenerPartidasPorJuego: obtenerPartidasPorJuego,
+    estadisticasAhorcado: estadisticasAhorcado 
 }
