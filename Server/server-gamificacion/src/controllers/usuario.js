@@ -47,7 +47,7 @@ const login = async (req, res) => {
 
 const modificar = async (req, res) => {
     const { nuevoUsername, usernameActual, perfil } = req.body;
-    
+
     try {
         const result = await usuario.updateOne(
             { username: usernameActual },
@@ -81,9 +81,26 @@ const modificarPassword = async (req, res) => {
     }
 }
 
+//Agregar a API
+const obtenerUsuario = async (req, res) => {
+    const filler1 = { username: req.query.username };
+    try {
+        console.log(filler1);
+        const result = await usuario.findOne(filler1);
+        if (result == undefined) {
+            res.status(409).json({ error: `No existe el usuario "${filler1.username}"` });
+        } else {
+            res.status(200).json(result);
+        }
+    } catch (error) {
+        res.status(409).json({ error: error.message });
+    }
+}
+
 module.exports = {
     registro: registro,
     login: login,
     modificar: modificar,
-    modificarPassword: modificarPassword
+    modificarPassword: modificarPassword,
+    obtenerUsuario
 }

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { SesionService } from 'src/app/services/sesion.service';
 
 @Component({
   selector: 'app-informacion-usuario',
@@ -10,15 +11,13 @@ export class InformacionUsuarioComponent implements OnInit {
 
   usuario: any
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private sessionService: SesionService) {
 
   }
 
   ngOnInit(): void {
-    const jsonUser = localStorage.getItem('usuario');
-    if (jsonUser) {
-      this.usuario = JSON.parse(jsonUser)
-    }
+      this.usuario = this.sessionService.obtenerSesion();
+    
   }
 
   modificarInformacion() {

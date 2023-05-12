@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { SesionService } from 'src/app/services/sesion.service';
 
 @Injectable({
   providedIn: 'root'
@@ -9,36 +10,37 @@ export class AuthService {
   usuario: any;
   baseUrl = "http://localhost:5000/api"
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private sessionService: SesionService) { }
 
   obtenerUsuario() {
-    const jsonUsuario = localStorage.getItem("usuario");
-    if (jsonUsuario) {
-      this.usuario = JSON.parse(jsonUsuario);
-    }
+    this.usuario = this.sessionService.obtenerSesion();
   }
 
   getUsuario() {
     return this.usuario;
   }
 
-  login(body: any){
+  login(body: any) {
     return this.http.post(`${this.baseUrl}/login`, body);
   }
-  
-  register(body: any){
+
+  register(body: any) {
     return this.http.post(`${this.baseUrl}/registro`, body);
   }
 
-  modificar(body: any){
+  modificar(body: any) {
     return this.http.put(`${this.baseUrl}/modificar`, body);
   }
 
-  modificarPassword(body: any){
+  modificarPassword(body: any) {
     return this.http.put(`${this.baseUrl}/modificarPassword`, body);
   }
 
-  verEstadisticasGenerales(username: string){
+  verEstadisticasGenerales(username: string) {
     return this.http.get(`${this.baseUrl}/estadisticasGenerales?username=${username}`);
+  }
+
+  obtenerUsuarioDB(username: string) {
+    return this.http.get(`${this.baseUrl}/usuario?username=${username}`);
   }
 }

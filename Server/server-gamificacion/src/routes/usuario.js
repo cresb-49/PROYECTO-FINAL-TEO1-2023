@@ -11,4 +11,6 @@ router.put('/modificar', usuariocontroller.modificar);
 
 router.put('/modificarPassword', usuariocontroller.modificarPassword);
 
+router.get('/usuario', usuariocontroller.obtenerUsuario);
+
 module.exports = router;
