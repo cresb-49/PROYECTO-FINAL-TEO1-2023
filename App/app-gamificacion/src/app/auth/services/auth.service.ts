@@ -50,4 +50,8 @@ export class AuthService {
     console.log('us', username);
     return this.http.get(`${this.baseUrl}/partidasPorJuego?username=${username}&juego=J00002`);
   }
+
+  verEstadisticasAhorcado(username: string) {
+    return this.http.get(`${this.baseUrl}/estadisticasAhorcado?username=${username}`);
+  }
 }

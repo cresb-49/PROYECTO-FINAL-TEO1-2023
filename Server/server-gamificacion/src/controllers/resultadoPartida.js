@@ -43,7 +43,7 @@ const obtenerPartida = async (req, res) => {
     }
 }
 
-//DOC
+
 const obtenerPartidasPorJuego = async (req, res) => {
     try {
         const data = {
@@ -88,7 +88,6 @@ const estadisticasGenerales = async (req, res) => {
     }
 }
 
-//DOC
 const estadisticasAhorcado = async (req, res) => {
     try {
         const { username } = req.query;

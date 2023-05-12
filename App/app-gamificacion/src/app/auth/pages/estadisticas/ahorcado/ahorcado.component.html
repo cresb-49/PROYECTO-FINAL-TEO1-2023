@@ -1,4 +1,4 @@
-<div class="container bg-white">
+<div class="container bg-white p-2 m-2">
     <h1>Estadisticas del Ahorcado</h1>
     <h3>Ultimas partidas jugadas</h3>
     <div>
@@ -26,9 +26,12 @@
         </table>
     </div>
 
-    <h3> Estadisticas de partidas: </h3>
-    <h3>Punteo: <span class="fw-bold"> 1000 </span></h3>
-    <div>
-        
+    <h3> Estadisticas de partidas </h3>
+    <h3>Punteo Total: <span class="fw-bold"> {{punteoTotal}} </span></h3>
+    <div class="chartPie">
+        <canvas baseChart class="chart" [data]="pieChartData" [type]="pieChartType" [options]="pieChartOptions">
+        </canvas>
     </div>
+
+    <button class="btn btn-warning" (click)="regresar()"> Regresar</button>
 </div>
