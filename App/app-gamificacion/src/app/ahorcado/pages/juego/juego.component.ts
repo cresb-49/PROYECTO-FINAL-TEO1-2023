@@ -4,6 +4,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { AhorcadoService } from '../../services/ahorcado.service';
 import * as moment from 'moment';
+import { AuthService } from 'src/app/auth/services/auth.service';
+import { LogrosService } from 'src/app/services/logros.service';
 
 @Component({
   selector: 'app-juego',
@@ -29,7 +31,7 @@ export class JuegoComponent implements OnInit {
   palabrasEntontradas = 0;
   palabrasFalladas = 0;
 
-  constructor(private router: Router, private route: ActivatedRoute, private ahorcadoService: AhorcadoService) {
+  constructor(private router: Router, private route: ActivatedRoute, private ahorcadoService: AhorcadoService, private authService: AuthService, private logrosService: LogrosService) {
 
   }
 
@@ -41,6 +43,7 @@ export class JuegoComponent implements OnInit {
       this.codigoJuego = params.codigo;
     });
 
+    this.obtenerLogros("perro15");
     this.ahorcadoService.obtenerPartida(this.codigoJuego, "J00002")
       .subscribe({
         next: (result: any) => {
@@ -153,7 +156,7 @@ export class JuegoComponent implements OnInit {
         }
         this.ahorcadoService.guardarResultado(resultadoBody)
           .subscribe({
-            next: (resultado: any) => { console.log(resultado); },
+            next: (resultado: any) => { console.log(resultado); this.obtenerLogros(usuario.username)},
             error: (error: any) => { console.log(error); }
           });
         this.palabrasEntontradas = 0;
@@ -162,6 +165,14 @@ export class JuegoComponent implements OnInit {
       }, 1500)
       this.numeroPalabra = 0;
     }
+  }
+
+  obtenerLogros(username: string) {
+    this.authService.obtenerUsuarioDB(username)
+      .subscribe({
+        next: (result: any) => { this.logrosService.obtenerLogrosGenerales(result); },
+        error: (err) => { console.log(err); }
+      });
   }
 
   cambiarEstadoBotones(estado: boolean) {

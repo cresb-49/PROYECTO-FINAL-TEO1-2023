@@ -81,7 +81,7 @@ const modificarPassword = async (req, res) => {
     }
 }
 
-//Agregar a API
+
 const obtenerUsuario = async (req, res) => {
     const filler1 = { username: req.query.username };
     try {
@@ -96,10 +96,24 @@ const obtenerUsuario = async (req, res) => {
     }
 }
 
+//API
+const agregarLogro = async (req, res) => {
+    const { username, logro } = req.body
+    try {
+        const actualizacion = await usuario.updateOne({ username }, {
+            $push: { "data.logros": logro }
+        })
+        res.status(200).json(actualizacion);
+    } catch (error) {
+        res.status(409).json({ error: error.message });
+    }
+
+}
 module.exports = {
     registro: registro,
     login: login,
     modificar: modificar,
     modificarPassword: modificarPassword,
-    obtenerUsuario
+    obtenerUsuario,
+    agregarLogro: agregarLogro
 }
