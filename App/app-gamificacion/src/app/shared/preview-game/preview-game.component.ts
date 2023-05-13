@@ -5,6 +5,7 @@ import { MeGustaService } from './services/megusta.service';
 import { MeGusta } from './model/MeGusta';
 import Swal from 'sweetalert2';
 import { FormsModule } from '@angular/forms';
+import { NgToastService } from 'ng-angular-popup';
 
 @Component({
   selector: 'app-preview-game',
@@ -19,15 +20,19 @@ export class PreviewGameComponent implements OnInit {
   @Input() comentarioUsuario: string = "";
   @Input() comentarios: Comentario[] = []
 
-  constructor(private comentariosService: ComentariosService, private meGustaService: MeGustaService, private formsModule: FormsModule) { }
+  cantidadLikes: number = 0;
+  cantidadDislikes: number = 0;
+
+  constructor(private comentariosService: ComentariosService, private meGustaService: MeGustaService, private formsModule: FormsModule, private toast: NgToastService) { }
   ngOnInit(): void {
-    this.actualizarComentarios()
-    this.actualizarMeGustaUsuario()
+    this.actualizarComentarios();
+    this.actualizarMeGustaUsuario();
+    this.obtenerMegustaNoMegusta();
   }
 
   /**
    * Ejecuta la logica del Me Gusta
-   */
+  */
   onMeGusta(estado: boolean) {
     //Se comprueba si se esta logeado, si no, se envia una alerta y se retorna
     if (localStorage.getItem("usuario") === null || localStorage.getItem("usuario") === undefined) {
@@ -47,11 +52,7 @@ export class PreviewGameComponent implements OnInit {
       this.meGustaService.publicarMeGusta(new MeGusta(this.juego!, username, estado))
         .subscribe({
           next: (response: Object) => {
-            Swal.fire({
-              icon: 'success',
-              title: 'Me Gusta',
-              text: 'Gracias por el ' + (estado ? '' : 'No ') + 'Me Gusta!'
-            });
+            this.toast.success({ detail: "Me Gusta", summary: 'Gracias por el ' + (estado ? '' : 'No ') + 'Me Gusta!', duration: 5000 });
             this.actualizarMeGustaUsuario()
           },
           error: (error: any) => {
@@ -64,11 +65,7 @@ export class PreviewGameComponent implements OnInit {
       this.meGustaService.removerMeGusta(username, this.juego!)
         .subscribe({
           next: (response: Object) => {
-            Swal.fire({
-              icon: 'success',
-              title: 'Me Gusta',
-              text: "Se ha quitado el " + (estado ? "" : 'No ') + 'Me Gusta!'
-            });
+            this.toast.success({ detail: "Me Gusta", summary: "Se ha quitado el " + (estado ? "" : 'No ') + 'Me Gusta!', duration: 5000 });
             this.actualizarMeGustaUsuario()
           },
           error: (error: any) => {
@@ -80,11 +77,7 @@ export class PreviewGameComponent implements OnInit {
       this.meGustaService.removerMeGusta(username, this.juego!)
         .subscribe({
           next: (response: Object) => {
-            Swal.fire({
-              icon: 'success',
-              title: 'No Me Gusta',
-              text: "Se ha quitado el " + (estado ? "" : 'No ') + 'Me Gusta!'
-            });
+            this.toast.success({ detail: "No Me Gusta", summary: "Se ha quitado el " + (estado ? "" : 'No ') + 'Me Gusta!', duration: 5000 });
             this.actualizarMeGustaUsuario()
           },
           error: (error: any) => {
@@ -96,11 +89,7 @@ export class PreviewGameComponent implements OnInit {
       this.meGustaService.publicarMeGusta(new MeGusta(this.juego!, username, estado))
         .subscribe({
           next: (response: Object) => {
-            Swal.fire({
-              icon: 'success',
-              title: 'Me Gusta',
-              text: 'Gracias por el ' + (estado ? '' : 'No ') + 'Me Gusta!'
-            });
+            this.toast.success({ detail: "No Me Gusta", summary: 'Gracias por el ' + (estado ? '' : 'No ') + 'Me Gusta!', duration: 5000 });
             this.actualizarMeGustaUsuario()
           },
           error: (error: any) => {
@@ -116,7 +105,7 @@ export class PreviewGameComponent implements OnInit {
 
   /**
    * Guarda un comentario escrito
-   */
+  */
   guardarComentario() {
     let username: any = JSON.parse(localStorage.getItem("usuario")!).username
     this.comentariosService.publicarComentario(username, this.comentarioUsuario, this.juego!)
@@ -132,7 +121,7 @@ export class PreviewGameComponent implements OnInit {
 
   /**
    * Actualiza los comentarios del juego
-   */
+ */
   actualizarComentarios(): void {
     this.comentariosService.obtenerComentarios(this.juego!)
       .subscribe({
@@ -147,7 +136,7 @@ export class PreviewGameComponent implements OnInit {
 
   /**
    * Actualiza la informacion del like del usuario
-   */
+  */
   actualizarMeGustaUsuario(): void {
     if (localStorage.getItem("usuario") === null || localStorage.getItem("usuario") === undefined) {
       return;
@@ -167,5 +156,19 @@ export class PreviewGameComponent implements OnInit {
           console.log(error)
         })
       })
+  }
+  /**
+   * Obtiene el objeto juego base de la base de datos para tener los parametros de la cantidad de likes y no likes
+   */
+  obtenerMegustaNoMegusta() {
+    this.meGustaService.getCantidadMeGustaNoMeGusta(this.juego!).subscribe({
+      next: (game: any) => {
+        this.cantidadLikes = game.likes;
+        this.cantidadDislikes = game.dislikes;
+      },
+      error: (error: any) => {
+        console.log(error);
+      }
+    });
   }
 }

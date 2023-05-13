@@ -38,24 +38,26 @@
                 <div class="col-4 bordes-juegos-left d-flex align-items-center">
                     <input name="comentarios" placeholder="Deja un comentario" id="comentarios" cols="30" type="text"
                         class="text-comentario" [(ngModel)]="comentarioUsuario" />
-                    <button class="btn btn-enviar" (click)="guardarComentario()">Publicar</button>
+                    <button class="btn btn-enviar" (click)="guardarComentario()">
+                        <i class="fa-solid fa-paper-plane"></i>
+                    </button>
                 </div>
             </div>
         </div>
         <div class="col-3">
             <div class="row d-flex justify-content-center align-items-center" style="height: 100px;">
-                Cantidad de Me Gusta y No Me Gusta
+                Me Gusta x {{cantidadLikes}} No Me Gusta x{{cantidadDislikes}}//TODO:Cambiar la cantidad de likes con los iconos
             </div>
             <div class="row bordes-juegos-top d-flex justify-content-center align-items-center" style="height: 700px;">
                 <div class="contenedorComentarios">
                     Comentarios<br>
-
                     <div *ngIf="comentarios.length === 0">Aun no hay comentarios, se el primero el publicar uno!</div>
                     <ng-template ngFor let-comentario [ngForOf]="comentarios">
-                        <div class="card">
+                        <div class="card card-coment">
                             <div class="container">
                                 <h4><b>{{comentario.usuario}}</b></h4>
                                 <p>{{comentario.comentario}}</p>
+                                <small class="text-muted">{{comentario.fecha}}</small>
                             </div>
                         </div>
                     </ng-template>

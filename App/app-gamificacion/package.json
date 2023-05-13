@@ -24,6 +24,7 @@
     "chart.js": "^3.9.1",
     "jquery": "^3.6.4",
     "moment": "^2.29.4",
+    "ng-angular-popup": "^0.3.0",
     "ng2-charts": "^3.1.2",
     "ngx-cookie-service": "^15.0.0",
     "primeng": "^15.4.1",

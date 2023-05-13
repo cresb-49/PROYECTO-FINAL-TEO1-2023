@@ -43,14 +43,20 @@
 
 .btn-enviar {
     background: #EFDB00;
+    font-size: 20px;
     height: 80px;
-    border: 4px solid #69D957;
+    border-color: #69D957;
+    border-style: solid;
+    border-width: 4px 4px 4px 0px;
     border-radius: 0px 7px 7px 0px;
 }
 
 .btn-gusta {
-    margin: 5px;
-    font-size: 40px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    margin-left: 5px;
+    margin-right: 5px;
+    font-size: 35px;
     background-color: #EFDB00;
     color: #000000;
 }
@@ -66,6 +72,9 @@
 .contenedorComentarios {
     display: flex;
     flex-direction: column;
+    align-items: flex-start;
+    height: 680px;
+    overflow: scroll;
 }
 
 .card {
@@ -81,4 +90,7 @@
 
 .container {
     padding: 5px 16px;
+}
+.card-coment{
+    background-color: #EFDB00;
 }
