@@ -1,7 +1,9 @@
 .container {
-    background-color: white;
+    background-color: #007da7d0;
+    border-radius: 1rem;
     margin: 5px;
     width: 500px;
+    text-align: center;
 }
 
 .containerpadre {
@@ -13,4 +15,16 @@
 
 button{
     width: 100%;
+    background-color: #EFDB00;
+    color: #000000;
+}
+
+button:hover{
+    background-color: #22e684da;
+}
+
+.perfil-user{
+    font-size: 40px;
+    font-style: normal;
+    color: #FFFFFF;
 }

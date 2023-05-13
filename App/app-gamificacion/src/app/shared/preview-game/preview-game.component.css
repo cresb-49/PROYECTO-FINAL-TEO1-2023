@@ -1,27 +1,27 @@
 .bordes-juegos-top {
-    border-top: 7px solid #E0F04F;
+    border-top: 4px solid #EFDB00;
 }
 
 .bordes-juegos-btm {
-    border-bottom: 7px solid #E0F04F;
+    border-bottom: 4px solid #EFDB00;
 }
 
 .bordes-juegos-left {
-    border-left: 7px solid #E0F04F;
+    border-left: 4px solid #EFDB00;
 }
 
 .bordes-juegos-right {
-    border-right: 7px solid #E0F04F;
+    border-right: 4px solid #EFDB00;
 }
 
 .contenedor-principal {
-    border: 7px solid #E0F04F;
-    background: #22E685;
+    border: 4px solid #EFDB00;
+    background-color: #22e684da;
     border-radius: 7px;
 }
 
 .button-play {
-    background: #E0F04F;
+    background: #EFDB00;
     border: 4px solid #69D957;
     width: 300px;
     height: 50px;
@@ -29,7 +29,7 @@
 }
 
 .input-code {
-    background: #E0F04F;
+    background: #EFDB00;
     border: 4px solid #69D957;
     border-radius: 7px;
     height: 50px;
@@ -42,21 +42,29 @@
 }
 
 .btn-enviar {
-    background: #E0F04F;
+    background: #EFDB00;
+    font-size: 20px;
     height: 80px;
-    border: 4px solid #69D957;
+    border-color: #69D957;
+    border-style: solid;
+    border-width: 4px 4px 4px 0px;
     border-radius: 0px 7px 7px 0px;
 }
 
 .btn-gusta {
-    background-color: #E0F04F;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    margin-left: 5px;
+    margin-right: 5px;
+    font-size: 35px;
+    background-color: #EFDB00;
     color: #000000;
 }
 
 .text-comentario {
     height: 80px;
     width: 350px;
-    background: #E0F04F;
+    background: #EFDB00;
     border: 4px solid #69D957;
     resize: none;
 }
@@ -64,6 +72,9 @@
 .contenedorComentarios {
     display: flex;
     flex-direction: column;
+    align-items: flex-start;
+    height: 730px;
+    overflow: scroll;
 }
 
 .card {
@@ -79,4 +90,21 @@
 
 .container {
     padding: 5px 16px;
+}
+
+.card-coment {
+    background-color: #EFDB00;
+}
+
+.reacciones {
+    font-size: 30px;
+    text-align: center;
+    color: #EFDB00;
+}
+
+.comentarios-titulo{
+    margin-top: 10px;
+    color: #EFDB00;
+    font-weight: bold;
+    font-size: 30px;
 }

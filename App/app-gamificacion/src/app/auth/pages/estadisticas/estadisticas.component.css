@@ -7,3 +7,11 @@
 button{
     width: 100%;
 }
+
+.container{
+    background-color: #22e684da;
+    margin-top: 20px;
+    border-radius: 1rem;
+    border: 3px solid #EFDB00;
+    padding: 20px;
+}

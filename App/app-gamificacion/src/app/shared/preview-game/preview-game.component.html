@@ -2,7 +2,8 @@
     <div class="row contenedor-principal">
         <div class="col bordes-juegos-right ">
             <div class="row d-flex justify-content-center align-items-center" style="height: 700px;">
-                <img [src]="'http://localhost:5000/api/juego/imagen?juego='+juego" class="imagenJuego" alt="Imagen Juego">
+                <img [src]="'http://localhost:5000/api/juego/imagen?juego='+juego" class="imagenJuego"
+                    alt="Imagen Juego">
             </div>
             <div class="row bordes-juegos-top d-flex justify-content-center align-items-center" style="height: 100px;">
                 <div class="col-6 d-flex justify-content-center align-items-center">
@@ -19,33 +20,47 @@
             </div>
             <div class="row bordes-juegos-top" style="height: 100px;">
                 <button type="button" (click)="onMeGusta(true)" class="col-2 btn btn-gusta">
-                    <div *ngIf="likeUsuario !== null && likeUsuario">Quitar </div>Me Gusta
+                    <div *ngIf="(likeUsuario !== null && likeUsuario)">
+                        <i class="fa-solid fa-thumbs-up"></i>
+                    </div>
+                    <div *ngIf="!(likeUsuario !== null && likeUsuario)">
+                        <i class="fa-regular fa-thumbs-up"></i>
+                    </div>
                 </button>
                 <button type="button" (click)="onMeGusta(false)" class="col-2 btn btn-gusta">
-                    <div *ngIf="likeUsuario !== null && !likeUsuario">Quitar </div>
-                    No Me Gusta
+                    <div *ngIf="(likeUsuario !== null && !likeUsuario)">
+                        <i class="fa-solid fa-thumbs-down"></i>
+                    </div>
+                    <div *ngIf="!(likeUsuario !== null && !likeUsuario)">
+                        <i class="fa-regular fa-thumbs-down"></i>
+                    </div>
                 </button>
                 <div class="col-4 bordes-juegos-left d-flex align-items-center">
                     <input name="comentarios" placeholder="Deja un comentario" id="comentarios" cols="30" type="text"
                         class="text-comentario" [(ngModel)]="comentarioUsuario" />
-                    <button class="btn btn-enviar" (click)="guardarComentario()">Publicar</button>
+                    <button class="btn btn-enviar" (click)="guardarComentario()">
+                        <i class="fa-solid fa-paper-plane"></i>
+                    </button>
                 </div>
             </div>
         </div>
         <div class="col-3">
-            <div class="row d-flex justify-content-center align-items-center" style="height: 100px;">
-                Cantidad de Me Gusta y No Me Gusta
+            <div class="row d-flex justify-content-center align-items-center" style="height: 60px;">
+                <div class="container reacciones">
+                    <i class="fa-solid fa-thumbs-up"></i> {{cantidadLikes}} 
+                    <i class="fa-solid fa-thumbs-down" style="margin-left: 20px;"></i> {{cantidadDislikes}}
+                </div>
             </div>
             <div class="row bordes-juegos-top d-flex justify-content-center align-items-center" style="height: 700px;">
                 <div class="contenedorComentarios">
-                    Comentarios<br>
-
+                    <p class="comentarios-titulo">Comentarios</p>
                     <div *ngIf="comentarios.length === 0">Aun no hay comentarios, se el primero el publicar uno!</div>
                     <ng-template ngFor let-comentario [ngForOf]="comentarios">
-                        <div class="card">
+                        <div class="card card-coment">
                             <div class="container">
                                 <h4><b>{{comentario.usuario}}</b></h4>
                                 <p>{{comentario.comentario}}</p>
+                                <small class="text-muted">{{comentario.fecha}}</small>
                             </div>
                         </div>
                     </ng-template>
