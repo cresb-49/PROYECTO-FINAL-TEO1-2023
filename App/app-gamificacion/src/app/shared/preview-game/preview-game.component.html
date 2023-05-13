@@ -45,12 +45,15 @@
             </div>
         </div>
         <div class="col-3">
-            <div class="row d-flex justify-content-center align-items-center" style="height: 100px;">
-                Me Gusta x {{cantidadLikes}} No Me Gusta x{{cantidadDislikes}}//TODO:Cambiar la cantidad de likes con los iconos
+            <div class="row d-flex justify-content-center align-items-center" style="height: 60px;">
+                <div class="container reacciones">
+                    <i class="fa-solid fa-thumbs-up"></i> {{cantidadLikes}} 
+                    <i class="fa-solid fa-thumbs-down" style="margin-left: 20px;"></i> {{cantidadDislikes}}
+                </div>
             </div>
             <div class="row bordes-juegos-top d-flex justify-content-center align-items-center" style="height: 700px;">
                 <div class="contenedorComentarios">
-                    Comentarios<br>
+                    <p class="comentarios-titulo">Comentarios</p>
                     <div *ngIf="comentarios.length === 0">Aun no hay comentarios, se el primero el publicar uno!</div>
                     <ng-template ngFor let-comentario [ngForOf]="comentarios">
                         <div class="card card-coment">

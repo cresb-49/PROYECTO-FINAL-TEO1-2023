@@ -51,8 +51,10 @@ export class PreviewGameComponent implements OnInit {
     if (this.likeUsuario === null) {
       this.meGustaService.publicarMeGusta(new MeGusta(this.juego!, username, estado))
         .subscribe({
-          next: (response: Object) => {
+          next: (response: any) => {
             this.toast.success({ detail: "Me Gusta", summary: 'Gracias por el ' + (estado ? '' : 'No ') + 'Me Gusta!', duration: 5000 });
+            this.cantidadLikes = response.likes;
+            this.cantidadDislikes = response.dislikes;
             this.actualizarMeGustaUsuario()
           },
           error: (error: any) => {
@@ -64,8 +66,10 @@ export class PreviewGameComponent implements OnInit {
     } else if (this.likeUsuario && estado) {
       this.meGustaService.removerMeGusta(username, this.juego!)
         .subscribe({
-          next: (response: Object) => {
+          next: (response: any) => {
             this.toast.success({ detail: "Me Gusta", summary: "Se ha quitado el " + (estado ? "" : 'No ') + 'Me Gusta!', duration: 5000 });
+            this.cantidadLikes = response.likes;
+            this.cantidadDislikes = response.dislikes;
             this.actualizarMeGustaUsuario()
           },
           error: (error: any) => {
@@ -76,8 +80,10 @@ export class PreviewGameComponent implements OnInit {
     } else if (!this.likeUsuario && !estado) {
       this.meGustaService.removerMeGusta(username, this.juego!)
         .subscribe({
-          next: (response: Object) => {
+          next: (response: any) => {
             this.toast.success({ detail: "No Me Gusta", summary: "Se ha quitado el " + (estado ? "" : 'No ') + 'Me Gusta!', duration: 5000 });
+            this.cantidadLikes = response.likes;
+            this.cantidadDislikes = response.dislikes;
             this.actualizarMeGustaUsuario()
           },
           error: (error: any) => {
@@ -88,8 +94,10 @@ export class PreviewGameComponent implements OnInit {
     } else if (this.likeUsuario !== estado) {
       this.meGustaService.publicarMeGusta(new MeGusta(this.juego!, username, estado))
         .subscribe({
-          next: (response: Object) => {
+          next: (response: any) => {
             this.toast.success({ detail: "No Me Gusta", summary: 'Gracias por el ' + (estado ? '' : 'No ') + 'Me Gusta!', duration: 5000 });
+            this.cantidadLikes = response.likes;
+            this.cantidadDislikes = response.dislikes;
             this.actualizarMeGustaUsuario()
           },
           error: (error: any) => {
