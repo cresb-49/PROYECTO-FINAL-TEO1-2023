@@ -28,7 +28,103 @@ export class LogrosService {
   }
 
   obtenerLogrosAhorcado(usuario: any) {
+    const logros: any = usuario.data.logros;
+    this.authService.verEstadisticasAhorcado(usuario.username)
+      .subscribe({
+        next: (result: any) => {
+          const palabrasEncontradas = result[0].palabrasEncontradas;
+          const punteo = result[0].punteo;
+          this.calcularLogrosAhorcado(palabrasEncontradas, punteo, logros, usuario.username);
+        },
+        error: (err) => { }
 
+      });
+  }
+
+  calcularLogrosAhorcado(palabrasEncontradas: number, punteo: number, logros: any[], username: string) {
+    if (palabrasEncontradas >= 10) {
+      const logro = {
+        id: "L00100",
+        nombre: "Haz encontrado 10 palabras",
+        fecha: moment().format("YYYY-MM-DD")
+      }
+      const verificacion = logros.find(lr => lr.id == logro.id);
+      if (!verificacion) {
+        this.guardarLogro(logro, username);
+      }
+    } else if (palabrasEncontradas >= 50) {
+      const logro = {
+        id: "L00101",
+        nombre: "Haz encontrado 50 palabras",
+        fecha: moment().format("YYYY-MM-DD")
+      }
+      const verificacion = logros.find(lr => lr.id == logro.id);
+      if (!verificacion) {
+        this.guardarLogro(logro, username);
+      }
+    } else if (palabrasEncontradas >= 100) {
+      const logro = {
+        id: "L00102",
+        nombre: "Haz encontrado 100 palabras",
+        fecha: moment().format("YYYY-MM-DD")
+      }
+      const verificacion = logros.find(lr => lr.id == logro.id);
+      if (!verificacion) {
+        this.guardarLogro(logro, username);
+      }
+    } else if (palabrasEncontradas >= 500) {
+      const logro = {
+        id: "L00103",
+        nombre: "Haz encontrado 500 palabras",
+        fecha: moment().format("YYYY-MM-DD")
+      }
+      const verificacion = logros.find(lr => lr.id == logro.id);
+      if (!verificacion) {
+        this.guardarLogro(logro, username);
+      }
+    }
+
+    if (punteo >= 500) {
+      const logro = {
+        id: "L00104",
+        nombre: "Haz obtenido 500 puntos en partidas",
+        fecha: moment().format("YYYY-MM-DD")
+      }
+      const verificacion = logros.find(lr => lr.id == logro.id);
+      if (!verificacion) {
+        this.guardarLogro(logro, username);
+      }
+    } else if (punteo >= 1000) {
+      const logro = {
+        id: "L00105",
+        nombre: "Haz obtenido 1000 puntos en partidas",
+        fecha: moment().format("YYYY-MM-DD")
+      }
+      const verificacion = logros.find(lr => lr.id == logro.id);
+      if (!verificacion) {
+        this.guardarLogro(logro, username);
+      }
+    } else if (punteo >= 2000) {
+      const logro = {
+        id: "L00106",
+        nombre: "Haz obtenido 2000 puntos en partidas",
+        fecha: moment().format("YYYY-MM-DD")
+      }
+      const verificacion = logros.find(lr => lr.id == logro.id);
+      if (!verificacion) {
+        this.guardarLogro(logro, username);
+      }
+    } else if (punteo >= 5000) {
+      const logro = {
+        id: "L00107",
+        nombre: "Haz obtenido 5000 puntos en partidass",
+        fecha: moment().format("YYYY-MM-DD")
+      }
+      const verificacion = logros.find(lr => lr.id == logro.id);
+      if (!verificacion) {
+        this.guardarLogro(logro, username);
+      }
+    }
   }
 
   calcularTrofeosGenerales(partidas: number, logros: any[], username: string) {

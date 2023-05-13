@@ -170,7 +170,7 @@ export class JuegoComponent implements OnInit {
   obtenerLogros(username: string) {
     this.authService.obtenerUsuarioDB(username)
       .subscribe({
-        next: (result: any) => { this.logrosService.obtenerLogrosGenerales(result); },
+        next: (result: any) => { this.logrosService.obtenerLogrosGenerales(result); this.logrosService.obtenerLogrosAhorcado(result)},
         error: (err) => { console.log(err); }
       });
   }
