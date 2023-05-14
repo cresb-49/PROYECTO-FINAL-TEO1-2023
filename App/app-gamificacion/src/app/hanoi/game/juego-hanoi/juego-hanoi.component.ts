@@ -10,6 +10,7 @@ import Swal2 from "sweetalert2";
 import { SesionService } from 'src/app/services/sesion.service';
 import * as moment from 'moment'
 import { NgToastModule, NgToastService } from 'ng-angular-popup';
+import { ActivatedRoute, Router } from '@angular/router';
 @Component({
   selector: 'app-juego-hanoi',
   templateUrl: './juego-hanoi.component.html',
@@ -37,7 +38,7 @@ export class JuegoHanoiComponent {
     movExperados: 0
   }
 
-  constructor(private hanoiService: HanoiService, private sesionService: SesionService, private toast: NgToastService) { }
+  constructor(private router: Router, private hanoiService: HanoiService, private sesionService: SesionService, private toast: NgToastService) { }
 
   public iniciar(): void {
     this.estadisticaHanoi.movExperados = Math.pow(2, this.juegoHanoi.hanoi.discos) - 1;
@@ -124,7 +125,7 @@ export class JuegoHanoiComponent {
           detail: "Error",
           summary: 'No se registro la partida error con el servidor',
           duration: 5000
-        })
+        });
       }
     });
   }
@@ -150,6 +151,7 @@ export class JuegoHanoiComponent {
             icon: 'error',
             confirmButtonText: 'Salir'
           });
+          this.router.navigate(['/hanoi/principal']);
         }
       }
     );
