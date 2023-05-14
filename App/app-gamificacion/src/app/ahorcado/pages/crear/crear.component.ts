@@ -24,7 +24,7 @@ export class CrearComponent {
         const nuevaPalabra = this.palabraActual.replace(/\s+/g, '');
         const palabraSinNumeros = nuevaPalabra.replace(/[0-9]/g, "");
         const palabraSinEspeciales = palabraSinNumeros.replace(/[^\w\s]/gi, "");
-        const repeticion = this.palabras.includes(palabraSinEspeciales.toLocaleLowerCase());
+        const repeticion = this.palabras.includes(palabraSinEspeciales.toLowerCase());
         if (repeticion == false) {
           if (palabraSinEspeciales != "") {
             this.palabras.push(palabraSinEspeciales.toLowerCase());

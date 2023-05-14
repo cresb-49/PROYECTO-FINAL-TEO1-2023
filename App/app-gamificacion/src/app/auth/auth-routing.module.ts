@@ -6,6 +6,7 @@ import { RegisterComponent } from './pages/register/register.component';
 import { InformacionUsuarioComponent } from './pages/informacion-usuario/informacion-usuario.component';
 import { ModificarInformacionComponent } from './pages/modificar-informacion/modificar-informacion.component';
 import { EstadisticasComponent } from './pages/estadisticas/estadisticas.component';
+import { AhorcadoComponent } from './pages/estadisticas/ahorcado/ahorcado.component';
 
 const routes: Routes = [
   {
@@ -17,6 +18,7 @@ const routes: Routes = [
       { path: "informacion", component: InformacionUsuarioComponent },
       { path: "modificar", component: ModificarInformacionComponent },
       { path: "estadisticas", component: EstadisticasComponent },
+      { path: "ahorcado", component: AhorcadoComponent },
       { path: "**", redirectTo: "login" },
     ]
   }
