@@ -16,7 +16,7 @@ const registroModelo = async (req, res) => {
         } while (partida != undefined);
 
         const modelo = new modeloPartida({
-            codigo: nuevoCodigo, //TODO: Generacion del codigo de partida
+            codigo: nuevoCodigo,
             juego: data.juego,
             usuario: data.usuario,
             data: data.data

@@ -10,7 +10,7 @@ const cors = require('cors');
 
 //Configuracion de CORS
 const corsOptions = {
-    origin: 'http://localhost:4200', //TODO: puerto del forntend
+    origin: 'http://localhost:4200',
     credentials: true,
     optionSuccessStatus: 200
 }

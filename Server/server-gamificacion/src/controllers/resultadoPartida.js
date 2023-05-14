@@ -1,7 +1,6 @@
 const resultadoPartida = require('../models/resultadoPartida');
 
 const registarPartida = async (req, res) => {
-    console.log('Partida');
     try {
         const data = {
             codigo: req.body.codigo,
@@ -17,7 +16,6 @@ const registarPartida = async (req, res) => {
             fecha: data.fecha,
             data: data.data
         });
-        console.log('PR');
         const result = await resultPartida.save();
         res.status(200).json(result);
     } catch (error) {
@@ -66,7 +64,7 @@ const estadisticasGenerales = async (req, res) => {
                 }
             }
         ]);
-        res.status(200).json({generales: partidasJugadas, juegos: partidasJuego});
+        res.status(200).json({ generales: partidasJugadas, juegos: partidasJuego });
     } catch (error) {
         res.status(409).json({ error: error.message });
     }
