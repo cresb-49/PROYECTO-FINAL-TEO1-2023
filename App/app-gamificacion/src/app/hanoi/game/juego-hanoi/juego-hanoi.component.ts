@@ -1,9 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Hanoi } from '../../models/Hanoi';
 import { Torre } from '../../models/Torre';
 import { Disco } from '../../models/Disco';
 import { EstadisticaHanoi } from '../../models/EstadisticaHanoi';
 import { JuegoHanoi } from '../../models/JuegoHanoi';
+import { Data } from '../../models/Data';
+import { HanoiService } from '../../services/hanoi.service';
+import Swal2 from "sweetalert2";
 
 @Component({
   selector: 'app-juego-hanoi',
@@ -11,6 +14,7 @@ import { JuegoHanoi } from '../../models/JuegoHanoi';
   styleUrls: ['./juego-hanoi.component.css']
 })
 export class JuegoHanoiComponent {
+  @Input() codigoPartida!: string;
 
   contador: number = 1;
   torres: Torre[] = [];
@@ -22,6 +26,8 @@ export class JuegoHanoiComponent {
     terminado: false,
     movExperados: 0
   }
+
+  constructor(private hanoiService: HanoiService) { }
 
   public iniciar(): void {
     this.estadisticaHanoi.movExperados = Math.pow(2, this.juegoHanoi.hanoi.discos) - 1;
@@ -76,11 +82,40 @@ export class JuegoHanoiComponent {
   }
 
   public registrarPartida() {
-    console.log(this.estadisticaHanoi);
+    let result = new Data(this.estadisticaHanoi.movimientos.length, this.estadisticaHanoi.movExperados, this.estadisticaHanoi.movimientos, "");
+    console.log(result);
   }
 
   ngOnInit() {
-    this.juegoHanoi = new JuegoHanoi('xxxxx', new Hanoi(4, 2));
-    this.iniciar();
+    this.hanoiService.obtenerJuegoPersonalizado({ codigo: this.codigoPartida, juego: 'J00001' }).subscribe(
+      {
+        next: (response: any) => {
+          console.log(response);
+          this.juegoHanoi = new JuegoHanoi('xxxxx', new Hanoi(4, 2));
+          this.iniciar();
+        },
+        error: (error: any) => {
+          console.log(error);
+          Swal2.fire({
+            title: 'Error!',
+            text: `No existe un partida con el codigo ${this.codigoPartida} para Torres de Hanoi`,
+            icon: 'error',
+            confirmButtonText: 'Salir'
+          });
+        }
+      }
+    );
+  }
+
+  private iniciarReloj(): void {
+    //TODO: logica de reloj
+  }
+
+  private reloj(): void {
+
+  }
+
+  private pararReloj(): void {
+
   }
 }
