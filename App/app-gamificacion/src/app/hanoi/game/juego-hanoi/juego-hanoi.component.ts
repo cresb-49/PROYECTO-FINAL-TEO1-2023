@@ -38,7 +38,7 @@ export class JuegoHanoiComponent {
     movExperados: 0
   }
 
-  constructor(private router: Router, private hanoiService: HanoiService, private sesionService: SesionService, private toast: NgToastService) { }
+  constructor(private router: Router, private route: ActivatedRoute, private hanoiService: HanoiService, private sesionService: SesionService, private toast: NgToastService) { }
 
   public iniciar(): void {
     this.estadisticaHanoi.movExperados = Math.pow(2, this.juegoHanoi.hanoi.discos) - 1;
@@ -131,12 +131,13 @@ export class JuegoHanoiComponent {
   }
 
   ngOnInit() {
+    this.route.queryParams.subscribe((params: any) => {
+      this.codigoPartida = params.codigo;
+    });
     this.obtenerModeloJuego();
   }
 
   private obtenerModeloJuego(): void {
-    //TODO:Eliminar dato por el momento esto solo es de prueba
-    this.codigoPartida = '669898';
     this.hanoiService.obtenerJuegoPersonalizado({ codigo: this.codigoPartida, juego: 'J00001' }).subscribe(
       {
         next: (response: any) => {
