@@ -1,3 +1,13 @@
-.contenedorTorres{
+.contenedorTorres {
     display: flex;
+    width: 100%;
+    overflow-x: scroll;
+    padding-bottom: 20px;
+}
+
+.container {
+    background-color: aliceblue;
+}
+.reloj{
+    font-size: 25px;
 }

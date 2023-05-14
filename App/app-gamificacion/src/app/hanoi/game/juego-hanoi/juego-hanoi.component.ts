@@ -7,7 +7,9 @@ import { JuegoHanoi } from '../../models/JuegoHanoi';
 import { Data } from '../../models/Data';
 import { HanoiService } from '../../services/hanoi.service';
 import Swal2 from "sweetalert2";
-
+import { SesionService } from 'src/app/services/sesion.service';
+import * as moment from 'moment'
+import { NgToastModule, NgToastService } from 'ng-angular-popup';
 @Component({
   selector: 'app-juego-hanoi',
   templateUrl: './juego-hanoi.component.html',
@@ -20,6 +22,14 @@ export class JuegoHanoiComponent {
   torres: Torre[] = [];
   juegoHanoi!: JuegoHanoi;
 
+  //Variables del reloj
+  public minutos: number = 0;
+  public segundos: number = 0;
+
+  public isPause: boolean = false;
+
+  private idInterval: any;
+
 
   estadisticaHanoi: EstadisticaHanoi = {
     movimientos: [],
@@ -27,7 +37,7 @@ export class JuegoHanoiComponent {
     movExperados: 0
   }
 
-  constructor(private hanoiService: HanoiService) { }
+  constructor(private hanoiService: HanoiService, private sesionService: SesionService, private toast: NgToastService) { }
 
   public iniciar(): void {
     this.estadisticaHanoi.movExperados = Math.pow(2, this.juegoHanoi.hanoi.discos) - 1;
@@ -48,7 +58,7 @@ export class JuegoHanoiComponent {
     return altura;
   }
 
-  public movimientoDisco(origen: Torre, destino: Torre, estadisticas: EstadisticaHanoi) {
+  public movimientoDisco(origen: Torre, destino: Torre, estadisticas: EstadisticaHanoi, iniciarReloj: Function) {
     if (!estadisticas.terminado) {
       let bandera = false;
       if (origen.discos.length > 0) {
@@ -82,16 +92,54 @@ export class JuegoHanoiComponent {
   }
 
   public registrarPartida() {
-    let result = new Data(this.estadisticaHanoi.movimientos.length, this.estadisticaHanoi.movExperados, this.estadisticaHanoi.movimientos, "");
-    console.log(result);
+    let horas: number = Math.trunc(this.minutos / 60);
+    let minutos: number = ((this.minutos / 60) - horas) * 60;
+    let segundos: number = this.segundos;
+    let result: Data = new Data(this.estadisticaHanoi.movimientos.length, this.estadisticaHanoi.movExperados, this.estadisticaHanoi.movimientos, `${(horas < 10 ? "0" + horas : horas)}:${(minutos < 10 ? "0" + minutos : minutos)}:${(segundos < 10 ? "0" + segundos : segundos)}`);
+    Swal2.fire({
+      title: 'Partida Terminada!',
+      text: `Ha completado el juego en ${this.estadisticaHanoi.movimientos.length} movimientos , en un tiempo de ${this.minutos} minutos con ${this.segundos} segundos`,
+      icon: 'success',
+      confirmButtonText: 'Salir'
+    });
+
+    let body: any = {
+      codigo: this.juegoHanoi.codigo, //Codigo de partida personalizada
+      juego: this.juegoHanoi.juego, //Codigo del juego
+      usuario: this.sesionService.obtenerUsername(), //Nombre de usuario
+      fecha: moment().format("YYYY-MM-DD"), // Fecha de realización de la partida
+      data: result //Resultado de la partida
+    }
+    console.log(body);
+    this.hanoiService.registrarResultado(body).subscribe({
+      next: (result: any) => {
+        this.toast.info({
+          detail: "Partida Registrada",
+          summary: 'Se registro con exito la partida',
+          duration: 5000
+        })
+      },
+      error: (error: any) => {
+        this.toast.error({
+          detail: "Error",
+          summary: 'No se registro la partida error con el servidor',
+          duration: 5000
+        })
+      }
+    });
   }
 
   ngOnInit() {
+    this.obtenerModeloJuego();
+  }
+
+  private obtenerModeloJuego(): void {
+    //TODO:Eliminar dato por el momento esto solo es de prueba
+    this.codigoPartida = '669898';
     this.hanoiService.obtenerJuegoPersonalizado({ codigo: this.codigoPartida, juego: 'J00001' }).subscribe(
       {
         next: (response: any) => {
-          console.log(response);
-          this.juegoHanoi = new JuegoHanoi('xxxxx', new Hanoi(4, 2));
+          this.juegoHanoi = new JuegoHanoi(response.codigo, new Hanoi(4, 2));
           this.iniciar();
         },
         error: (error: any) => {
@@ -107,15 +155,55 @@ export class JuegoHanoiComponent {
     );
   }
 
-  private iniciarReloj(): void {
-    //TODO: logica de reloj
+  private banderaRejol: boolean = false; //False no activado, true activado el reloj
+  public receiveMenssge($event: any) {
+    if ($event) {
+      if (!this.banderaRejol) {
+        this.banderaRejol = !this.banderaRejol;
+        this.iniciarReloj();
+      }
+    } else {
+      this.banderaRejol = !this.banderaRejol;
+      this.pararReloj();
+      this.registrarPartida();
+    }
+  }
+
+  public iniciarReloj(): void {
+    this.isPause = false;
+    if (this.idInterval) {
+      clearInterval(this.idInterval);
+    }
+    this.idInterval = setInterval(() => this.reloj(), 1000);
   }
 
   private reloj(): void {
-
+    if (!this.isPause) {
+      if (++this.segundos > 59) {
+        this.segundos = 0;
+        this.minutos++;
+      }
+    }
   }
 
-  private pararReloj(): void {
+  private resetTimer(): void {
+    this.minutos = 0;
+    this.segundos = 0;
+  }
 
+  public pararReloj(): void {
+    this.isPause = true;
+  }
+
+  public reiniciarjuego(): void {
+    this.contador = 1;
+    this.torres = [];
+    this.estadisticaHanoi = {
+      movimientos: [],
+      terminado: false,
+      movExperados: 0
+    };
+    this.resetTimer();
+    this.obtenerModeloJuego();
   }
 }

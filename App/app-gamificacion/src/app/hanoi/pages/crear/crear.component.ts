@@ -87,12 +87,11 @@ export class CrearComponent {
             Swal.fire(
               {
                 title: 'Juego creado',
-                text: 'Se creo con exito el juego personalizado',
+                text: `El codigo del juego es "${result.codigo}"`,
                 icon: 'success',
                 confirmButtonText: 'Salir'
               }
             )
-            console.log(result);
           },
           error: (error: any) => {
             Swal.fire(
@@ -102,8 +101,7 @@ export class CrearComponent {
                 icon: 'error',
                 confirmButtonText: 'Salir'
               }
-            )
-            console.log(error.error.error);//TODO: Verificar la informacion de error
+            );
           }
         });
     } else {
