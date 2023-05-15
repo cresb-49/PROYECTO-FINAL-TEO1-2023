@@ -26,9 +26,6 @@ export class MenuComponent implements OnInit {
 
   ngOnInit(): void {
     this.usuario = this.sesionService.obtenerSesion();
-    if (jsonUsuario) {
-      this.usuario = JSON.parse(jsonUsuario);
-    }
     this.menuService.getPic().subscribe(
       {
         next: (respuesta: any) => {
@@ -40,7 +37,6 @@ export class MenuComponent implements OnInit {
       }
     );
   }
-
 
   inicio() {
     this.router.navigate(["/principal"]);
