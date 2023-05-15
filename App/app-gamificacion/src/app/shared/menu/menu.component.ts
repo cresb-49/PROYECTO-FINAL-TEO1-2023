@@ -1,6 +1,7 @@
 import { AfterContentInit, AfterViewInit, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { SesionService } from 'src/app/services/sesion.service';
+import { MenuService } from './services/menu.service';
 
 @Component({
   selector: 'app-menu',
@@ -9,6 +10,7 @@ import { SesionService } from 'src/app/services/sesion.service';
 })
 export class MenuComponent implements OnInit {
 
+  picProfile: any = '../../../assets/no-profile-picture.png';
   usuario: any;
 
   nombre = () => {
@@ -20,10 +22,23 @@ export class MenuComponent implements OnInit {
     }
   }
 
-  constructor(private router: Router, private sesionService: SesionService) { }
+  constructor(private router: Router, private sesionService: SesionService, private menuService: MenuService) { }
 
   ngOnInit(): void {
     this.usuario = this.sesionService.obtenerSesion();
+    if (jsonUsuario) {
+      this.usuario = JSON.parse(jsonUsuario);
+    }
+    this.menuService.getPic().subscribe(
+      {
+        next: (respuesta: any) => {
+          this.picProfile = respuesta.imagen
+        },
+        error: (error: any) => {
+          this.picProfile = '../../../assets/no-profile-picture.png';
+        }
+      }
+    );
   }
 
 
@@ -44,6 +59,7 @@ export class MenuComponent implements OnInit {
   salir() {
     this.router.navigate(['/principal'])
     this.usuario = null;
-    this.sesionService.cerrarSesion()
+    this.sesionService.cerrarSesion();
+    this.picProfile = '../../../assets/no-profile-picture.png';
   }
 }

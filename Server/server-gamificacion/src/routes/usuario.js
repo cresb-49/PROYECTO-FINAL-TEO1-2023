@@ -11,6 +11,8 @@ router.put('/modificar', usuariocontroller.modificar);
 
 router.put('/modificarPassword', usuariocontroller.modificarPassword);
 
+router.get('/imgPerfil', usuariocontroller.getProfilePic);
+
 router.get('/usuario', usuariocontroller.obtenerUsuario);
 
 router.put('/agregarLogro', usuariocontroller.agregarLogro);

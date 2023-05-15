@@ -12,7 +12,7 @@ import { SesionService } from '../../../services/sesion.service';
 })
 export class ModificarInformacionComponent {
   usuario: any;
-  imagenPerfil: string = "../../assets/imageNotFound.webp";
+  imagenPerfil: string = "../../assets/no-profile-picture.png";
   MAXIMO_TAMANIO_BYTES = 1000000;
   hiddenInfo: boolean = false;
   hiddenPass: boolean = true;
@@ -66,7 +66,7 @@ export class ModificarInformacionComponent {
         reader.readAsDataURL(file);
       }
     } catch (error) {
-      this.imagenPerfil = "../../assets/imageNotFound.webp";
+      this.imagenPerfil = "../../assets/no-profile-picture.png";
     }
   }
 
