@@ -10,7 +10,6 @@ import { MenuService } from './services/menu.service';
 })
 export class MenuComponent implements OnInit {
 
-  picProfile: any = '../../../assets/no-profile-picture.png';
   usuario: any;
 
   nombre = () => {
@@ -26,16 +25,6 @@ export class MenuComponent implements OnInit {
 
   ngOnInit(): void {
     this.usuario = this.sesionService.obtenerSesion();
-    this.menuService.getPic().subscribe(
-      {
-        next: (respuesta: any) => {
-          this.picProfile = respuesta.imagen
-        },
-        error: (error: any) => {
-          this.picProfile = '../../../assets/no-profile-picture.png';
-        }
-      }
-    );
   }
 
   inicio() {
@@ -56,6 +45,5 @@ export class MenuComponent implements OnInit {
     this.router.navigate(['/principal'])
     this.usuario = null;
     this.sesionService.cerrarSesion();
-    this.picProfile = '../../../assets/no-profile-picture.png';
   }
 }
