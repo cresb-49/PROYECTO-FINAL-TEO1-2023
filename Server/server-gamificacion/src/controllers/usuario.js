@@ -88,7 +88,6 @@ const getProfilePic = async (req, res) => {
         const result = await usuario.findOne(filler);
         res.setHeader('Content-Type', 'application/octet-stream');
         if (result) {
-            console.log(result.perfil);
             if (result.perfil) {
                 res.send(Buffer.from(result.perfil.split(',')[1], 'base64'));
             } else {
