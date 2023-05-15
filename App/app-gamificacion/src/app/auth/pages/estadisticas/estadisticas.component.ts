@@ -87,4 +87,8 @@ export class EstadisticasComponent implements OnInit {
     this.router.navigate(["/auth/ahorcado"]);
   }
 
+  verEstadisticasHanoi(){
+    this.router.navigate(["/auth/hanoi"]);
+  }
+
 }

@@ -46,9 +46,9 @@ export class AuthService {
   }
 
 
-  obtenerPartidasPorJuego(username: string) {
+  obtenerPartidasPorJuego(username: string, juego:string) {
     console.log('us', username);
-    return this.http.get(`${this.baseUrl}/partidasPorJuego?username=${username}&juego=J00002`);
+    return this.http.get(`${this.baseUrl}/partidasPorJuego?username=${username}&juego=${juego}`);
   }
 
   verEstadisticasAhorcado(username: string) {
