@@ -35,22 +35,11 @@ export class EstadisticasComponent implements OnInit {
   logros: any[] = [];
   usuario: any;
 
-  constructor(private authService: AuthService, private router: Router, private logrosService: LogrosService) { }
-
-  obtenerLogros(username: string) {
-    this.authService.obtenerUsuarioDB(username)
-      .subscribe({
-        next: (result: any) => {
-          this.logrosService.obtenerLogrosSopa(result);
-        },
-        error: (err) => { console.log(err); }
-      });
-  }
+  constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit(): void {
     this.authService.obtenerUsuario();
     const session = this.authService.getUsuario();
-    this.obtenerLogros(session.username);
     this.authService.verEstadisticasGenerales(session.username)
       .subscribe({
         next: (result: any) => {
