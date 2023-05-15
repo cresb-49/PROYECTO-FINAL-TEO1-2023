@@ -3,6 +3,7 @@ import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { AuthService } from '../../services/auth.service';
+import { SesionService } from '../../../services/sesion.service';
 
 @Component({
   selector: 'app-modificar-informacion',
@@ -26,21 +27,25 @@ export class ModificarInformacionComponent {
     confirm: ["", [Validators.minLength(6), Validators.required]],
   });
 
-  constructor(private fb: FormBuilder, private router: Router, private authService: AuthService) { }
+  constructor(private fb: FormBuilder, private router: Router, private authService: AuthService, private sessionService: SesionService) { }
 
   ngOnInit(): void {
-    const jsonUsuario = localStorage.getItem('usuario');
-    if (jsonUsuario) {
-      this.usuario = JSON.parse(jsonUsuario)
-    }
+    const user = this.sessionService.obtenerUsername();
+    this.authService.obtenerUsuarioDB(user!)
+      .subscribe({
+        next: (res) => {
+          this.usuario = res;
+          this.miFormulario.setValue({
+            username: this.usuario.username
+          });
 
-    this.miFormulario.setValue({
-      username: this.usuario.username
-    });
+          this.imagenPerfil = this.usuario.perfil
+        },
+        error: () => { }
+      });
 
-    if (this.usuario.perfil) {
-      this.imagenPerfil = this.usuario.perfil
-    }
+
+
   }
 
   onChange(event: any) {
@@ -96,9 +101,9 @@ export class ModificarInformacionComponent {
                 showConfirmButton: false,
                 timer: 1500
               });
-              this.usuario.username = username;;
+              this.usuario.username = username;
               this.usuario.perfil = this.imagenPerfil;
-              localStorage.setItem("usuario", JSON.stringify(this.usuario));
+              this.sessionService.iniciarSesion(this.usuario.username, this.usuario.rol);
               setTimeout(() => {
                 window.location.reload();
               }, 1500)
@@ -139,6 +144,9 @@ export class ModificarInformacionComponent {
                   icon: 'success',
                   title: 'Constraseña modificada'
                 });
+                setTimeout(() => {
+                  window.location.reload();
+                }, 1500)
               }
             },
             error: (error: any) => { console.log(error); }

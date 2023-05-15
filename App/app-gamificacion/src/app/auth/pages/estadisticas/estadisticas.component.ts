@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { ChartData, ChartEvent, ChartType } from 'chart.js';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-estadisticas',
@@ -30,19 +31,19 @@ export class EstadisticasComponent implements OnInit {
 
   partidasGenerales: number = 0;
   partidasJuego: any[] = [];
+  logros: any[] = [];
+  usuario: any;
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit(): void {
     this.authService.obtenerUsuario();
-    const usuario = this.authService.getUsuario();
-
-    this.authService.verEstadisticasGenerales(usuario.username)
+    const session = this.authService.getUsuario();
+    this.authService.verEstadisticasGenerales(session.username)
       .subscribe({
         next: (result: any) => {
           this.partidasGenerales = result.generales;
           this.partidasJuego = result.juegos;
-          console.log(this.partidasJuego);
           const data: any = [];
           this.partidasJuego.forEach((partida: any) => {
             this.doughnutChartLabels.push(this.cambiarNombreJuego(partida._id));
@@ -57,6 +58,17 @@ export class EstadisticasComponent implements OnInit {
         },
         error: (error: any) => { console.log(error); }
       });
+
+    this.authService.obtenerUsuarioDB(session.username)
+      .subscribe({
+        next: (res) => {
+          this.usuario = res;
+          console.log(this.usuario.data);
+        },
+        error: (err) => {
+          console.log(err);
+        }
+      });
   }
 
   cambiarNombreJuego(nombreJuego: string) {
@@ -69,6 +81,10 @@ export class EstadisticasComponent implements OnInit {
     } else {
       return "Sopa de Letras"
     }
+  }
+
+  verEstadisticasAhorcado(){
+    this.router.navigate(["/auth/ahorcado"]);
   }
 
 }

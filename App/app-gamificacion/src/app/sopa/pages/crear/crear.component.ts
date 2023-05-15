@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { SopaService } from '../../services/sopa.service';
 import Swal from 'sweetalert2';
+import { SesionService } from 'src/app/services/sesion.service';
 
 @Component({
   selector: 'app-crear',
@@ -11,7 +12,7 @@ export class CrearSopaComponent {
   palabra: string = ""
   palabras: string[] = []
 
-  constructor(private sopaService: SopaService) { }
+  constructor(private sopaService: SopaService, private sesionService: SesionService) { }
 
   agregarPalabra() {
     if (this.palabra !== "") {
@@ -30,7 +31,7 @@ export class CrearSopaComponent {
     if (this.palabras.length < 5) {
       alert("Debes ingresar al menos 5 palabras")
     } else {
-      let username: any = JSON.parse(localStorage.getItem("usuario")!).username
+      let username: string = this.sesionService.obtenerUsername()!;
       this.sopaService.registarJuegoPersonalizado({ juego: "J00004", usuario: username, data: { palabras: this.palabras } })
         .subscribe({
           next: (response: any) => {

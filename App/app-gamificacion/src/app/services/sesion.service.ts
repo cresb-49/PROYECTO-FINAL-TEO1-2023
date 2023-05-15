@@ -17,7 +17,7 @@ export class SesionService {
      * @param rol  - rol de usuario que se quiere iniciar sesion
      */
     iniciarSesion(username: string, rol: string) {
-        this.cookieService.set('sesion',  JSON.stringify({username: username, rol: rol}))
+        this.cookieService.set('sesion',  JSON.stringify({username: username, rol: rol}));
     }
 
     /**

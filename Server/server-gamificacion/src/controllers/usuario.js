@@ -81,6 +81,7 @@ const modificarPassword = async (req, res) => {
     }
 }
 
+
 const getProfilePic = async (req, res) => {
     const filler = { username: req.query.username };
     try {
@@ -95,10 +96,39 @@ const getProfilePic = async (req, res) => {
     }
 }
 
+const obtenerUsuario = async (req, res) => {
+    const filler1 = { username: req.query.username };
+    try {
+        const result = await usuario.findOne(filler1);
+        if (result == undefined) {
+            res.status(409).json({ error: `No existe el usuario "${filler1.username}"` });
+        } else {
+            res.status(200).json(result);
+        }
+    } catch (error) {
+        res.status(409).json({ error: error.message });
+    }
+}
+
+const agregarLogro = async (req, res) => {
+    const { username, logro } = req.body
+    try {
+        const actualizacion = await usuario.updateOne({ username }, {
+            $push: { "data.logros": logro }
+        })
+        res.status(200).json(actualizacion);
+    } catch (error) {
+        res.status(409).json({ error: error.message });
+    }
+
+}
+
 module.exports = {
     registro: registro,
     login: login,
     modificar: modificar,
     modificarPassword: modificarPassword,
-    getProfilePic: getProfilePic
+    getProfilePic: getProfilePic,
+    obtenerUsuario:obtenerUsuario,
+    agregarLogro: agregarLogro
 }
