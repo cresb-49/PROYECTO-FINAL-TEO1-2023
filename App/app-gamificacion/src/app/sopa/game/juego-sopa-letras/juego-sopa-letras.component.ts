@@ -1,5 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
+import * as moment from 'moment';
+import { Moment } from 'moment';
+import { Data } from "../../models/Data";
+import { ActivatedRoute } from "@angular/router";
+import { SopaService } from '../../services/sopa.service';
+import { SesionService } from 'src/app/services/sesion.service';
 
 @Component({
   selector: 'app-juego-sopa-letra',
@@ -7,8 +13,29 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./juego-sopa-letras.component.css']
 })
 export class JuegoSopaLetrasComponent implements OnInit {
+  stopwatch: Stopwatch = new Stopwatch();
+  codigoJuego: string = "";
+  
+  constructor (private route: ActivatedRoute, private sopaService: SopaService, private sesionService: SesionService){}
+
   ngOnInit(): void {
-    this.generarTablero();
+    this.route.queryParams
+      .subscribe({
+        next: (params) => {
+          this.codigoJuego = params['juego']
+          this.sopaService.obtenerJuegoPersonalizado({codigo: params['juego'], juego: 'J00004'})
+            .subscribe({
+              next: (response: any) => {
+                alert(response)
+                this.generarTablero(response.data.palabras);
+              },
+              error: (error:any) => {
+                console.log(error)
+              }
+            })
+        }
+      })
+    this.stopwatch.start()
   }
 
   //tablero[y][x]
@@ -16,14 +43,15 @@ export class JuegoSopaLetrasComponent implements OnInit {
   //map(palabra, [x,y,orientacion, direccion])
   posicionesPalabras: Map<string, number[]> = new Map()
 
-  palabras: string[] = ['parametro', 'programa', 'sistema', 'codigo', 'ciclo', 'maya', 'sopa', 'letra']
+  cantidadPalabras: number = 0;
   palabra: string = ""
   palabrasEncontradas: string[] = []
 
-  generarTablero() {
+  generarTablero(palabras: string[]) {
+    this.cantidadPalabras = palabras.length;
     let palabraLarga = ""
     let sizeTablero = 0
-    this.palabras.forEach(palabra => {
+    palabras.forEach(palabra => {
       if (palabra.length > palabraLarga.length) {
         palabraLarga = palabra
       }
@@ -40,7 +68,7 @@ export class JuegoSopaLetrasComponent implements OnInit {
     this.posicionesPalabras = new Map()
     this.palabrasEncontradas = []
 
-    this.palabras.sort((a, b) => {
+    palabras.sort((a, b) => {
       return b.length - a.length;
     });
 
@@ -48,7 +76,7 @@ export class JuegoSopaLetrasComponent implements OnInit {
       this.tablero.push(new Array(palabraLarga.length).fill('0') as string[])
     }
 
-    this.palabras.forEach(palabra => {
+    palabras.forEach(palabra => {
       //se prueban posiciones y orientaciones hasta que la palabra se pone
       while (true) {
         let x = this.obtenerPosicionAleatoria(sizeTablero);
@@ -179,7 +207,18 @@ export class JuegoSopaLetrasComponent implements OnInit {
       this.posicionesPalabras.delete(this.palabra)
       this.palabrasEncontradas.push(this.palabra)
       if (this.posicionesPalabras.size === 0) {
-        alert("Has ganado!")
+        this.stopwatch.stop()
+        alert("Has ganado! en: "+this.stopwatch.getTime())
+        if (this.sesionService.obtenerUsername() !== null) {
+          let dataPartida = new Data(this.stopwatch.getTime())
+          this.sopaService.registrarResultado({codigo: this.codigoJuego, juego: 'J00004', usuario: this.sesionService.obtenerUsername(), fecha: moment().format('YYYY/MM/DD'), data: dataPartida})
+          .subscribe({
+            next: (response: any) => {
+            }, error: (error:any) => {
+              console.log(error)
+            }
+          })
+        }
       }
     } else {
       if (this.palabrasEncontradas.includes(this.palabra)) {
@@ -189,5 +228,46 @@ export class JuegoSopaLetrasComponent implements OnInit {
       }
     }
     this.palabra = ""
+  }
+}
+
+export class Stopwatch {
+  private startTime: moment.Moment;
+  private stopTime: moment.Moment;
+  private running: boolean;
+
+  constructor() {
+    this.startTime = moment();
+    this.stopTime = moment();
+    this.running = false;
+  }
+
+  start() {
+    if (!this.running) {
+      this.startTime = moment();
+      this.running = true;
+    }
+  }
+
+  stop() {
+    if (this.running) {
+      this.stopTime = moment();
+      this.running = false;
+    }
+  }
+
+  reset() {
+    this.startTime = moment();
+    this.stopTime = moment();
+    this.running = false;
+  }
+
+  getTime(): string {
+    const diff = this.stopTime.diff(this.startTime);
+    const duration = moment.duration(diff);
+    const hours = duration.hours().toString().padStart(2, '0');
+    const minutes = duration.minutes().toString().padStart(2, '0');
+    const seconds = duration.seconds().toString().padStart(2, '0');
+    return `${hours}:${minutes}:${seconds}`;
   }
 }
