@@ -42,7 +42,7 @@ export class AhorcadoComponent implements OnInit{
   ngOnInit(): void {
     this.authService.obtenerUsuario();
     const usuario = this.authService.getUsuario();
-    this.authService.obtenerPartidasPorJuego(usuario.username)
+    this.authService.obtenerPartidasPorJuego(usuario.username, "J00002")
       .subscribe({
         next: (result: any) => {
           this.partidasJugadas = result;

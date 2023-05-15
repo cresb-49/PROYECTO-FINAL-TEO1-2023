@@ -1,0 +1,42 @@
+<div class="container bg-white p-2 m-2">
+    <h1>Estadisticas de Hanoi</h1>
+    <h3>Ultimas partidas jugadas</h3>
+    <div>
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Codigo</th>
+                    <th scope="col">Fecha</th>
+                    <th scope="col">Tiempo Jugado</th>
+                    <th scope="col">Movimientos Realizados</th>
+                    <th scope="col">Secuencia</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of partidasJugadas; let i = index;">
+                    <td>{{i+1}}</td>
+                    <td>{{item.codigo}}</td>
+                    <td>{{item.fecha}}</td>
+                    <td>{{item.data.tiempo}}</td>
+                    <td>{{item.data.movimientos}}</td>
+                    <td>
+                        <li *ngFor="let secuencia of item.data.secuencia">
+                            {{secuencia}}
+                        </li>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <h3> Estadisticas de partidas </h3>
+    <h3>Tiempo Jugado: <span class="fw-bold">{{tiempoJugado}}</span></h3>
+    <h3>Estadistica de Tiempos</h3>
+    <div class="chartBar">
+        <canvas baseChart class="chart" [data]="barChartData" [options]="barChartOptions" [type]="barChartType">
+        </canvas>
+    </div>
+
+    <button class="btn btn-warning" (click)="regresar()"> Regresar</button>
+</div>

@@ -7,6 +7,8 @@ import { InformacionUsuarioComponent } from './pages/informacion-usuario/informa
 import { ModificarInformacionComponent } from './pages/modificar-informacion/modificar-informacion.component';
 import { EstadisticasComponent } from './pages/estadisticas/estadisticas.component';
 import { AhorcadoComponent } from './pages/estadisticas/ahorcado/ahorcado.component';
+import { HanoiComponent } from './pages/estadisticas/hanoi/hanoi.component';
+import { SopaComponent } from './pages/estadisticas/sopa/sopa.component';
 
 const routes: Routes = [
   {
@@ -19,6 +21,8 @@ const routes: Routes = [
       { path: "modificar", component: ModificarInformacionComponent },
       { path: "estadisticas", component: EstadisticasComponent },
       { path: "ahorcado", component: AhorcadoComponent },
+      { path: "hanoi", component: HanoiComponent },
+      { path: "sopa", component: SopaComponent },
       { path: "**", redirectTo: "login" },
     ]
   }
