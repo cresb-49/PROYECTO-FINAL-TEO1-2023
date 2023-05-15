@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { SesionService } from 'src/app/services/sesion.service';
 
 @Injectable({
   providedIn: 'root'
@@ -9,13 +10,10 @@ export class AhorcadoService {
   usuario: any;
   baseUrl: string = "http://localhost:5000/api";
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private sessionService: SesionService) { }
 
   obtenerUsuario() {
-    const jsonUsuario = localStorage.getItem("usuario");
-    if (jsonUsuario) {
-      this.usuario = JSON.parse(jsonUsuario);
-    }
+    this.usuario = this.sessionService.obtenerSesion();
   }
 
   getUsuario() {

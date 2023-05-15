@@ -12,8 +12,9 @@ export class MenuComponent implements OnInit {
   usuario: any;
 
   nombre = () => {
+    this.usuario = this.sesionService.obtenerSesion();
     if (this.sesionService.verificarSesion()) {
-      return this.sesionService.obtenerUsername()
+      return this.usuario.username;
     } else {
       return 'Guest'
     }
@@ -22,10 +23,7 @@ export class MenuComponent implements OnInit {
   constructor(private router: Router, private sesionService: SesionService) { }
 
   ngOnInit(): void {
-    const jsonUsuario = localStorage.getItem("usuario");
-    if (jsonUsuario) {
-      this.usuario = JSON.parse(jsonUsuario);
-    }
+    this.usuario = this.sesionService.obtenerSesion();
   }
 
 
@@ -45,7 +43,6 @@ export class MenuComponent implements OnInit {
 
   salir() {
     this.router.navigate(['/principal'])
-    localStorage.removeItem("usuario");
     this.usuario = null;
     this.sesionService.cerrarSesion()
   }

@@ -51,8 +51,7 @@ export class LoginComponent {
       this.authService.login(body)
         .subscribe({
           next: (result: any) => {
-            localStorage.setItem("usuario", JSON.stringify(result.usuario))
-            this.sesionService.iniciarSesion(result.usuario.username, result.usuario.rol)
+            this.sesionService.iniciarSesion(result.usuario.username, result.usuario.rol);
             setTimeout(() => {
               this.router.navigate(['/']);
             }, 0);
@@ -65,9 +64,6 @@ export class LoginComponent {
                 timer: 1500
               })
             }, 500);
-            setTimeout(() => {
-              window.location.reload();
-            }, 2000);
           },
           error: (error: any) => {
             Swal.fire({
