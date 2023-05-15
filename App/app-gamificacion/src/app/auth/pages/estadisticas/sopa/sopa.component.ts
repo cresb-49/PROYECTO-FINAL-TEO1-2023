@@ -4,20 +4,17 @@ import * as moment from 'moment';
 import { AuthService } from 'src/app/auth/services/auth.service';
 import { BaseChartDirective } from 'ng2-charts';
 import { ChartConfiguration, ChartData, ChartType } from 'chart.js';
-
 @Component({
-  selector: 'app-hanoi',
-  templateUrl: './hanoi.component.html',
-  styleUrls: ['./hanoi.component.css']
+  selector: 'app-sopa',
+  templateUrl: './sopa.component.html',
+  styleUrls: ['./sopa.component.css']
 })
-export class HanoiComponent implements OnInit {
-
+export class SopaComponent implements OnInit{
   partidasJugadas: any[] = [];
   tiempoJugado: string = "";
 
   public barChartOptions: ChartConfiguration['options'] = {
     responsive: true,
-    // We use these empty structures as placeholders for dynamic theming.
     scales: {
       x: {},
       y: {
@@ -43,7 +40,7 @@ export class HanoiComponent implements OnInit {
   ngOnInit(): void {
     this.authService.obtenerUsuario();
     const usuario = this.authService.getUsuario();
-    this.authService.obtenerPartidasPorJuego(usuario.username, "J00001")
+    this.authService.obtenerPartidasPorJuego(usuario.username, "J00004")
       .subscribe({
         next: (result: any) => {
           this.partidasJugadas = result;
@@ -51,7 +48,6 @@ export class HanoiComponent implements OnInit {
           const etiquetas:string[] = [];
           const datos:number[] = [];
           this.partidasJugadas.forEach((partida) => {
-            console.log(partida.data.tiempo);
             let t = moment.duration(partida.data.tiempo);
             let minutos = t.asMinutes();
             etiquetas.push(partida.fecha)

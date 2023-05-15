@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { ChartData, ChartEvent, ChartType } from 'chart.js';
 import { Router } from '@angular/router';
+import { LogrosService } from 'src/app/services/logros.service';
 
 @Component({
   selector: 'app-estadisticas',
@@ -34,11 +35,22 @@ export class EstadisticasComponent implements OnInit {
   logros: any[] = [];
   usuario: any;
 
-  constructor(private authService: AuthService, private router: Router) { }
+  constructor(private authService: AuthService, private router: Router, private logrosService: LogrosService) { }
+
+  obtenerLogros(username: string) {
+    this.authService.obtenerUsuarioDB(username)
+      .subscribe({
+        next: (result: any) => {
+          this.logrosService.obtenerLogrosSopa(result);
+        },
+        error: (err) => { console.log(err); }
+      });
+  }
 
   ngOnInit(): void {
     this.authService.obtenerUsuario();
     const session = this.authService.getUsuario();
+    this.obtenerLogros(session.username);
     this.authService.verEstadisticasGenerales(session.username)
       .subscribe({
         next: (result: any) => {
@@ -63,7 +75,6 @@ export class EstadisticasComponent implements OnInit {
       .subscribe({
         next: (res) => {
           this.usuario = res;
-          console.log(this.usuario.data);
         },
         error: (err) => {
           console.log(err);
@@ -83,12 +94,16 @@ export class EstadisticasComponent implements OnInit {
     }
   }
 
-  verEstadisticasAhorcado(){
+  verEstadisticasAhorcado() {
     this.router.navigate(["/auth/ahorcado"]);
   }
 
-  verEstadisticasHanoi(){
+  verEstadisticasHanoi() {
     this.router.navigate(["/auth/hanoi"]);
+  }
+
+  verEstadisticasSopa() {
+    this.router.navigate(["/auth/sopa"]);
   }
 
 }

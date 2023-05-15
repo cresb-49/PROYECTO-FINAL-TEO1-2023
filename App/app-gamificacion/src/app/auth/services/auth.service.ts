@@ -47,11 +47,14 @@ export class AuthService {
 
 
   obtenerPartidasPorJuego(username: string, juego:string) {
-    console.log('us', username);
     return this.http.get(`${this.baseUrl}/partidasPorJuego?username=${username}&juego=${juego}`);
   }
 
   verEstadisticasAhorcado(username: string) {
     return this.http.get(`${this.baseUrl}/estadisticasAhorcado?username=${username}`);
+  }
+
+  verEstadisticasHanoi(username: string) {
+    return this.http.get(`${this.baseUrl}/estadisticasHanoi?username=${username}`);
   }
 }

@@ -117,10 +117,38 @@ const estadisticasAhorcado = async (req, res) => {
     }
 }
 
+const estadisticasHanoi = async (req, res) => {
+    try {
+        const { username } = req.query;
+        const estadisticas = await resultadoPartida.aggregate([
+            { $match: { usuario: username, juego: "J00001" } },
+            { $unwind: "$data" },
+            {
+                $project: {
+                    _id: 0,
+                    movimientos: "$data.movimientos"
+                }
+            },
+            {
+                $group: {
+                    _id: "$usuario",
+                    movimientos: { $sum: "$movimientos" }
+                }
+            },
+            { $sort: { palabrasEncontradas: -1 } },
+            { $limit: 10 }
+        ]);
+        res.status(200).json(estadisticas);
+    } catch (error) {
+        res.status(409).json({ error: error.message });
+    }
+}
+
 module.exports = {
     registarPartida: registarPartida,
     obtenerPartida: obtenerPartida,
     estadisticasGenerales: estadisticasGenerales,
     obtenerPartidasPorJuego: obtenerPartidasPorJuego,
-    estadisticasAhorcado: estadisticasAhorcado 
+    estadisticasAhorcado: estadisticasAhorcado, 
+    estadisticasHanoi: estadisticasHanoi 
 }

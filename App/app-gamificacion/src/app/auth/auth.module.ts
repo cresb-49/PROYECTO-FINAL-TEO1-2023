@@ -12,6 +12,7 @@ import { EstadisticasComponent } from './pages/estadisticas/estadisticas.compone
 import { NgChartsModule } from 'ng2-charts';
 import { AhorcadoComponent } from './pages/estadisticas/ahorcado/ahorcado.component';
 import { HanoiComponent } from './pages/estadisticas/hanoi/hanoi.component';
+import { SopaComponent } from './pages/estadisticas/sopa/sopa.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { HanoiComponent } from './pages/estadisticas/hanoi/hanoi.component';
     ModificarInformacionComponent,
     EstadisticasComponent,
     AhorcadoComponent,
-    HanoiComponent
+    HanoiComponent,
+    SopaComponent
   ],
   imports: [
     CommonModule,

@@ -1,5 +1,5 @@
 <div class="container bg-white p-2 m-2">
-    <h1>Estadisticas de Hanoi</h1>
+    <h1>Estadisticas de Sopa de Letras</h1>
     <h3>Ultimas partidas jugadas</h3>
     <div>
         <table class="table">
@@ -9,8 +9,6 @@
                     <th scope="col">Codigo</th>
                     <th scope="col">Fecha</th>
                     <th scope="col">Tiempo Jugado</th>
-                    <th scope="col">Movimientos Realizados</th>
-                    <th scope="col">Secuencia</th>
                 </tr>
             </thead>
             <tbody>
@@ -19,12 +17,6 @@
                     <td>{{item.codigo}}</td>
                     <td>{{item.fecha}}</td>
                     <td>{{item.data.tiempo}}</td>
-                    <td>{{item.data.movimientos}}</td>
-                    <td>
-                        <li *ngFor="let secuencia of item.data.secuencia">
-                            {{secuencia}}
-                        </li>
-                    </td>
                 </tr>
             </tbody>
         </table>

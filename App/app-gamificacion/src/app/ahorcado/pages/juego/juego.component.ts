@@ -42,8 +42,6 @@ export class JuegoComponent implements OnInit {
     this.route.queryParams.subscribe((params: any) => {
       this.codigoJuego = params.codigo;
     });
-
-    this.obtenerLogros("perro15");
     this.ahorcadoService.obtenerPartida(this.codigoJuego, "J00002")
       .subscribe({
         next: (result: any) => {

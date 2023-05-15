@@ -13,4 +13,6 @@ router.get('/estadisticasGenerales', resultadoPartidaController.estadisticasGene
 
 router.get('/estadisticasAhorcado', resultadoPartidaController.estadisticasAhorcado);
 
+router.get('/estadisticasHanoi', resultadoPartidaController.estadisticasHanoi);
+
 module.exports = router;
