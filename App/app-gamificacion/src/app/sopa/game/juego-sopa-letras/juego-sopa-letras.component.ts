@@ -22,11 +22,10 @@ export class JuegoSopaLetrasComponent implements OnInit {
     this.route.queryParams
       .subscribe({
         next: (params) => {
-          this.codigoJuego = params['juego']
-          this.sopaService.obtenerJuegoPersonalizado({codigo: params['juego'], juego: 'J00004'})
+          this.codigoJuego = params['codigo']
+          this.sopaService.obtenerJuegoPersonalizado({codigo: params['codigo'], juego: 'J00004'})
             .subscribe({
               next: (response: any) => {
-                alert(response)
                 this.generarTablero(response.data.palabras);
               },
               error: (error:any) => {
