@@ -57,4 +57,8 @@ export class AuthService {
   verEstadisticasHanoi(username: string) {
     return this.http.get(`${this.baseUrl}/estadisticasHanoi?username=${username}`);
   }
+
+  modificarUsuarioResultados(body:any) {
+    return this.http.put(`${this.baseUrl}/modificarUsuarioResultados`, body);
+  }
 }
