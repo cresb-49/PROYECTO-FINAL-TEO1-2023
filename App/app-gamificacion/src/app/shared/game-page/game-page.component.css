@@ -1,0 +1,121 @@
+.bordes-juegos-top {
+    border-top: 4px solid #EFDB00;
+}
+
+.bordes-juegos-btm {
+    border-bottom: 4px solid #EFDB00;
+}
+
+.bordes-juegos-left {
+    border-left: 4px solid #EFDB00;
+}
+
+.bordes-juegos-right {
+    border-right: 4px solid #EFDB00;
+}
+
+.contenedor-principal {
+    border: 4px solid #EFDB00;
+    background-color: #22e684da;
+    border-radius: 7px;
+}
+
+.button-play {
+    background: #EFDB00;
+    border: 4px solid #69D957;
+    width: 300px;
+    height: 50px;
+    font-size: 25px;
+}
+
+.input-code {
+    background: #EFDB00;
+    border: 4px solid #69D957;
+    border-radius: 7px;
+    height: 50px;
+    width: 300px;
+}
+
+.imagenJuego {
+    height: 95%;
+    border-radius: 7px;
+}
+
+.btn-enviar {
+    background: #EFDB00;
+    font-size: 20px;
+    height: 80px;
+    border-color: #69D957;
+    border-style: solid;
+    border-width: 4px 4px 4px 0px;
+    border-radius: 0px 7px 7px 0px;
+}
+
+.btn-gusta {
+    margin-top: 15px;
+    margin-bottom: 15px;
+    margin-left: 5px;
+    margin-right: 5px;
+    font-size: 35px;
+    background-color: #EFDB00;
+    color: #000000;
+}
+
+.text-comentario {
+    height: 80px;
+    width: 350px;
+    background: #EFDB00;
+    border: 4px solid #69D957;
+    resize: none;
+}
+
+.contenedorComentarios {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    height: 730px;
+    overflow: scroll;
+}
+
+.card {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    transition: 0.3s;
+    border-radius: 5px;
+    margin-top: 1%
+}
+
+.card:hover {
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+}
+
+.container {
+    padding: 5px 16px;
+}
+
+.card-coment {
+    background-color: #EFDB00;
+}
+
+.reacciones {
+    font-size: 30px;
+    text-align: center;
+    color: #EFDB00;
+}
+
+.comentarios-titulo{
+    margin-top: 10px;
+    color: #EFDB00;
+    font-weight: bold;
+    font-size: 30px;
+}
+
+.maquina-fondo{
+    position: relative;
+    background-image: url('/assets/arcademachine_reescalado.png'); 
+    background-size: cover;
+    height: 865px;
+    padding-top: 9%; 
+    padding-left: 47%; 
+    padding-right: 20%; 
+    margin-left: -25%;
+}

@@ -4,6 +4,7 @@ import { MenuComponent } from './menu/menu.component';
 import { PreviewGameComponent } from './preview-game/preview-game.component';
 import { ComentarioJuegoComponent } from './comentario-juego/comentario-juego.component';
 import { FormsModule } from '@angular/forms';
+import { GamePageComponent } from './game-page/game-page.component';
 
 
 
@@ -11,7 +12,8 @@ import { FormsModule } from '@angular/forms';
   declarations: [
     MenuComponent,
     PreviewGameComponent,
-    ComentarioJuegoComponent
+    ComentarioJuegoComponent,
+    GamePageComponent
   ],
   imports: [
     CommonModule,
@@ -20,7 +22,8 @@ import { FormsModule } from '@angular/forms';
   exports: [
     MenuComponent,
     PreviewGameComponent,
-    ComentarioJuegoComponent
+    ComentarioJuegoComponent,
+    GamePageComponent
   ]
 })
 export class SharedModule { }

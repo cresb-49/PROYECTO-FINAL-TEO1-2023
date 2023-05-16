@@ -9,6 +9,7 @@ import { TorreHanoiComponent } from './game/torre-hanoi/torre-hanoi.component';
 import { PrincipalComponent } from './pages/principal/principal.component';
 import { PreviewGameComponent } from '../shared/preview-game/preview-game.component';
 import { SharedModule } from '../shared/shared.module';
+import { GamePageComponent } from '../shared/game-page/game-page.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,7 @@ import { SharedModule } from '../shared/shared.module';
     JuegoHanoiComponent,
     DiscoHanoiComponent,
     TorreHanoiComponent,
-    PrincipalComponent
+    PrincipalComponent,
   ],
   imports: [
     CommonModule,

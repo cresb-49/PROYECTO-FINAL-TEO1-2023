@@ -11,6 +11,7 @@ import { SesionService } from 'src/app/services/sesion.service';
 import * as moment from 'moment'
 import { NgToastModule, NgToastService } from 'ng-angular-popup';
 import { ActivatedRoute, Router } from '@angular/router';
+import { GamePageComponent } from 'src/app/shared/game-page/game-page.component';
 @Component({
   selector: 'app-juego-hanoi',
   templateUrl: './juego-hanoi.component.html',
