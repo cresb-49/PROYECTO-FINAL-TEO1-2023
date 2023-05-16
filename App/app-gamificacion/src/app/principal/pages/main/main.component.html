@@ -1,11 +1,20 @@
 <div class="container contenedor">
 	<section class="py-5 text-center container">
 		<div class="row py-lg-5">
-			<div class="col-lg-6 col-md-8 mx-auto">
-				<h1 class="titulo-pagina">Bienvenidos a gamificacion</h1>
-				<p class="">Algo corto y principal sobre la colección a continuación: su contenido, el
-					creador, etc. Hágalo breve y agradable, pero no demasiado corto para que la gente no lo pase por
-					alto por completo.</p>
+			<div class="mx-auto">
+				<h1 class="titulo-pagina">Bienvenidos a Gamificacion</h1>
+				<div style="font-size: 20px; font-style: italic;">
+					<p class="pt-2" style="text-align: justify;">Estamos emocionados de que hayas decidido unirte a nosotros en este viaje
+						de aprendizaje
+						divertido y estimulante. Nuestro objetivo es brindarte una amplia gama de juegos interactivos que no
+						solo te entretengan, sino que también te ayuden a adquirir conocimientos nuevos y fortalecer tus
+						habilidades en diferentes áreas.</p>
+					<p style="text-align: justify;">Explora nuestra colección de juegos cuidadosamente seleccionados, diseñados para
+						desafiar tu pensamiento
+						crítico, mejorar tu vocabulario, estimular tu razonamiento lógico y mucho más. Ya sea que estés
+						interesado en matemáticas, ciencias, historia, idiomas o arte, encontrarás juegos adecuados a tu nivel y
+						preferencias.</p>
+				</div>
 			</div>
 		</div>
 	</section>
@@ -17,8 +26,8 @@
 						<img [src]="'http://localhost:5000/api/juego/imagen?juego='+juego.codigo" alt="imagenJuego"
 							class="bd-placeholder-img card-img-top" width="100%" height="225">
 						<div class="card-body">
-							<p class="card-text">Esta es una tarjeta más amplia con texto de apoyo a continuación como
-								una introducción natural a contenido adicional. Este contenido es un poco más largo.</p>
+							<h5>{{juego.nombre}}</h5>
+							<p class="card-text p-text overflow-ellipsis"><small>{{juego.descripcion}}</small></p>
 							<div class="d-flex justify-content-between align-items-center">
 								<div class="btn-group">
 									<button *ngIf="usuario===2" type="button" class="btn btn-sm btn-outline-secondary"

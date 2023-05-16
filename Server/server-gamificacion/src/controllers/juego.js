@@ -23,6 +23,7 @@ const getJuegos = async (req, res) => {
                     codigo: 1,
                     nombre: 1,
                     autores: 1,
+                    descripcion: 1,
                     like: 1,
                     likes: { $sum: { $map: { input: "$like", as: "v", in: { $cond: [{ $eq: ["$$v.like", true] }, 1, 0] } } } },
                     dislikes: { $subtract: [{ $size: "$like" }, { $sum: { $map: { input: "$like", as: "v", in: { $cond: [{ $eq: ["$$v.like", true] }, 1, 0] } } } }] }
@@ -80,7 +81,7 @@ const isLike = async (req, res) => {
             res.status(409).json({ error: `No existe el juego ${fillterJuego.codigo}` });
         }
     } catch (error) {
-    console.log(error)
+        console.log(error)
         res.status(409).json({ error: error.message });
     }
 }
@@ -130,6 +131,7 @@ const obtenerJuego = async (codigo) => {
                 codigo: 1,
                 nombre: 1,
                 autores: 1,
+                descripcion: 1,
                 like: 1,
                 likes: { $sum: { $map: { input: "$like", as: "v", in: { $cond: [{ $eq: ["$$v.like", true] }, 1, 0] } } } },
                 dislikes: { $subtract: [{ $size: "$like" }, { $sum: { $map: { input: "$like", as: "v", in: { $cond: [{ $eq: ["$$v.like", true] }, 1, 0] } } } }] }

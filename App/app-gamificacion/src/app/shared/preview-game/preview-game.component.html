@@ -15,8 +15,13 @@
             </div>
         </div>
         <div class="col bordes-juegos-right">
-            <div class="row d-flex justify-content-center align-items-center" style="height: 700px;">
-                {{desc}}
+            <div class="row d-flex justify-content-center align-items-center"
+                style="height: 700px; overflow-y: scroll;">
+                <div>
+                    <p style=" margin: 30px; font-size: 20px; font-style: oblique; text-align: justify;">
+                        {{desc}}
+                    </p>
+                </div>
             </div>
             <div class="row bordes-juegos-top" style="height: 100px;">
                 <button type="button" (click)="onMeGusta(true)" class="col-2 btn btn-gusta">
@@ -47,7 +52,7 @@
         <div class="col-3">
             <div class="row d-flex justify-content-center align-items-center" style="height: 60px;">
                 <div class="container reacciones">
-                    <i class="fa-solid fa-thumbs-up"></i> {{cantidadLikes}} 
+                    <i class="fa-solid fa-thumbs-up"></i> {{cantidadLikes}}
                     <i class="fa-solid fa-thumbs-down" style="margin-left: 20px;"></i> {{cantidadDislikes}}
                 </div>
             </div>

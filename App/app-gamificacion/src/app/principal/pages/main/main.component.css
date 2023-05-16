@@ -6,29 +6,53 @@
     border: 3px solid #EFDB00;
 }
 
-.contenedor2{
+.contenedor2 {
     margin-bottom: 25px;
 }
-.titulo-pagina{
+
+.titulo-pagina {
     font-size: 50px;
 }
 
-.card{
+.card {
     border: 3px solid #2C6D55;
     background-color: #007da7b2;
 }
 
-.card-text{
+.card-text {
     color: #000000a6;
 }
 
-.btn-outline-secondary{
+.btn-outline-secondary {
     border-color: #22e684;
     color: #22e684;
 }
 
-.btn-outline-secondary:hover{
+.btn-outline-secondary:hover {
     border-color: #EFDB00;
     color: #EFDB00;
     background-color: transparent;
 }
+
+.overflow-visible {
+    white-space: initial;
+}
+
+.overflow-clip {
+    text-overflow: clip;
+}
+
+.overflow-ellipsis {
+    text-overflow: ellipsis;
+}
+
+.overflow-string {
+    /* Not supported in most browsers,
+       see the 'Browser compatibility' section below */
+    text-overflow: " [..]";
+}
+.p-text {
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+  }

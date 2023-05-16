@@ -27,7 +27,7 @@ export class PreviewGameComponent implements OnInit {
   ngOnInit(): void {
     this.actualizarComentarios();
     this.actualizarMeGustaUsuario();
-    this.obtenerMegustaNoMegusta();
+    this.infoJuego();
   }
 
   /**
@@ -129,7 +129,7 @@ export class PreviewGameComponent implements OnInit {
 
   /**
    * Actualiza los comentarios del juego
- */
+  */
   actualizarComentarios(): void {
     this.comentariosService.obtenerComentarios(this.juego!)
       .subscribe({
@@ -168,11 +168,12 @@ export class PreviewGameComponent implements OnInit {
   /**
    * Obtiene el objeto juego base de la base de datos para tener los parametros de la cantidad de likes y no likes
    */
-  obtenerMegustaNoMegusta() {
+  infoJuego() {
     this.meGustaService.getCantidadMeGustaNoMeGusta(this.juego!).subscribe({
       next: (game: any) => {
         this.cantidadLikes = game.likes;
         this.cantidadDislikes = game.dislikes;
+        this.desc = game.descripcion;
       },
       error: (error: any) => {
         console.log(error);
