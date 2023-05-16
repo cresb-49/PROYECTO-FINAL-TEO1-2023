@@ -6,6 +6,8 @@ import { MeGusta } from './model/MeGusta';
 import Swal from 'sweetalert2';
 import { FormsModule } from '@angular/forms';
 import { NgToastService } from 'ng-angular-popup';
+import { Router } from '@angular/router';
+import { PartidaService } from './services/partida.service';
 
 @Component({
   selector: 'app-preview-game',
@@ -20,10 +22,14 @@ export class PreviewGameComponent implements OnInit {
   @Input() comentarioUsuario: string = "";
   @Input() comentarios: Comentario[] = []
 
+  codigoJuego: string = "";
+
   cantidadLikes: number = 0;
   cantidadDislikes: number = 0;
 
-  constructor(private comentariosService: ComentariosService, private meGustaService: MeGustaService, private formsModule: FormsModule, private toast: NgToastService) { }
+  constructor(private comentariosService: ComentariosService, private meGustaService: MeGustaService,
+    private formsModule: FormsModule, private toast: NgToastService, private router: Router, private partidaService: PartidaService) { }
+
   ngOnInit(): void {
     this.actualizarComentarios();
     this.actualizarMeGustaUsuario();
@@ -178,5 +184,39 @@ export class PreviewGameComponent implements OnInit {
         console.log(error);
       }
     });
+  }
+
+  /**
+   * Realiza las validaciones y redirige a la pantalla del juego
+   */
+  onPlay() {
+    if (this.codigoJuego === "") {
+      alert("Debes ingresar un codigo de juego")
+    } else {
+      let url = "";
+      switch (this.juego) {
+        case 'J00001':
+          url = "hanoi"
+          break;
+        case 'J00002':
+          url = "ahorcado"
+          break;
+        case 'J00003':
+          url = "sopa"
+          break;
+        case 'J00004':
+          url = "crucigrama"
+          break;
+      }
+
+      this.partidaService.obtenerPartida(this.codigoJuego, this.juego!)
+        .subscribe({
+          next: (response:any) => {
+            this.router.navigateByUrl(url+"/juego?codigo="+this.codigoJuego)
+          }, error: (error:any) => {
+            alert("No existe un juego con ese codigo")
+          }
+        })
+    }
   }
 }
