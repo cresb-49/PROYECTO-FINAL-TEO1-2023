@@ -8,7 +8,10 @@
         </div>
         <div class="row m-3">
             <div class="col">
-                <button class="btn btn-success" (click)="verEstadisticas()"> Estadisticas </button>
+                <button class="btn btn-success" *ngIf="this.usuario.rol == 1" (click)="verEstadisticas()"> Estadisticas
+                </button>
+                <button class="btn btn-success" *ngIf="this.usuario.rol == 2 " (click)="verPartidasCreadas()"> Partidas
+                    Creadas </button>
             </div>
         </div>
     </div>
