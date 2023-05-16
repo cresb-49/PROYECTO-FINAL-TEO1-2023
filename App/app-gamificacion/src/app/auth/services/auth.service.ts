@@ -45,7 +45,6 @@ export class AuthService {
     return this.http.get(`${this.baseUrl}/usuario?username=${username}`);
   }
 
-
   obtenerPartidasPorJuego(username: string, juego:string) {
     return this.http.get(`${this.baseUrl}/partidasPorJuego?username=${username}&juego=${juego}`);
   }
@@ -60,5 +59,17 @@ export class AuthService {
 
   modificarUsuarioResultados(body:any) {
     return this.http.put(`${this.baseUrl}/modificarUsuarioResultados`, body);
+  }
+
+  obtenerModelosporUsuario(usuario:string) {
+    return this.http.get(`${this.baseUrl}/modelosUsuario?usuario=${usuario}`);
+  }
+
+  obtenerModelosporCodigo(codigo:string) {
+    return this.http.get(`${this.baseUrl}/modeloPorCodigo?codigo=${codigo}`);
+  }
+
+  borrarModelo(codigo:string) {
+    return this.http.delete(`${this.baseUrl}/modelo?codigo=${codigo}`);
   }
 }

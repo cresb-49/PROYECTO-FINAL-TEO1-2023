@@ -13,6 +13,8 @@ import { NgChartsModule } from 'ng2-charts';
 import { AhorcadoComponent } from './pages/estadisticas/ahorcado/ahorcado.component';
 import { HanoiComponent } from './pages/estadisticas/hanoi/hanoi.component';
 import { SopaComponent } from './pages/estadisticas/sopa/sopa.component';
+import { PartidasComponent } from './pages/partidas/partidas.component';
+import { InfoPartidaComponent } from './pages/info-partida/info-partida.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +26,9 @@ import { SopaComponent } from './pages/estadisticas/sopa/sopa.component';
     EstadisticasComponent,
     AhorcadoComponent,
     HanoiComponent,
-    SopaComponent
+    SopaComponent,
+    PartidasComponent,
+    InfoPartidaComponent
   ],
   imports: [
     CommonModule,

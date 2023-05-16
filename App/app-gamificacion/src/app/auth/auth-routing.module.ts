@@ -9,6 +9,8 @@ import { EstadisticasComponent } from './pages/estadisticas/estadisticas.compone
 import { AhorcadoComponent } from './pages/estadisticas/ahorcado/ahorcado.component';
 import { HanoiComponent } from './pages/estadisticas/hanoi/hanoi.component';
 import { SopaComponent } from './pages/estadisticas/sopa/sopa.component';
+import { PartidasComponent } from './pages/partidas/partidas.component';
+import { InfoPartidaComponent } from './pages/info-partida/info-partida.component';
 
 const routes: Routes = [
   {
@@ -23,6 +25,8 @@ const routes: Routes = [
       { path: "ahorcado", component: AhorcadoComponent },
       { path: "hanoi", component: HanoiComponent },
       { path: "sopa", component: SopaComponent },
+      { path: "partidas", component: PartidasComponent },
+      { path: "infoPartida", component: InfoPartidaComponent },
       { path: "**", redirectTo: "login" },
     ]
   }
