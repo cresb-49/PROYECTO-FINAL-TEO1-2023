@@ -198,7 +198,11 @@ export class PreviewGameComponent implements OnInit {
    */
   onPlay() {
     if (this.codigoJuego === "") {
-      alert("Debes ingresar un codigo de juego")
+      Swal.fire({
+        icon: 'error',
+        title: 'Error de codigo',
+        text: 'Debes ingresar un codigo de juego',
+      });
     } else {
       let url = "";
       switch (this.juego) {
@@ -209,10 +213,10 @@ export class PreviewGameComponent implements OnInit {
           url = "ahorcado"
           break;
         case 'J00003':
-          url = "sopa"
+          url = "crucigrama"
           break;
         case 'J00004':
-          url = "crucigrama"
+          url = "sopa"
           break;
       }
 
@@ -221,7 +225,11 @@ export class PreviewGameComponent implements OnInit {
           next: (response: any) => {
             this.router.navigateByUrl(url + "/juego?codigo=" + this.codigoJuego)
           }, error: (error: any) => {
-            alert("No existe un juego con ese codigo")
+            Swal.fire({
+              icon: 'error',
+              title: 'Error de codigo',
+              text: 'No existe un juego con ese codigo',
+            });
           }
         })
     }
