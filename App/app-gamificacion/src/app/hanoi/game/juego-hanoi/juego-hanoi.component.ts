@@ -12,6 +12,9 @@ import * as moment from 'moment'
 import { NgToastModule, NgToastService } from 'ng-angular-popup';
 import { ActivatedRoute, Router } from '@angular/router';
 import { GamePageComponent } from 'src/app/shared/game-page/game-page.component';
+import { LogrosService } from 'src/app/services/logros.service';
+import { AuthService } from 'src/app/auth/services/auth.service';
+
 @Component({
   selector: 'app-juego-hanoi',
   templateUrl: './juego-hanoi.component.html',
@@ -39,7 +42,7 @@ export class JuegoHanoiComponent {
     movExperados: 0
   }
 
-  constructor(private router: Router, private route: ActivatedRoute, private hanoiService: HanoiService, private sesionService: SesionService, private toast: NgToastService) { }
+  constructor(private router: Router, private route: ActivatedRoute, private hanoiService: HanoiService, private sesionService: SesionService, private toast: NgToastService, private logrosService: LogrosService, private authService: AuthService) { }
 
   public iniciar(): void {
     this.estadisticaHanoi.movExperados = Math.pow(2, this.juegoHanoi.hanoi.discos) - 1;
@@ -112,14 +115,13 @@ export class JuegoHanoiComponent {
       fecha: moment().format("YYYY-MM-DD"), // Fecha de realización de la partida
       data: result //Resultado de la partida
     }
-    console.log(body);
     this.hanoiService.registrarResultado(body).subscribe({
       next: (result: any) => {
         this.toast.info({
           detail: "Partida Registrada",
           summary: 'Se registro con exito la partida',
           duration: 5000
-        })
+        });
       },
       error: (error: any) => {
         this.toast.error({
@@ -127,6 +129,9 @@ export class JuegoHanoiComponent {
           summary: 'No se registro la partida error con el servidor',
           duration: 5000
         });
+      },
+      complete: () => {
+        this.obtenerLogros();
       }
     });
   }
@@ -209,5 +214,26 @@ export class JuegoHanoiComponent {
     };
     this.resetTimer();
     this.obtenerModeloJuego();
+  }
+
+  obtenerLogros(): void {
+    let username: string | null = this.sesionService.obtenerUsername();
+    if (username) {
+      this.authService.obtenerUsuarioDB(username).subscribe(
+        {
+          next: (result: any) => {
+            this.logrosService.obtenerLogrosGenerales(result);
+            this.logrosService.obtenerLogrosHanoi(result);
+          },
+          error: (error: any) => {
+            this.toast.error({
+              detail: "Error",
+              summary: error,
+              duration: 3000
+            });
+          }
+        }
+      );
+    }
   }
 }
