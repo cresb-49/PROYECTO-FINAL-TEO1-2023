@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { AuthService } from '../auth/services/auth.service';
 import * as moment from 'moment';
 import { HttpClient } from '@angular/common/http';
+import { NgToastService } from 'ng-angular-popup';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,7 @@ export class LogrosService {
   baseUrl = "http://localhost:5000/api"
 
 
-  constructor(private authService: AuthService, private http: HttpClient) { }
+  constructor(private authService: AuthService, private http: HttpClient, private toast: NgToastService) { }
 
   obtenerLogrosGenerales(usuario: any) {
     const logros: any = usuario.data.logros;
@@ -449,7 +450,13 @@ export class LogrosService {
     }
     this.http.put(`${this.baseUrl}/agregarLogro`, body)
       .subscribe({
-        next: (result: any) => { console.log(result); },
+        next: (result: any) => {
+          this.toast.info({
+            detail: "Nuevo Logro!!",
+            summary: logro.nombre,
+            duration: 5000
+          });
+        },
         error: (err) => { console.log(err); }
       });
   }
