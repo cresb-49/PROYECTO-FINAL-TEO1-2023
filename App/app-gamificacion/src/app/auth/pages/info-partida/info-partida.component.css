@@ -1,8 +1,8 @@
 .divBack {
     padding: 5px;
-    border-radius: 7px;
+    border-radius: 1rem;
     border: 3px solid #e0f04f;
-    background-color: #22E685;
+    background-color: #22e684d3;
     max-width: 70%;
     margin: 5px auto;
 }
