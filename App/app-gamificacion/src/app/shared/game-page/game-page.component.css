@@ -102,20 +102,33 @@
     color: #EFDB00;
 }
 
-.comentarios-titulo{
+.comentarios-titulo {
     margin-top: 10px;
     color: #EFDB00;
     font-weight: bold;
     font-size: 30px;
 }
 
-.maquina-fondo{
-    position: relative;
-    background-image: url('/assets/arcademachine_reescalado.png'); 
-    background-size: cover;
-    height: 865px;
-    padding-top: 9%; 
-    padding-left: 47%; 
-    padding-right: 20%; 
-    margin-left: -25%;
+.cont {
+    background: url('../../../assets/arcademachine_reescalado2.png');
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 1920px;
+
+}
+
+.imgmaquina {
+    position: absolute;
+    width: 100%;
+    z-index: -1;
+}
+
+.juego {
+    position: absolute;
+    background-color: aliceblue;
+    width: 69.8%;
+    margin-top: 9.1%;
+    margin-left: 15.4%;
+    z-index: 1;
+    border-radius: 3px;
 }
