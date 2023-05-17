@@ -4,6 +4,7 @@ import { MainComponent } from './pages/main/main.component';
 import { PrincipalComponent } from './pages/principal/principal.component';
 import { JuegoComponent } from './pages/juego/juego.component';
 import { CrearComponent } from './pages/crear/crear.component';
+import { ProfesorGuard } from '../guards/profesor.guard';
 
 const routes: Routes = [
   {
@@ -12,7 +13,7 @@ const routes: Routes = [
     children: [
       { path: "principal", component: PrincipalComponent },
       { path: "juego", component: JuegoComponent },
-      { path: "crear", component: CrearComponent },
+      { path: "crear", component: CrearComponent, canActivate: [ProfesorGuard] },
       { path: "**", redirectTo: "principal" }
     ]
   }

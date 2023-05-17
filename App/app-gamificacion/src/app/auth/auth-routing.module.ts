@@ -12,6 +12,10 @@ import { SopaComponent } from './pages/estadisticas/sopa/sopa.component';
 import { PartidasComponent } from './pages/partidas/partidas.component';
 import { InfoPartidaComponent } from './pages/info-partida/info-partida.component';
 
+import { ProfesorGuard } from '../guards/profesor.guard';
+import { SessionGuard } from '../guards/session.guard';
+import { UsuarioGuard } from '../guards/usuario.guard';
+
 const routes: Routes = [
   {
     path: '',
@@ -19,14 +23,14 @@ const routes: Routes = [
     children: [
       { path: "login", component: LoginComponent },
       { path: "register", component: RegisterComponent },
-      { path: "informacion", component: InformacionUsuarioComponent },
-      { path: "modificar", component: ModificarInformacionComponent },
-      { path: "estadisticas", component: EstadisticasComponent },
-      { path: "ahorcado", component: AhorcadoComponent },
-      { path: "hanoi", component: HanoiComponent },
-      { path: "sopa", component: SopaComponent },
-      { path: "partidas", component: PartidasComponent },
-      { path: "infoPartida", component: InfoPartidaComponent },
+      { path: "informacion", component: InformacionUsuarioComponent, canActivate: [SessionGuard] },
+      { path: "modificar", component: ModificarInformacionComponent, canActivate: [SessionGuard] }, 
+      { path: "estadisticas", component: EstadisticasComponent, canActivate: [UsuarioGuard] },
+      { path: "ahorcado", component: AhorcadoComponent, canActivate: [UsuarioGuard] },
+      { path: "hanoi", component: HanoiComponent, canActivate: [UsuarioGuard] },
+      { path: "sopa", component: SopaComponent, canActivate: [UsuarioGuard] },
+      { path: "partidas", component: PartidasComponent, canActivate: [ProfesorGuard] },
+      { path: "infoPartida", component: InfoPartidaComponent,canActivate: [ProfesorGuard] },
       { path: "**", redirectTo: "login" },
     ]
   }

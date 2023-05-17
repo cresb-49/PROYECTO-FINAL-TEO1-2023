@@ -6,6 +6,7 @@ import { AhorcadoService } from '../../services/ahorcado.service';
 import * as moment from 'moment';
 import { AuthService } from 'src/app/auth/services/auth.service';
 import { LogrosService } from 'src/app/services/logros.service';
+import { SesionService } from 'src/app/services/sesion.service';
 
 @Component({
   selector: 'app-juego',
@@ -31,7 +32,8 @@ export class JuegoComponent implements OnInit {
   palabrasEntontradas = 0;
   palabrasFalladas = 0;
 
-  constructor(private router: Router, private route: ActivatedRoute, private ahorcadoService: AhorcadoService, private authService: AuthService, private logrosService: LogrosService) {
+  constructor(private router: Router, private route: ActivatedRoute, private ahorcadoService: AhorcadoService, private authService: AuthService, private logrosService: LogrosService
+    , private sessionService: SesionService) {
 
   }
 
@@ -137,6 +139,7 @@ export class JuegoComponent implements OnInit {
           title: 'Termino el juego',
           text: 'Tu puntuacion es de: ' + this.punteoTotal,
         });
+        if(this.sessionService.verificarSesion()){
         this.ahorcadoService.obtenerUsuario();
         const usuario = this.ahorcadoService.getUsuario();
         const fechaActual = moment().format("YYYY-MM-DD");
@@ -154,9 +157,10 @@ export class JuegoComponent implements OnInit {
         }
         this.ahorcadoService.guardarResultado(resultadoBody)
           .subscribe({
-            next: (resultado: any) => { console.log(resultado); this.obtenerLogros(usuario.username)},
+            next: (resultado: any) => {  this.obtenerLogros(usuario.username)},
             error: (error: any) => { console.log(error); }
           });
+        }
         this.palabrasEntontradas = 0;
         this.palabrasFalladas = 0;
         this.router.navigate(["/ahorcado"]);

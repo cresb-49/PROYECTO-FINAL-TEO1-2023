@@ -43,7 +43,6 @@ const obtenerModelo = async (req, res) => {
     }
 }
 
-//API
 const obtenerModelosPorUsuario = async (req, res) => {
     try {
         const { usuario } = req.query;
@@ -54,7 +53,6 @@ const obtenerModelosPorUsuario = async (req, res) => {
     }
 }
 
-//API
 const obtenerModeloPorCodigo = async (req, res) => {
     try {
         const { codigo } = req.query;
@@ -69,7 +67,6 @@ const obtenerModeloPorCodigo = async (req, res) => {
     }
 }
 
-//API
 const borrarModelo = async (req, res) => {
     try {
         const { codigo } = req.query;
