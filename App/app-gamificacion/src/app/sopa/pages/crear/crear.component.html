@@ -1,11 +1,26 @@
-<div>
-    <h3>Palabras de la Sopa de Letras</h3>
-    <input [(ngModel)]="palabra"/>
-    <button (click)="agregarPalabra()">Agregar Palabra</button>
-    <table>
-        <tr *ngFor="let palabra of palabras">
-            {{palabra}}
-        </tr>
-    </table>
-    <button (click)="onCrearJuego()">Crear Juego</button>
+<div class="container">
+    <div class="cont">
+        <h3>Palabras de la Sopa de Letras</h3>
+        <div class="input-group mb-3 mt-3">
+            <input type="text" class="form-control" style="max-width: 50%;" [(ngModel)]="palabra" />
+            <button class="btn btn-crear" style="margin-left: 5px;" (click)="agregarPalabra()">Agregar Palabra</button>
+        </div>
+        <div class="t">
+            <table class="table" style="color: #e0f04f;">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Palabra</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let palabra of palabras; let i = index">
+                        <th scope="row">{{i+1}}</th>
+                        <td>{{palabra}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <button class="btn btn-crear" (click)="onCrearJuego()">Crear Juego</button>
+    </div>
 </div>

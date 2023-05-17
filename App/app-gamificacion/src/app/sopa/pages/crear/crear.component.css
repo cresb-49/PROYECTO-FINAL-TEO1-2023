@@ -1,0 +1,30 @@
+.container {
+    margin-top: 20px;
+}
+
+.cont {
+    padding: 20px;
+    border-radius: 1rem;
+    border: 3px solid #e0f04f;
+    background-color: #22e684c2;
+}
+
+.btn-crear {
+    background-color: #e0f04f;
+    border: 3px solid #69D957;
+}
+
+.form-control {
+    border-radius: 6px;
+}
+
+.t {
+    max-width: 50%;
+    background-color: rgba(24, 80, 108, 0.753);
+    padding: 5px;
+    border-radius: 5px;
+    margin-bottom: 5px;
+    border-color: black;
+    border-style: solid;
+    border-width: 1px;
+}

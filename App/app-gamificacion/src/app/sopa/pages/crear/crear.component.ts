@@ -35,13 +35,20 @@ export class CrearSopaComponent {
       this.sopaService.registarJuegoPersonalizado({ juego: "J00004", usuario: username, data: { palabras: this.palabras } })
         .subscribe({
           next: (response: any) => {
-            Swal.fire({
-              icon: 'success',
-              title: 'Me Gusta',
-              text: 'Juego Creado!'
-            });
-          }, error: (error: any) => {
+            Swal.fire(
+              {
+                title: 'Juego creado',
+                text: `El codigo del juego es "${response.codigo}"`,
+                icon: 'success',
+                confirmButtonText: 'Salir'
+              }
+            );
+          },
+          error: (error: any) => {
             console.log(error)
+          },
+          complete: () => {
+            this.palabras = [];
           }
         })
     }
