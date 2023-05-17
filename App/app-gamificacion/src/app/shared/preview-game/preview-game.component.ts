@@ -8,6 +8,7 @@ import { FormsModule } from '@angular/forms';
 import { NgToastService } from 'ng-angular-popup';
 import { Router } from '@angular/router';
 import { PartidaService } from './services/partida.service';
+import { SesionService } from 'src/app/services/sesion.service';
 
 @Component({
   selector: 'app-preview-game',
@@ -28,7 +29,8 @@ export class PreviewGameComponent implements OnInit {
   cantidadDislikes: number = 0;
 
   constructor(private comentariosService: ComentariosService, private meGustaService: MeGustaService,
-    private formsModule: FormsModule, private toast: NgToastService, private router: Router, private partidaService: PartidaService) { }
+    private formsModule: FormsModule, private toast: NgToastService, private router: Router, private partidaService: PartidaService,
+    private sesionService: SesionService) { }
 
   ngOnInit(): void {
     this.actualizarComentarios();
@@ -41,7 +43,7 @@ export class PreviewGameComponent implements OnInit {
   */
   onMeGusta(estado: boolean) {
     //Se comprueba si se esta logeado, si no, se envia una alerta y se retorna
-    if (localStorage.getItem("usuario") === null || localStorage.getItem("usuario") === undefined) {
+    if (this.sesionService.verificarSesion()) {
       Swal.fire({
         icon: 'warning',
         title: 'Me Gusta',
@@ -50,12 +52,9 @@ export class PreviewGameComponent implements OnInit {
       return;
     }
 
-    //Se obtiene el username del usuario logeado
-    let username: any = JSON.parse(localStorage.getItem("usuario")!).username
-
     //Si no se ha dado Like o Dislike al juego se agrega el Like o Dislike al servidor
     if (this.likeUsuario === null) {
-      this.meGustaService.publicarMeGusta(new MeGusta(this.juego!, username, estado))
+      this.meGustaService.publicarMeGusta(new MeGusta(this.juego!, this.sesionService.obtenerUsername()!, estado))
         .subscribe({
           next: (response: any) => {
             this.toast.success({ detail: "Me Gusta", summary: 'Gracias por el ' + (estado ? '' : 'No ') + 'Me Gusta!', duration: 5000 });
@@ -70,7 +69,7 @@ export class PreviewGameComponent implements OnInit {
 
       //Si se ha dado like previamente y se vuelve a dar like se removera el like
     } else if (this.likeUsuario && estado) {
-      this.meGustaService.removerMeGusta(username, this.juego!)
+      this.meGustaService.removerMeGusta(this.sesionService.obtenerUsername()!, this.juego!)
         .subscribe({
           next: (response: any) => {
             this.toast.success({ detail: "Me Gusta", summary: "Se ha quitado el " + (estado ? "" : 'No ') + 'Me Gusta!', duration: 5000 });
@@ -84,7 +83,7 @@ export class PreviewGameComponent implements OnInit {
         })
       //Si se ha dado dislike previamente y se vuelve a dar dislike se removera el dislike
     } else if (!this.likeUsuario && !estado) {
-      this.meGustaService.removerMeGusta(username, this.juego!)
+      this.meGustaService.removerMeGusta(this.sesionService.obtenerUsername()!, this.juego!)
         .subscribe({
           next: (response: any) => {
             this.toast.success({ detail: "No Me Gusta", summary: "Se ha quitado el " + (estado ? "" : 'No ') + 'Me Gusta!', duration: 5000 });
@@ -98,7 +97,7 @@ export class PreviewGameComponent implements OnInit {
         })
       //Si se ha dado like o dislike previamente y se da a la opcion contraria se actualizara el estado
     } else if (this.likeUsuario !== estado) {
-      this.meGustaService.publicarMeGusta(new MeGusta(this.juego!, username, estado))
+      this.meGustaService.publicarMeGusta(new MeGusta(this.juego!, this.sesionService.obtenerUsername()!, estado))
         .subscribe({
           next: (response: any) => {
             this.toast.success({ detail: "No Me Gusta", summary: 'Gracias por el ' + (estado ? '' : 'No ') + 'Me Gusta!', duration: 5000 });
@@ -121,8 +120,7 @@ export class PreviewGameComponent implements OnInit {
    * Guarda un comentario escrito
   */
   guardarComentario() {
-    let username: any = JSON.parse(localStorage.getItem("usuario")!).username
-    this.comentariosService.publicarComentario(username, this.comentarioUsuario, this.juego!)
+    this.comentariosService.publicarComentario(this.sesionService.obtenerUsername()!, this.comentarioUsuario, this.juego!)
       .subscribe({
         next: (response: any) => {
           this.actualizarComentarios()
@@ -152,11 +150,10 @@ export class PreviewGameComponent implements OnInit {
    * Actualiza la informacion del like del usuario
   */
   actualizarMeGustaUsuario(): void {
-    if (localStorage.getItem("usuario") === null || localStorage.getItem("usuario") === undefined) {
+    if (!this.sesionService.verificarSesion()) {
       return;
     }
-    let username: any = JSON.parse(localStorage.getItem("usuario")!).username
-    let meGustaJugador = this.meGustaService.obtenerMeGusta(username, this.juego!)
+    let meGustaJugador = this.meGustaService.obtenerMeGusta(this.sesionService.obtenerUsername()!, this.juego!)
       .subscribe({
         next: (meGusta: any) => {
           //El usuario no tiene registrado interaccion
