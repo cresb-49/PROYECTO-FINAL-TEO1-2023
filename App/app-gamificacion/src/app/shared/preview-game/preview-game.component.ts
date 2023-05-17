@@ -43,7 +43,7 @@ export class PreviewGameComponent implements OnInit {
   */
   onMeGusta(estado: boolean) {
     //Se comprueba si se esta logeado, si no, se envia una alerta y se retorna
-    if (this.sesionService.verificarSesion()) {
+    if (!this.sesionService.verificarSesion()) {
       Swal.fire({
         icon: 'warning',
         title: 'Me Gusta',
@@ -120,15 +120,24 @@ export class PreviewGameComponent implements OnInit {
    * Guarda un comentario escrito
   */
   guardarComentario() {
-    this.comentariosService.publicarComentario(this.sesionService.obtenerUsername()!, this.comentarioUsuario, this.juego!)
-      .subscribe({
-        next: (response: any) => {
-          this.actualizarComentarios()
-          this.comentarioUsuario = ""
-        }, error: (error: any) => {
-          console.log(error)
-        }
-      })
+    if (this.sesionService.verificarSesion()) {
+      this.comentariosService.publicarComentario(this.sesionService.obtenerUsername()!, this.comentarioUsuario, this.juego!)
+        .subscribe({
+          next: (response: any) => {
+            this.actualizarComentarios()
+            this.comentarioUsuario = ""
+          }, error: (error: any) => {
+            console.log(error)
+          }
+        })
+    } else {
+      Swal.fire({
+        icon: 'warning',
+        title: 'Comentario',
+        text: 'Debes iniciar sesion para agregar un comentario'
+      });
+      return;
+    }
   }
 
   /**
@@ -209,9 +218,9 @@ export class PreviewGameComponent implements OnInit {
 
       this.partidaService.obtenerPartida(this.codigoJuego, this.juego!)
         .subscribe({
-          next: (response:any) => {
-            this.router.navigateByUrl(url+"/juego?codigo="+this.codigoJuego)
-          }, error: (error:any) => {
+          next: (response: any) => {
+            this.router.navigateByUrl(url + "/juego?codigo=" + this.codigoJuego)
+          }, error: (error: any) => {
             alert("No existe un juego con ese codigo")
           }
         })
