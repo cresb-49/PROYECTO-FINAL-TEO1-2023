@@ -17,7 +17,7 @@ export class InformacionUsuarioComponent implements OnInit {
 
   ngOnInit(): void {
       this.usuario = this.sessionService.obtenerSesion();
-    
+      console.log(this.usuario.rol);
   }
 
   modificarInformacion() {
@@ -26,6 +26,10 @@ export class InformacionUsuarioComponent implements OnInit {
 
   verEstadisticas() {
     this.router.navigate(["/auth/estadisticas"]);
+  }
+
+  verPartidasCreadas() {
+    this.router.navigate(["/auth/partidas"]);
   }
 
 

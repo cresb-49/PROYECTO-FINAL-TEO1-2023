@@ -1,0 +1,12 @@
+.conteedor{
+    background-color: #22e684dd;
+    border-radius: 1rem;
+    border: 3px solid #EFDB00;
+    margin: 0px auto;
+    max-width: 75%;
+}
+
+.table{
+    border-color: #EFDB00;
+    font-size: 20px;
+}

@@ -43,7 +43,51 @@ const obtenerModelo = async (req, res) => {
     }
 }
 
+//API
+const obtenerModelosPorUsuario = async (req, res) => {
+    try {
+        const { usuario } = req.query;
+        const result = await modeloPartida.find({ usuario: usuario });
+        res.status(200).json(result);
+    } catch (error) {
+        res.status(409).json({ error: error.message });
+    }
+}
+
+//API
+const obtenerModeloPorCodigo = async (req, res) => {
+    try {
+        const { codigo } = req.query;
+        const result = await modeloPartida.findOne({ codigo: codigo });
+        if (result) {
+            res.status(200).json(result);
+        } else {
+            res.status(409).json({ error: `No existe una partida personalizada con el codigo ${codigo}` });
+        }
+    } catch (error) {
+        res.status(409).json({ error: error.message });
+    }
+}
+
+//API
+const borrarModelo = async (req, res) => {
+    try {
+        const { codigo } = req.query;
+        const result = await modeloPartida.deleteOne({ codigo: codigo });
+        if (result) {
+            res.status(200).json(result);
+        } else {
+            res.status(409).json({ error: `No existe una partida personalizada con el codigo ${codigo}` });
+        }
+    } catch (error) {
+        res.status(409).json({ error: error.message });
+    }
+}
+
 module.exports = {
     registroModelo: registroModelo,
-    obtenerModelo: obtenerModelo
+    obtenerModelo: obtenerModelo,
+    obtenerModelosPorUsuario: obtenerModelosPorUsuario,
+    obtenerModeloPorCodigo: obtenerModeloPorCodigo,
+    borrarModelo: borrarModelo
 }

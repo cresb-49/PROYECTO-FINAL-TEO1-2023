@@ -144,11 +144,25 @@ const estadisticasHanoi = async (req, res) => {
     }
 }
 
+const modificarUsername = async (req, res) => {
+    const { nuevoUsername, usernameActual } = req.body;
+    try {
+        const result = await resultadoPartida.updateMany(
+            { usuario: usernameActual },
+            { $set: { usuario: nuevoUsername} }
+        );
+        res.status(200).json(result);
+    } catch (error) {
+        res.status(409).json({ error: error.message });
+    }
+}
+
 module.exports = {
     registarPartida: registarPartida,
     obtenerPartida: obtenerPartida,
     estadisticasGenerales: estadisticasGenerales,
     obtenerPartidasPorJuego: obtenerPartidasPorJuego,
     estadisticasAhorcado: estadisticasAhorcado, 
-    estadisticasHanoi: estadisticasHanoi 
+    estadisticasHanoi: estadisticasHanoi,
+    modificarUsername: modificarUsername
 }

@@ -15,4 +15,6 @@ router.get('/estadisticasAhorcado', resultadoPartidaController.estadisticasAhorc
 
 router.get('/estadisticasHanoi', resultadoPartidaController.estadisticasHanoi);
 
+router.put('/modificarUsuarioResultados', resultadoPartidaController.modificarUsername);
+
 module.exports = router;

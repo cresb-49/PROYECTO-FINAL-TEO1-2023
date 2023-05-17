@@ -1,0 +1,33 @@
+<div style="text-align:  center; margin-top: 20px;">
+    <div class="conteedor">
+        <div class="p-2 m-2">
+            <h1>Partidas Creadas</h1>
+            <div>
+                <table class="table table-hover">
+                    <caption style="color: #000000;">Juegos creados</caption>
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Codigo</th>
+                            <th scope="col">Juego</th>
+                            <th scope="col">...</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let item of partidasCreadas; let i = index;">
+                            <td>{{i+1}}</td>
+                            <td>{{item.codigo}}</td>
+                            <td>{{verNombre(item.juego)}}</td>
+                            <td>
+                                <span><button class="btn btn-primary mx-3" (click)="verPartida(i)">Ver
+                                        Partida</button></span>
+                                <span><button class="btn btn-danger" (click)="borrarPartida(i)">Borrar</button></span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+</div>
