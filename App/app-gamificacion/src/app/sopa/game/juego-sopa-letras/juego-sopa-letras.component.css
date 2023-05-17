@@ -1,0 +1,8 @@
+.cell {
+    width: 35px;
+    height: 30px;
+    text-align: center;
+    vertical-align: middle;
+    line-height: normal;
+    border-radius: 3px;
+}

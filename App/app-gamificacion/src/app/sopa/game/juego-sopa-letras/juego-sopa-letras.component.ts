@@ -5,7 +5,11 @@ import { Moment } from 'moment';
 import { Data } from "../../models/Data";
 import { ActivatedRoute } from "@angular/router";
 import { SopaService } from '../../services/sopa.service';
+import { NgToastModule, NgToastService } from 'ng-angular-popup';
+import Swal from 'sweetalert2';
 import { SesionService } from 'src/app/services/sesion.service';
+import { LogrosService } from 'src/app/services/logros.service';
+import { AuthService } from 'src/app/auth/services/auth.service';
 
 @Component({
   selector: 'app-juego-sopa-letra',
@@ -15,20 +19,20 @@ import { SesionService } from 'src/app/services/sesion.service';
 export class JuegoSopaLetrasComponent implements OnInit {
   stopwatch: Stopwatch = new Stopwatch();
   codigoJuego: string = "";
-  
-  constructor (private route: ActivatedRoute, private sopaService: SopaService, private sesionService: SesionService){}
+
+  constructor(private route: ActivatedRoute, private sopaService: SopaService, private sesionService: SesionService, private toast: NgToastService, private logrosService: LogrosService, private authService: AuthService) { }
 
   ngOnInit(): void {
     this.route.queryParams
       .subscribe({
         next: (params) => {
           this.codigoJuego = params['codigo']
-          this.sopaService.obtenerJuegoPersonalizado({codigo: params['codigo'], juego: 'J00004'})
+          this.sopaService.obtenerJuegoPersonalizado({ codigo: params['codigo'], juego: 'J00004' })
             .subscribe({
               next: (response: any) => {
                 this.generarTablero(response.data.palabras);
               },
-              error: (error:any) => {
+              error: (error: any) => {
                 console.log(error)
               }
             })
@@ -179,8 +183,8 @@ export class JuegoSopaLetrasComponent implements OnInit {
       }
     }
   }
-  
-  rellenarTablero(){
+
+  rellenarTablero() {
     for (let fila = 0; fila < this.tablero.length; fila++) {
       for (let columna = 0; columna < this.tablero.length; columna++) {
         if (this.tablero[fila][columna] === '0') {
@@ -189,8 +193,8 @@ export class JuegoSopaLetrasComponent implements OnInit {
       }
     }
   }
-  
-  obtenerCaracterAleatorio(){
+
+  obtenerCaracterAleatorio() {
     const caracteres = "abcdefghijklmnopqrstuvwxyz";
     return caracteres.at(Math.floor(Math.random() * 26))
   }
@@ -201,32 +205,81 @@ export class JuegoSopaLetrasComponent implements OnInit {
 
   onIngresarPalabra() {
     if (this.posicionesPalabras.has(this.palabra)) {
-      alert("Palabra encontrada")
+      this.toast.success({
+        detail: "Sopa de Letras",
+        summary: 'Palabra encontrada',
+        duration: 3000
+      });
       this.marcarPalabra(this.palabra)
       this.posicionesPalabras.delete(this.palabra)
       this.palabrasEncontradas.push(this.palabra)
       if (this.posicionesPalabras.size === 0) {
         this.stopwatch.stop()
-        alert("Has ganado! en: "+this.stopwatch.getTime())
+        Swal.fire({
+          icon: 'success',
+          title: 'Has ganado!',
+          text: 'Tu tiempo es de: ' + this.stopwatch.getTime(),
+        });
         if (this.sesionService.obtenerUsername() !== null) {
           let dataPartida = new Data(this.stopwatch.getTime())
-          this.sopaService.registrarResultado({codigo: this.codigoJuego, juego: 'J00004', usuario: this.sesionService.obtenerUsername(), fecha: moment().format('YYYY/MM/DD'), data: dataPartida})
-          .subscribe({
-            next: (response: any) => {
-            }, error: (error:any) => {
-              console.log(error)
-            }
-          })
+          this.sopaService.registrarResultado({ codigo: this.codigoJuego, juego: 'J00004', usuario: this.sesionService.obtenerUsername(), fecha: moment().format('YYYY/MM/DD'), data: dataPartida })
+            .subscribe({
+              next: (response: any) => {
+                this.toast.info({
+                  detail: "Partida Registrada",
+                  summary: 'Se registro con exito la partida',
+                  duration: 5000
+                });
+              },
+              error: (error: any) => {
+                this.toast.error({
+                  detail: "Error",
+                  summary: 'No se registro la partida error con el servidor',
+                  duration: 5000
+                });
+              },
+              complete: () => {
+                this.obtenerLogros();
+              }
+            })
         }
       }
     } else {
       if (this.palabrasEncontradas.includes(this.palabra)) {
-        alert("Esta palabra ya ha sido encontrada")
+        this.toast.info({
+          detail: "Sopa de Letras",
+          summary: 'Esta palabra ya ha sido encontrada',
+          duration: 5000
+        });
       } else {
-        alert("Esta palabra no esta en la sopa")
+        this.toast.error({
+          detail: "Sopa de Letras",
+          summary: 'Esta palabra no esta en la sopa',
+          duration: 5000
+        });
       }
     }
     this.palabra = ""
+  }
+  obtenerLogros() {
+    let username: string | null = this.sesionService.obtenerUsername();
+    if (username) {
+      this.authService.obtenerUsuarioDB(username).subscribe(
+        {
+          next: (result: any) => {
+            this.logrosService.obtenerLogrosGenerales(result);
+            this.logrosService.obtenerLogrosSopa(result);
+          },
+          error: (error: any) => {
+            this.toast.error({
+              detail: "Error",
+              summary: error,
+              duration: 3000
+            });
+          }
+        }
+      );
+    }
   }
 }
 
