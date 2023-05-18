@@ -10,6 +10,7 @@ import { CrearComponent } from './pages/crear/crear.component';
 import { JuegoCrucigramaComponent } from './game/juego-crucigrama/juego-crucigrama.component';
 import { CuadroComponent } from './game/cuadro/cuadro.component';
 import { DropdownModule } from 'primeng/dropdown';
+import { ViewCuadroComponent } from "./game/view-cuadro/view-cuadro.component";
 
 
 
@@ -19,7 +20,8 @@ import { DropdownModule } from 'primeng/dropdown';
         PrincipalComponent,
         CrearComponent,
         JuegoCrucigramaComponent,
-        CuadroComponent
+        CuadroComponent,
+        ViewCuadroComponent
     ],
     imports: [
         CommonModule,

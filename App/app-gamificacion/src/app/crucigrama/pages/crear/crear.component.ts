@@ -1,5 +1,11 @@
 import { Component } from '@angular/core';
 import { Crusigrama } from '../../models/Crusigrama';
+import { AuthService } from 'src/app/auth/services/auth.service';
+import Swal from 'sweetalert2';
+import { Cuadro } from '../../models/Cuadro';
+import { Pista } from '../../models/Pistas';
+import { Data } from '../../models/Data';
+import { Entrada } from '../../models/Entrada';
 
 @Component({
   selector: 'app-crear',
@@ -10,8 +16,21 @@ export class CrearComponent {
   modeloCrusigrama: Crusigrama = new Crusigrama();
   tamY: number = 5;
   tamX: number = 5;
+  validado: boolean = false;
+
+  tmpCuadro: Cuadro = new Cuadro();
+
+  pistasV: Array<Pista> = [];
+  pistasH: Array<Pista> = [];
+
+  errores: boolean = false;
+  errors: Array<any> = [];
+
+
+  constructor(private authService: AuthService) { }
 
   ngOnInit() {
+    this.tmpCuadro.setLetra('p');
     console.log(this.modeloCrusigrama);
   }
 
@@ -20,16 +39,43 @@ export class CrearComponent {
   }
 
   verificarCrusigrama() {
-    let result: Array<any> = this.modeloCrusigrama.verificar();
-    if (result.length === 0) {
-      //Generacion del juego
-      //Calculo de las pistas del juego
+    this.errors = this.modeloCrusigrama.verificar();
+    if (this.errors.length === 0) {
+      Swal.fire({
+        icon: 'success',
+        title: 'Crusigrama Verificado',
+        text: 'Ahora puede introducir las pistas del juego',
+        showConfirmButton: true
+      });
       let pistas = this.modeloCrusigrama.calculoPistasJuego();
-      console.log(pistas);
+      this.validado = true;
+      for (let v = 1; v < pistas.numPistas.numV; v++) {
+        this.pistasV.push(new Pista("", v, 'Vertical'));
+      }
+      for (let h = 1; h < pistas.numPistas.numH; h++) {
+        this.pistasH.push(new Pista("", h, 'Horizontal'));
+      }
+      console.log(this.pistasH);
+      console.log(this.pistasV);
+      this.errores = false;
 
     } else {
       //Mostrar los errores  
-      console.log(result);
+      console.log(this.errors);
+      this.errores = true;
     }
+  }
+
+  registroFinalCrusigrama() {
+    let matriz: Array<Array<Entrada>> = [];
+    for (const fila of this.modeloCrusigrama.getMatriz()) {
+      let fila2: Array<Entrada> = [];
+      for (const cuadro of fila) {
+        fila2.push(new Entrada(cuadro.getInicio(), cuadro.getLetra(), "", cuadro.getNumeroH(), cuadro.getNumeroV(), cuadro.getCordenada()));
+      }
+      matriz.push(fila2);
+    }
+    let data: Data = new Data(matriz, this.pistasH, this.pistasV);
+    console.log(data);
   }
 }

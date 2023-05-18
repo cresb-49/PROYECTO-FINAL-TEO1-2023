@@ -186,7 +186,7 @@ export class Crusigrama {
         return errores;
     }
 
-    public calculoPistasJuego(): Array<any> {
+    public calculoPistasJuego(): any {
         let pistas: Array<any> = [];
         let numPistas: Object = { numV: 1, numH: 1 }
 
@@ -207,7 +207,7 @@ export class Crusigrama {
                 }
             }
         }
-        return pistas;
+        return { pistas: pistas, numPistas: numPistas };
     }
 
     private calculoCompania(initIzq: boolean, initArriba: boolean, down: boolean, rigth: boolean, cuadro: Cuadro, numPistas: any) {

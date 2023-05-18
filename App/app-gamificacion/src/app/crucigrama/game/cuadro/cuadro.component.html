@@ -1,4 +1,4 @@
-<div class="contenedor">
+<div class="contenedor" [ngStyle]="{ 'background-color': (letra!==''?'yellow':'white') }">
   <div *ngIf="letra!==''">
   <div *ngIf="encenderFoco()">
     <button (click)="setInicio()" class="boton" [ngStyle]="{'color': (cuadro.getInicio()?'green':'black')}">
