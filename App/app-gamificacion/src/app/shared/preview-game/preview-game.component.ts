@@ -121,6 +121,7 @@ export class PreviewGameComponent implements OnInit {
   */
   guardarComentario() {
     if (this.sesionService.verificarSesion()) {
+      if(this.comentarioUsuario != ""){
       this.comentariosService.publicarComentario(this.sesionService.obtenerUsername()!, this.comentarioUsuario, this.juego!)
         .subscribe({
           next: (response: any) => {
@@ -130,6 +131,7 @@ export class PreviewGameComponent implements OnInit {
             console.log(error)
           }
         })
+      }
     } else {
       Swal.fire({
         icon: 'warning',

@@ -7,6 +7,7 @@ import * as moment from 'moment';
 import { AuthService } from 'src/app/auth/services/auth.service';
 import { LogrosService } from 'src/app/services/logros.service';
 import { SesionService } from 'src/app/services/sesion.service';
+import { NgToastService } from 'ng-angular-popup';
 
 @Component({
   selector: 'app-juego',
@@ -33,7 +34,7 @@ export class JuegoComponent implements OnInit {
   palabrasFalladas = 0;
 
   constructor(private router: Router, private route: ActivatedRoute, private ahorcadoService: AhorcadoService, private authService: AuthService, private logrosService: LogrosService
-    , private sessionService: SesionService) {
+    , private sessionService: SesionService, private toast: NgToastService) {
 
   }
 
@@ -159,6 +160,12 @@ export class JuegoComponent implements OnInit {
           .subscribe({
             next: (resultado: any) => {  this.obtenerLogros(usuario.username)},
             error: (error: any) => { console.log(error); }
+          });
+        } else {
+          this.toast.info({
+            detail: "Guardado de Resultado?",
+            summary: 'Debes de iniciar sesion para poder guardar tus resultados',
+            duration: 5000
           });
         }
         this.palabrasEntontradas = 0;
