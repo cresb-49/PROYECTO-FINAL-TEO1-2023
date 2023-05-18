@@ -2,15 +2,27 @@
     <div class="container" style="padding: 5px;">
         <h2>Juego Personalizado Curisigrama</h2>
         <div class="input-group mb-3">
-            <label class="input-group-text" for="inputGroupSelect01">Cantidad de filas&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-            <input type="number" class="form-select" id="inputGroupSelect01">
-            <button class="btn btn-outline-secondary" type="button">Button</button>
+            <label class="input-group-text" for="inputGroupSelect01">Cantidad de
+                filas&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+            <input type="number" class="form-select" id="inputGroupSelect01" [(ngModel)]="tamY"
+                (ngModelChange)="cambioSize()">
         </div>
         <div class="input-group mb-3">
             <label class="input-group-text" for="inputGroupSelect01">Cantidad de columnas</label>
-            <input type="number" class="form-select" id="inputGroupSelect01">
-            <button class="btn btn-outline-secondary" type="button">Button</button>
+            <input type="number" class="form-select" id="inputGroupSelect01" [(ngModel)]="tamX"
+                (ngModelChange)="cambioSize()">
         </div>
+        <button class="btn btn-dark mb-3">Asignar size</button>
         <h5>Vista Previa</h5>
+        <p>En cada casilla introduza la letra que contiene y si es inicio de una palabra</p>
+        <div class="contenedor-tabla">
+            <table>
+                <tr *ngFor="let item of modeloCrusigrama.getMatriz()">
+                    <td *ngFor="let item of item">
+                        <app-cuadro [cuadro]="item" [modeloCrucigrama]="modeloCrusigrama"></app-cuadro>
+                    </td>
+                </tr>
+            </table>
+        </div>
     </div>
 </div>

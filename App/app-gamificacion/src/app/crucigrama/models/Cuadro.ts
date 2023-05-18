@@ -1,8 +1,10 @@
 export class Cuadro {
 
-    inicio!: boolean;
-    letra!: string;
-    numero!: number;
+    private inicio: boolean = false;
+    private letra: string = "";
+    private numero: number = -1;
+
+    private cordenada: Object = { x: 0, y: 0 };
 
     constructor() { }
 
@@ -20,6 +22,8 @@ export class Cuadro {
 
     setLetra(letra: string): void {
         this.letra = letra
+        if (this.letra === "")
+            this.inicio = false;
     }
 
     getNumero(): number {
@@ -28,5 +32,13 @@ export class Cuadro {
 
     setNumero(numero: number): void {
         this.numero = numero;
+    }
+
+    public setCordenada(x: number, y: number) {
+        this.cordenada = { x: x, y: y };
+    }
+
+    public getCordenada(): any {
+        return this.cordenada;
     }
 }

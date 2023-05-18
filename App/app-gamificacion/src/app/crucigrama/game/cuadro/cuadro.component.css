@@ -1,0 +1,30 @@
+.contenedor {
+    border-color: black;
+    border-width: 1px;
+    border-style: solid;
+    width: 60px;
+    height: 60px;
+    display: flex;
+}
+
+.boton{
+    margin: 0;
+    background-color: transparent;
+    border-width: 0px;
+    border-radius: 3px;
+    z-index: 1;
+}
+
+.boton:hover{
+    background-color: gray;
+    color: white;
+}
+
+.input-cuadro{
+    width: 100%;
+    margin-top: 2px;
+    margin-bottom: 2px;
+    margin-right: 2px;
+    font-size: 27px;
+    text-align: center;
+}
