@@ -110,7 +110,7 @@
 }
 
 .cont {
-    background: url('../../../assets/arcademachine_reescalado2.png');
+    background: url('../../../assets/arcademachine_reescalado3.png');
     background-repeat: no-repeat;
     width: 100%;
     height: 1920px;
@@ -128,7 +128,7 @@
     background-color: aliceblue;
     width: 69.8%;
     margin-top: 9.1%;
-    margin-left: 15.4%;
+    margin-left: 15.2%;
     z-index: 1;
     border-radius: 3px;
 }

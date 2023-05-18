@@ -33,7 +33,7 @@ export class GamePageComponent implements AfterViewInit {
   anchoDiv!: number;
 
   obtenerAlturaDiv() {
-    this.anchoDiv = this.divRef.nativeElement.offsetHeight*0.5317;
+    this.anchoDiv = this.divRef.nativeElement.offsetHeight*0.2037;
   }
 
   ngAfterViewInit() {
