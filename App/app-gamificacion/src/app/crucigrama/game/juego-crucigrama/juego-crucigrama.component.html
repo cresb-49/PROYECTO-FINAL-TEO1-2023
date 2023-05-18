@@ -9,7 +9,7 @@
               <tr *ngFor="let item of data.matriz">
                 <td *ngFor="let item of item">
                   <app-play-cuadro [cuadro]="item" (startEvent)="receiveMenssge($event)"
-                    (cambioValor)="cambioDeValor($event)"></app-play-cuadro>
+                    (cambioValor)="cambioDeValor($event)" [habilitado]="partidaTerminada"></app-play-cuadro>
                 </td>
               </tr>
             </table>

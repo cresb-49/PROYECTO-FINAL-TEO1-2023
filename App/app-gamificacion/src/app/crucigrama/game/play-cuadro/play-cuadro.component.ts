@@ -10,6 +10,7 @@ export class PlayCuadroComponent implements OnInit {
 
   @ViewChild('miInput', { static: false }) miInput!: ElementRef;
   @Input() cuadro!: Entrada;
+  @Input() habilitado!: boolean;
 
   init: boolean = false;
   @Output() startEvent = new EventEmitter<boolean>();
@@ -41,7 +42,12 @@ export class PlayCuadroComponent implements OnInit {
       console.log(this.cuadro);
     }
   }
+
   seleccionarTexto(input: any) {
     input.select();
+  }
+
+  modelCambio($event: any) {
+    this.cuadro.entrada = this.letra;
   }
 }

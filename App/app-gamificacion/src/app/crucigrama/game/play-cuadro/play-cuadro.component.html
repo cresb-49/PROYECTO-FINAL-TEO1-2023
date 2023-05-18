@@ -12,6 +12,7 @@
   <div class="espacio">
     <input *ngIf="cuadro.letra!==''" type="text" class="texto-espacio" maxlength="1" [(ngModel)]="letra"
       [ngStyle]="{ 'background-color': (cuadro.entrada.length === 0 && cuadro.letra!=='' ? '#22E685' : 'transparent') }"
-      (keypress)="valorCambio($event)" />
+      (keypress)="valorCambio($event)" (focus)="seleccionarTexto($event.target)"
+      (ngModelChange)="modelCambio($event)" />
   </div>
 </div>

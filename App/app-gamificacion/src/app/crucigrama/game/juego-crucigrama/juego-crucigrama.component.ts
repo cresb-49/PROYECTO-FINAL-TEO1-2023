@@ -28,6 +28,8 @@ export class JuegoCrucigramaComponent {
 
   private modeloPartida: any;
 
+  public partidaTerminada: boolean = false;
+
   constructor(private router: Router, private route: ActivatedRoute, private crucigramaService: CrucigramaService, private sesionService: SesionService, private toast: NgToastService, private logrosService: LogrosService, private authService: AuthService) { }
   ngOnInit() {
     this.route.queryParams.subscribe((params: any) => {
@@ -86,6 +88,7 @@ export class JuegoCrucigramaComponent {
 
     if ((y * x) === contador) {
       this.banderaRejol = !this.banderaRejol;
+      this.partidaTerminada = !this.partidaTerminada;
       this.pararReloj();
       if (this.sesionService.obtenerSesion() !== null) {
         this.registrarPartida();
@@ -94,6 +97,12 @@ export class JuegoCrucigramaComponent {
           detail: "Guardado de Resultado?",
           summary: 'Debes de iniciar sesion para poder guardar tus resultados',
           duration: 5000
+        });
+        Swal2.fire({
+          title: 'Partida Terminada!',
+          text: `Ha completado el juego en un tiempo de ${this.minutos} minutos con ${this.segundos} segundos`,
+          icon: 'success',
+          confirmButtonText: 'Salir'
         });
       }
     }
@@ -134,7 +143,6 @@ export class JuegoCrucigramaComponent {
       icon: 'success',
       confirmButtonText: 'Salir'
     });
-
     let body: any = {
       codigo: this.modeloPartida.codigo, //Codigo de partida personalizada
       juego: this.modeloPartida.juego, //Codigo del juego
@@ -170,7 +178,7 @@ export class JuegoCrucigramaComponent {
         {
           next: (result: any) => {
             this.logrosService.obtenerLogrosGenerales(result);
-            //TODO: agregar los logros de crusigrama
+            this.logrosService.obtenerLogrosCrucigrama(result);
           },
           error: (error: any) => {
             this.toast.error({
