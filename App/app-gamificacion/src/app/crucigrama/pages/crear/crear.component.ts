@@ -18,4 +18,9 @@ export class CrearComponent {
   cambioSize() {
     this.modeloCrusigrama.setNewSize(this.tamX, this.tamY);
   }
+
+  verificarCrusigrama() {
+    let result = this.modeloCrusigrama.verificar();
+    console.log(result);
+  }
 }

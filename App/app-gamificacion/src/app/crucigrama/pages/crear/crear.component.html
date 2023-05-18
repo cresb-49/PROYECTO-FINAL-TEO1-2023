@@ -12,8 +12,7 @@
             <input type="number" class="form-select" id="inputGroupSelect01" [(ngModel)]="tamX"
                 (ngModelChange)="cambioSize()">
         </div>
-        <button class="btn btn-dark mb-3">Asignar size</button>
-        <h5>Vista Previa</h5>
+        <h5>Edicion</h5>
         <p>En cada casilla introduza la letra que contiene y si es inicio de una palabra</p>
         <div class="contenedor-tabla">
             <table>
@@ -24,5 +23,7 @@
                 </tr>
             </table>
         </div>
+        <br>
+        <button class="btn btn-dark mb-3" (click)="verificarCrusigrama()">Asignar size</button>
     </div>
 </div>

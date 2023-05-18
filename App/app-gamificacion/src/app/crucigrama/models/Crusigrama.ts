@@ -125,4 +125,56 @@ export class Crusigrama {
     public setInitCreate(initCreate: boolean): void {
         this.initCreate = initCreate;
     }
+
+    public verificar(): any {
+        let errores: Array<any> = [];
+        for (const fila of this.matriz) {
+            for (const cuadro of fila) {
+                if (cuadro.getInicio()) {
+                    console.log('casilla inicio no hay verificacion');
+                } else {
+                    if (cuadro.getLetra() !== "") {
+                        let izquierda: Cuadro = this.getSiguienteIzquierda(cuadro.getCordenada().x, cuadro.getCordenada().y);
+                        let arriba: Cuadro = this.getSiguienteArriba(cuadro.getCordenada().x, cuadro.getCordenada().y);
+                        let derecha: Cuadro = this.getSiguienteDerecha(cuadro.getCordenada().x, cuadro.getCordenada().y);
+                        let abajo: Cuadro = this.getSiguienteAbajo(cuadro.getCordenada().x, cuadro.getCordenada().y);
+
+                        let up = (arriba !== null ? (arriba.getLetra() !== "" ? true : false) : false);
+                        let down = (abajo !== null ? (abajo.getLetra() !== "" ? true : false) : false);
+                        let left = (izquierda !== null ? (izquierda.getLetra() !== "" ? true : false) : false);
+                        let rigth = (derecha !== null ? (derecha.getLetra() !== "" ? true : false) : false);
+
+                        if ((rigth && !left) || (!up && down)) {
+                            if (!cuadro.getInicio()) {
+                                let error = { info: `La casilla de la fila ${cuadro.getCordenada().y + 1}, columna ${cuadro.getCordenada().x + 1} parece ser un inicio de paralabra pero no esta marcado`};
+                                errores.push(error);
+                            }
+                        }
+
+                        if (izquierda !== null) {
+                            if (izquierda.getLetra() !== "") {
+                                let resultIzquierda: boolean = this.verificacionIzquierda(cuadro);
+                                if (!resultIzquierda) {
+                                    let error = { info: `La casilla de la fila ${cuadro.getCordenada().y + 1}, columna ${cuadro.getCordenada().x + 1} no tiene inicio de palabra hacia la izquierda` };
+                                    errores.push(error);
+                                }
+                            }
+                        }
+                        if (arriba !== null) {
+                            if (arriba.getLetra() !== "") {
+                                let resultArriva: boolean = this.verificacionArriba(cuadro);
+                                if (!resultArriva) {
+                                    let error = { info: `La casilla de la fila ${cuadro.getCordenada().y + 1}, columna ${cuadro.getCordenada().x + 1} no tiene inicio de palabra hacia arriva` };
+                                    errores.push(error);
+                                }
+                            }
+                        }
+                    } else {
+                        console.log('casilla vacia no hay verificacion');
+                    }
+                }
+            }
+        }
+        return errores;
+    }
 }
