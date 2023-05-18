@@ -43,8 +43,9 @@ export class PlayCuadroComponent implements OnInit {
     }
   }
 
-  seleccionarTexto(input: any) {
-    input.select();
+  seleccionarTexto(input: any ) {
+    if (input)
+      input.select();
   }
 
   modelCambio($event: any) {
