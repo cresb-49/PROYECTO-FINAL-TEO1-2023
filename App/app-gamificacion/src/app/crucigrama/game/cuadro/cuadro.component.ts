@@ -109,7 +109,9 @@ export class CuadroComponent implements OnInit {
       } else {
         this.letra = "";
         this.miInput.nativeElement.value = '';
+        console.log(this.modeloCrucigrama);
         alert('Para agregar una nueva letra, esta casilla debe de tener por lo menos una casilla vecina con letra');
+        
       }
 
     }

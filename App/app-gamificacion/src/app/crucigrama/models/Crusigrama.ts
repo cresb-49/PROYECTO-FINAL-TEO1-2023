@@ -41,7 +41,9 @@ export class Crusigrama {
                     ccopia.setInicio(false);
                     fila.push(ccopia);
                 } else {
-                    fila.push(new Cuadro());
+                    let c = new Cuadro();
+                    c.setCordenada(x, y);
+                    fila.push(c);
                 }
             }
             this.matriz.push(fila);
@@ -58,6 +60,7 @@ export class Crusigrama {
 
     public getSiguienteIzquierda(x: number, y: number): any {
         let xtmp = x - 1;
+        console.log('entro', 0, xtmp, this.sizeX);
         if (xtmp >= 0 && xtmp < this.sizeX) {
             return this.matriz[y][xtmp];
         } else {
