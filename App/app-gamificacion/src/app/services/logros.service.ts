@@ -90,6 +90,68 @@ export class LogrosService {
       });
   }
 
+  obtenerLogrosCrucigrama(usuario: any) {
+    const logros: any = usuario.data.logros;
+    this.authService.obtenerPartidasPorJuego(usuario.username, "J00003")
+      .subscribe({
+        next: (result: any) => {
+          const partidasJugadas: any[] = result;
+          let tiempo = 0;
+          partidasJugadas.forEach((partida) => {
+            let t = moment.duration(partida.data.tiempo);
+            let segundos = t.asSeconds();
+            tiempo += segundos;
+          });
+          this.calcularLogrosTiempoCrucigrama(tiempo, logros, usuario.username);
+        },
+        error: (err) => { }
+      });
+  }
+
+  calcularLogrosTiempoCrucigrama(tiempo: number, logros: any[], username: string) {
+    if (tiempo >= 3600 && tiempo < 18000) {
+      const logro = {
+        id: "L00400",
+        nombre: "Haz jugado mas de una hora al crucigrama",
+        fecha: moment().format("YYYY-MM-DD")
+      }
+      const verificacion = logros.find(lr => lr.id == logro.id);
+      if (!verificacion) {
+        this.guardarLogro(logro, username);
+      }
+    } else if (tiempo >= 18000 && tiempo < 36000) {
+      const logro = {
+        id: "L00401",
+        nombre: "Haz jugado mas de 5 horas al crucigrama",
+        fecha: moment().format("YYYY-MM-DD")
+      }
+      const verificacion = logros.find(lr => lr.id == logro.id);
+      if (!verificacion) {
+        this.guardarLogro(logro, username);
+      }
+    } else if (tiempo >= 36000 && tiempo < 90000) {
+      const logro = {
+        id: "L00402",
+        nombre: "Haz jugado mas de 10 horas al crucigrama",
+        fecha: moment().format("YYYY-MM-DD")
+      }
+      const verificacion = logros.find(lr => lr.id == logro.id);
+      if (!verificacion) {
+        this.guardarLogro(logro, username);
+      }
+    } else if (tiempo >= 90000) {
+      const logro = {
+        id: "L00403",
+        nombre: "Haz jugado mas de 25 horas al crucigrama",
+        fecha: moment().format("YYYY-MM-DD")
+      }
+      const verificacion = logros.find(lr => lr.id == logro.id);
+      if (!verificacion) {
+        this.guardarLogro(logro, username);
+      }
+    }
+  }
+
   calcularLogrosTiempoHanoi(tiempo: number, logros: any[], username: string) {
     if (tiempo >= 3600 && tiempo < 18000) {
       const logro = {

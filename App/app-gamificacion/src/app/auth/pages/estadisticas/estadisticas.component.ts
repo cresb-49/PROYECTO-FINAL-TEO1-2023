@@ -96,7 +96,7 @@ export class EstadisticasComponent implements OnInit {
   }
 
   verEstadisticasCrucigrama() {
-    this.router.navigate(["/auth/crucigrama"]);
+    this.router.navigate(["/auth/crucigrama"]); 
   }
 
 }
