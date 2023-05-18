@@ -11,6 +11,7 @@ import { JuegoCrucigramaComponent } from './game/juego-crucigrama/juego-crucigra
 import { CuadroComponent } from './game/cuadro/cuadro.component';
 import { DropdownModule } from 'primeng/dropdown';
 import { ViewCuadroComponent } from "./game/view-cuadro/view-cuadro.component";
+import { PlayCuadroComponent } from './game/play-cuadro/play-cuadro.component';
 
 
 
@@ -21,7 +22,8 @@ import { ViewCuadroComponent } from "./game/view-cuadro/view-cuadro.component";
         CrearComponent,
         JuegoCrucigramaComponent,
         CuadroComponent,
-        ViewCuadroComponent
+        ViewCuadroComponent,
+        PlayCuadroComponent
     ],
     imports: [
         CommonModule,
@@ -29,7 +31,7 @@ import { ViewCuadroComponent } from "./game/view-cuadro/view-cuadro.component";
         SharedModule,
         FormsModule,
         DropdownModule
-        
+
     ]
 })
 export class CrucigramaModule { }

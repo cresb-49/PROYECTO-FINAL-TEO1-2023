@@ -24,11 +24,10 @@ export class CrucigramaService {
     return this.http.post(`${this.baseUrl}/modelo`, body);
   }
 
-  obtenerPartida(codigo: string, juego: string) {
-    return this.http.get(`${this.baseUrl}/modelo?codigo=${codigo}&juego=${juego}`);
+  obtenerJuegoPersonalizado(query: any) {
+    return this.http.get(`${this.baseUrl}/modelo?codigo=${query.codigo}&juego=${query.juego}`)
   }
-
-  guardarResultado(body: any) {
+  registrarResultado(body: any) {
     return this.http.post(`${this.baseUrl}/partida`, body);
   }
 
