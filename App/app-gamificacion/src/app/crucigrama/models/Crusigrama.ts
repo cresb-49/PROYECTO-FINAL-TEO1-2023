@@ -60,7 +60,6 @@ export class Crusigrama {
 
     public getSiguienteIzquierda(x: number, y: number): any {
         let xtmp = x - 1;
-        console.log('entro', 0, xtmp, this.sizeX);
         if (xtmp >= 0 && xtmp < this.sizeX) {
             return this.matriz[y][xtmp];
         } else {

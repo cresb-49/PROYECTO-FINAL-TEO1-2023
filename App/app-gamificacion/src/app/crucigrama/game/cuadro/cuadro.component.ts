@@ -111,7 +111,7 @@ export class CuadroComponent implements OnInit {
         this.miInput.nativeElement.value = '';
         console.log(this.modeloCrucigrama);
         alert('Para agregar una nueva letra, esta casilla debe de tener por lo menos una casilla vecina con letra');
-        
+
       }
 
     }
@@ -119,5 +119,32 @@ export class CuadroComponent implements OnInit {
 
   seleccionarTexto(input: any) {
     input.select();
+  }
+
+  encenderFoco(): any {
+    let cordenadas = this.cuadro.getCordenada();
+    let arriba: Cuadro = this.modeloCrucigrama.getSiguienteArriba(cordenadas.x, cordenadas.y);
+    let abajo: Cuadro = this.modeloCrucigrama.getSiguienteAbajo(cordenadas.x, cordenadas.y);
+    let izquierda: Cuadro = this.modeloCrucigrama.getSiguienteIzquierda(cordenadas.x, cordenadas.y);
+    let derecha: Cuadro = this.modeloCrucigrama.getSiguienteDerecha(cordenadas.x, cordenadas.y);
+
+
+    let up = (arriba !== null ? (arriba.getLetra() !== "" ? true : false) : false);
+    let down = (abajo !== null ? (abajo.getLetra() !== "" ? true : false) : false);
+    let left = (izquierda !== null ? (izquierda.getLetra() !== "" ? true : false) : false);
+    let rigth = (derecha !== null ? (derecha.getLetra() !== "" ? true : false) : false);
+
+
+    if ((rigth && !left) || (!up && down)) {
+      if ((!up && down && !rigth && left) || (!up && down && rigth && left)) {
+        return this.modeloCrucigrama.verificacionIzquierda(this.cuadro);
+
+      } else if ((up && !down && rigth && !left) || (up && down && rigth && !left)) {
+        return this.modeloCrucigrama.verificacionArriba(this.cuadro);
+
+      } else {
+        return true;
+      }
+    }
   }
 }

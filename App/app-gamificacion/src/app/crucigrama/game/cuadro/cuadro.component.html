@@ -1,5 +1,10 @@
 <div class="contenedor">
-  <button (click)="setInicio()" class="boton" [ngStyle]="{'color': (cuadro.getInicio()?'green':'black')}">
-    <i class="fa-solid fa-lightbulb"></i></button>
-  <input #miInput type="text" class="input-cuadro" maxlength="1" [(ngModel)]="letra" (ngModelChange)="asignarValor()" (keypress)="valorCambio($event)" (focus)="seleccionarTexto($event.target)">
+  <div *ngIf="letra!==''">
+  <div *ngIf="encenderFoco()">
+    <button (click)="setInicio()" class="boton" [ngStyle]="{'color': (cuadro.getInicio()?'green':'black')}">
+      <i class="fa-solid fa-lightbulb"></i></button>
+  </div>
+  </div>
+  <input #miInput type="text" class="input-cuadro" maxlength="1" [(ngModel)]="letra" (ngModelChange)="asignarValor()"
+    (keypress)="valorCambio($event)" (focus)="seleccionarTexto($event.target)">
 </div>
