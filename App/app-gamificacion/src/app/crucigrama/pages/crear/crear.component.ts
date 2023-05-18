@@ -6,6 +6,9 @@ import { Cuadro } from '../../models/Cuadro';
 import { Pista } from '../../models/Pistas';
 import { Data } from '../../models/Data';
 import { Entrada } from '../../models/Entrada';
+import { SesionService } from 'src/app/services/sesion.service';
+import { CrucigramaService } from '../../services/crucigrama.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-crear',
@@ -27,7 +30,7 @@ export class CrearComponent {
   errors: Array<any> = [];
 
 
-  constructor(private authService: AuthService) { }
+  constructor(private router: Router, private sesionServide: SesionService, private crucigramaService: CrucigramaService) { }
 
   ngOnInit() {
     this.tmpCuadro.setLetra('p');
@@ -76,6 +79,32 @@ export class CrearComponent {
       matriz.push(fila2);
     }
     let data: Data = new Data(matriz, this.pistasH, this.pistasV);
-    console.log(data);
+    const body = {
+      juego: "J00003",
+      usuario: this.sesionServide.obtenerUsername(),
+      data: data
+    }
+    console.log(body);
+    this.crucigramaService.registrarPartida(body).subscribe({
+      next: (result: any) => {
+        if (result) {
+          Swal.fire({
+            icon: 'success',
+            title: 'Juego Creado',
+            text: `El codigo del juego es: ${result.codigo}`
+          });
+        }
+      },
+      error: (error: any) => {
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: error
+        });
+      },
+      complete: () => {
+        this.router.navigate(["/crucigrama/principal"]);
+      }
+    });
   }
 }
