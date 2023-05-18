@@ -174,7 +174,15 @@ export class JuegoHanoiComponent {
     } else {
       this.banderaRejol = !this.banderaRejol;
       this.pararReloj();
-      this.registrarPartida();
+      if (this.sesionService.obtenerSesion() !== null) {
+        this.registrarPartida();
+      } else {
+        this.toast.info({
+          detail: "Guardado de Resultado?",
+          summary: 'Debes de iniciar sesion para poder guardar tus resultados',
+          duration: 5000
+        });
+      }
     }
   }
 

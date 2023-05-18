@@ -214,34 +214,14 @@ export class JuegoSopaLetrasComponent implements OnInit {
       this.posicionesPalabras.delete(this.palabra)
       this.palabrasEncontradas.push(this.palabra)
       if (this.posicionesPalabras.size === 0) {
-        this.stopwatch.stop()
-        Swal.fire({
-          icon: 'success',
-          title: 'Has ganado!',
-          text: 'Tu tiempo es de: ' + this.stopwatch.getTime(),
-        });
-        if (this.sesionService.obtenerUsername() !== null) {
-          let dataPartida = new Data(this.stopwatch.getTime())
-          this.sopaService.registrarResultado({ codigo: this.codigoJuego, juego: 'J00004', usuario: this.sesionService.obtenerUsername(), fecha: moment().format('YYYY/MM/DD'), data: dataPartida })
-            .subscribe({
-              next: (response: any) => {
-                this.toast.info({
-                  detail: "Partida Registrada",
-                  summary: 'Se registro con exito la partida',
-                  duration: 5000
-                });
-              },
-              error: (error: any) => {
-                this.toast.error({
-                  detail: "Error",
-                  summary: 'No se registro la partida error con el servidor',
-                  duration: 5000
-                });
-              },
-              complete: () => {
-                this.obtenerLogros();
-              }
-            })
+        if (this.sesionService.obtenerSesion() !== null) {
+          this.registrarPartida();
+        } else {
+          this.toast.info({
+            detail: "Guardado de Resultado?",
+            summary: 'Debes de iniciar sesion para poder guardar tus resultados',
+            duration: 5000
+          });
         }
       }
     } else {
@@ -260,6 +240,37 @@ export class JuegoSopaLetrasComponent implements OnInit {
       }
     }
     this.palabra = ""
+  }
+  registrarPartida() {
+    this.stopwatch.stop()
+    Swal.fire({
+      icon: 'success',
+      title: 'Has ganado!',
+      text: 'Tu tiempo es de: ' + this.stopwatch.getTime(),
+    });
+    if (this.sesionService.obtenerUsername() !== null) {
+      let dataPartida = new Data(this.stopwatch.getTime())
+      this.sopaService.registrarResultado({ codigo: this.codigoJuego, juego: 'J00004', usuario: this.sesionService.obtenerUsername(), fecha: moment().format('YYYY/MM/DD'), data: dataPartida })
+        .subscribe({
+          next: (response: any) => {
+            this.toast.info({
+              detail: "Partida Registrada",
+              summary: 'Se registro con exito la partida',
+              duration: 5000
+            });
+          },
+          error: (error: any) => {
+            this.toast.error({
+              detail: "Error",
+              summary: 'No se registro la partida error con el servidor',
+              duration: 5000
+            });
+          },
+          complete: () => {
+            this.obtenerLogros();
+          }
+        })
+    }
   }
   obtenerLogros() {
     let username: string | null = this.sesionService.obtenerUsername();
