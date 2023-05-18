@@ -107,7 +107,6 @@ export class JuegoHanoiComponent {
       icon: 'success',
       confirmButtonText: 'Salir'
     });
-
     let body: any = {
       codigo: this.juegoHanoi.codigo, //Codigo de partida personalizada
       juego: this.juegoHanoi.juego, //Codigo del juego
@@ -181,6 +180,12 @@ export class JuegoHanoiComponent {
           detail: "Guardado de Resultado?",
           summary: 'Debes de iniciar sesion para poder guardar tus resultados',
           duration: 5000
+        });
+        Swal2.fire({
+          title: 'Partida Terminada!',
+          text: `Ha completado el juego en ${this.estadisticaHanoi.movimientos.length} movimientos , en un tiempo de ${this.minutos} minutos con ${this.segundos} segundos`,
+          icon: 'success',
+          confirmButtonText: 'Salir'
         });
       }
     }

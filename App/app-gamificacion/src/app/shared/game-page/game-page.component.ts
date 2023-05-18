@@ -30,10 +30,10 @@ export class GamePageComponent implements AfterViewInit {
     return this.likeUsuario !== null && this.likeUsuario
   }
 
-  anchoDiv!: number;
+  anchoDiv: number = 0;
 
   obtenerAlturaDiv() {
-    this.anchoDiv = this.divRef.nativeElement.offsetHeight*0.2037;
+    this.anchoDiv = this.divRef.nativeElement.offsetHeight * 0.2037;
   }
 
   ngAfterViewInit() {

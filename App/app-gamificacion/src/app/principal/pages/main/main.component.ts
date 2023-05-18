@@ -53,7 +53,7 @@ export class MainComponent {
     } else if (codigo === "J00002") {
       this.router.navigate(['/ahorcado/crear']);
     } else if (codigo === 'J00003') {
-      this.router.navigate(['/crusigrama/crear']);
+      this.router.navigate(['/crucigrama/crear']);
     } else if (codigo === 'J00004') {
       this.router.navigate(['/sopa/crear']);
     } else {

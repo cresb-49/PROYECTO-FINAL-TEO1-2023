@@ -214,6 +214,12 @@ export class JuegoSopaLetrasComponent implements OnInit {
       this.posicionesPalabras.delete(this.palabra)
       this.palabrasEncontradas.push(this.palabra)
       if (this.posicionesPalabras.size === 0) {
+        this.stopwatch.stop()
+        Swal.fire({
+          icon: 'success',
+          title: 'Has ganado!',
+          text: 'Tu tiempo es de: ' + this.stopwatch.getTime(),
+        });
         if (this.sesionService.obtenerSesion() !== null) {
           this.registrarPartida();
         } else {
@@ -242,12 +248,6 @@ export class JuegoSopaLetrasComponent implements OnInit {
     this.palabra = ""
   }
   registrarPartida() {
-    this.stopwatch.stop()
-    Swal.fire({
-      icon: 'success',
-      title: 'Has ganado!',
-      text: 'Tu tiempo es de: ' + this.stopwatch.getTime(),
-    });
     if (this.sesionService.obtenerUsername() !== null) {
       let dataPartida = new Data(this.stopwatch.getTime())
       this.sopaService.registrarResultado({ codigo: this.codigoJuego, juego: 'J00004', usuario: this.sesionService.obtenerUsername(), fecha: moment().format('YYYY/MM/DD'), data: dataPartida })
