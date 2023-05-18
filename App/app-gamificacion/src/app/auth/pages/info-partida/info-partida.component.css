@@ -30,3 +30,12 @@
     text-align: center;
     border-radius: 7px;
 }
+
+.divCruci{
+    background-color: #DBBA2E;
+    width: 500px;
+    height: 50px;
+    margin-left: auto;
+    margin-right: auto;
+    color: white
+}

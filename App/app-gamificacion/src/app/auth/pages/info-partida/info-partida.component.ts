@@ -60,4 +60,21 @@ export class InfoPartidaComponent implements OnInit {
   regresar(){
     this.router.navigate(["/auth/partidas"])
   }
+
+  obtenerLetraCrucigrama(item:any){
+    if(item.letra == ""){
+      return "_";
+    } else {
+      return item.letra;
+    }
+  }
+  
+  obtenerClaseCruciGrama(item:any){
+    if(item.letra == ""){
+      return "btn btn-outline-dark mx-1 my-1 text-warning";
+    } else {
+      return "btn btn-success mx-1 my-1";
+    }
+  }
+
 }
