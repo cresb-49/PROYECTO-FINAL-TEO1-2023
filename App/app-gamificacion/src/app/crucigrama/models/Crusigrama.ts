@@ -183,4 +183,55 @@ export class Crusigrama {
         }
         return errores;
     }
+
+    public calculoPistasJuego(): Array<any> {
+        let pistas: Array<any> = [];
+        let numPistas: Object = { numV: 1, numH: 1 }
+
+        for (const fila of this.matriz) {
+            for (const cuadro of fila) {
+                if (cuadro.getInicio()) {
+                    let resultIzquierda: boolean = this.verificacionIzquierda(cuadro);
+                    let resultArriva: boolean = this.verificacionArriba(cuadro);
+
+                    let derecha: Cuadro = this.getSiguienteDerecha(cuadro.getCordenada().x, cuadro.getCordenada().y);
+                    let abajo: Cuadro = this.getSiguienteAbajo(cuadro.getCordenada().x, cuadro.getCordenada().y);
+
+                    let down = (abajo !== null ? (abajo.getLetra() !== "" ? true : false) : false);
+                    let rigth = (derecha !== null ? (derecha.getLetra() !== "" ? true : false) : false);
+
+                    this.calculoCompania(resultIzquierda, resultArriva, down, rigth, cuadro, numPistas)
+                    pistas.push(cuadro);
+                }
+            }
+        }
+        return pistas;
+    }
+
+    private calculoCompania(initIzq: boolean, initArriba: boolean, down: boolean, rigth: boolean, cuadro: Cuadro, numPistas: any) {
+        if (!down && !rigth) {
+            console.log('error', cuadro);
+        } else if (!down && rigth) {
+            cuadro.setNumeroH(numPistas.numH);
+            numPistas.numH = numPistas.numH + 1;
+        } else if (down && !rigth) {
+            cuadro.setNumeroV(numPistas.numV);
+            numPistas.numV = numPistas.numV + 1;
+        } else if (down && rigth) {
+            if (!initIzq && !initArriba) {
+                cuadro.setNumeroH(numPistas.numH);
+                numPistas.numH = numPistas.numH + 1;
+                cuadro.setNumeroV(numPistas.numV);
+                numPistas.numV = numPistas.numV + 1;
+            } else if (!initIzq && initArriba) {
+                cuadro.setNumeroH(numPistas.numH);
+                numPistas.numH = numPistas.numH + 1;
+            } else if (initIzq && !initArriba) {
+                cuadro.setNumeroV(numPistas.numV);
+                numPistas.numV = numPistas.numV + 1;
+            } else if (initIzq && initArriba) {
+                console.log('error', cuadro);
+            }
+        }
+    }
 }

@@ -20,7 +20,16 @@ export class CrearComponent {
   }
 
   verificarCrusigrama() {
-    let result = this.modeloCrusigrama.verificar();
-    console.log(result);
+    let result: Array<any> = this.modeloCrusigrama.verificar();
+    if (result.length === 0) {
+      //Generacion del juego
+      //Calculo de las pistas del juego
+      let pistas = this.modeloCrusigrama.calculoPistasJuego();
+      console.log(pistas);
+
+    } else {
+      //Mostrar los errores  
+      console.log(result);
+    }
   }
 }
