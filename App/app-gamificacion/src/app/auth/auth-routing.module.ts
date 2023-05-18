@@ -15,6 +15,7 @@ import { InfoPartidaComponent } from './pages/info-partida/info-partida.componen
 import { ProfesorGuard } from '../guards/profesor.guard';
 import { SessionGuard } from '../guards/session.guard';
 import { UsuarioGuard } from '../guards/usuario.guard';
+import { CrucigramaComponent } from './pages/estadisticas/crucigrama/crucigrama.component';
 
 const routes: Routes = [
   {
@@ -29,6 +30,7 @@ const routes: Routes = [
       { path: "ahorcado", component: AhorcadoComponent, canActivate: [UsuarioGuard] },
       { path: "hanoi", component: HanoiComponent, canActivate: [UsuarioGuard] },
       { path: "sopa", component: SopaComponent, canActivate: [UsuarioGuard] },
+      { path: "crucigrama", component: CrucigramaComponent, canActivate: [UsuarioGuard] },
       { path: "partidas", component: PartidasComponent, canActivate: [ProfesorGuard] },
       { path: "infoPartida", component: InfoPartidaComponent,canActivate: [ProfesorGuard] },
       { path: "**", redirectTo: "login" },

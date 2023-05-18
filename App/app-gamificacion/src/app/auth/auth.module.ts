@@ -15,6 +15,7 @@ import { HanoiComponent } from './pages/estadisticas/hanoi/hanoi.component';
 import { SopaComponent } from './pages/estadisticas/sopa/sopa.component';
 import { PartidasComponent } from './pages/partidas/partidas.component';
 import { InfoPartidaComponent } from './pages/info-partida/info-partida.component';
+import { CrucigramaComponent } from './pages/estadisticas/crucigrama/crucigrama.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { InfoPartidaComponent } from './pages/info-partida/info-partida.componen
     HanoiComponent,
     SopaComponent,
     PartidasComponent,
-    InfoPartidaComponent
+    InfoPartidaComponent,
+    CrucigramaComponent
   ],
   imports: [
     CommonModule,

@@ -95,4 +95,8 @@ export class EstadisticasComponent implements OnInit {
     this.router.navigate(["/auth/sopa"]);
   }
 
+  verEstadisticasCrucigrama() {
+    this.router.navigate(["/auth/crucigrama"]);
+  }
+
 }
