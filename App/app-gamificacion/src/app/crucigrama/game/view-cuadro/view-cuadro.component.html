@@ -1,0 +1,15 @@
+<div class="contenedor" [ngStyle]="{ 'background-color': (this.cuadro.getLetra() !==''?'yellow':'white') }">
+  <div class="texto-horizontal">
+    <div *ngIf="this.cuadro.getNumeroH()!==0">
+      H {{this.cuadro.getNumeroH()}}
+    </div>
+  </div>
+  <div class="texto-vertical">
+    <div *ngIf="this.cuadro.getNumeroV()!==0">
+      V {{this.cuadro.getNumeroV()}}
+    </div>
+  </div>
+  <div class="espacio">
+    <p class="texto-espacio">{{this.cuadro.getLetra().toUpperCase()}}</p>
+  </div>
+</div>

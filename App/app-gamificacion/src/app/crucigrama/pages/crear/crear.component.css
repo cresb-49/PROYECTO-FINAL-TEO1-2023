@@ -1,0 +1,13 @@
+.cont {
+    margin-top: 20px;
+    padding: 20px;
+    border-radius: 7px;
+    border: 3px solid #e0f04f;
+    background-color: #22E685;
+}
+
+.contenedor-tabla {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

@@ -1,72 +1,37 @@
-<h1>Crucigrama</h1>
-<div class="container bg-white">
-  <button class="btn" id="btnCreate">Create</button>
-  <button class="btn" id="btnPlay">Play</button>
-  <br /><br />
-
-  <div class="center crossword" id="crossword"></div><br />
-
-  <div class="center">
-
-    <div class="line">
-      <input class="word" type="text" value="Tucan" />
-      <input class="clue" value="A tropical bird with a large beak" />
-    </div>
-
-    <div class="line">
-      <input class="word" type="text" value="Dingo" />
-      <input class="clue" value="This free-ranging dog is at home in the outback." />
-    </div>
-
-    <div class="line">
-      <input class="word" type="text" value="Dolphin" />
-      <input class="clue" value="A friendly finned non-fish" />
-    </div>
-
-    <div class="line">
-      <input class="word" type="text" value="Pig" />
-      <input class="clue" value="Bosses of the farm in Orwell's world" />
-    </div>
-
-    <div class="line">
-      <input class="word" type="text" value="Kangaroo" />
-      <input class="clue" value="Boxing champions of the outback" />
-    </div>
-
-    <div class="line">
-      <input class="word" type="text" value="Octopus" />
-      <input class="clue" value="Eight legged sea creature" />
-    </div>
-
-    <div class="line">
-      <input class="word" type="text" value="Hamster" />
-      <input class="clue" value="Furry rodent whose teeth never stop growing" />
-    </div>
-
-    <div class="line">
-      <input class="word" type="text" value="Alligator" />
-      <input class="clue" value="Dating back further than the T-rex, this reptile is a modern day dinosaur" />
-    </div>
-
-    <div class="line">
-      <input class="word" type="text" value="Ostrich" />
-      <input class="clue" value="Flightless bird not know for its people skills" />
-    </div>
-
-    <div class="line">
-      <input class="word" type="text" value="Koala" />
-      <input class="clue" value="Friendly version of the infamous Australian tourist terrorizing tree-dwellers" />
-    </div>
-
-    <div class="line">
-      <input class="word" type="text" value="Mouse" />
-      <input class="clue" value="This poor animal is often the victim of feline aggression and human experimentation" />
-    </div>
-
-    <div class="line">
-      <input class="word" type="text" value="Antelope" />
-      <input class="clue" value="The victim of every lion documentary clip you've ever seen." />
-    </div>
-
-  </div>
-</div>
+<app-game-page>
+  <h1>Crucigrama</h1>
+  <div class="reloj">
+    Reloj: {{(minutos<10?'0'+minutos:minutos)}}:{{(segundos<10?'0'+segundos:segundos)}} </div>
+      <div class="row">
+        <div class="col">
+          <div class="contenedor-tabla">
+            <table *ngIf="data !== undefined">
+              <tr *ngFor="let item of data.matriz">
+                <td *ngFor="let item of item">
+                  <app-play-cuadro [cuadro]="item" (startEvent)="receiveMenssge($event)"
+                    (cambioValor)="cambioDeValor($event)"></app-play-cuadro>
+                </td>
+              </tr>
+            </table>
+          </div>
+        </div>
+        <div class="col">
+          <div class="row" *ngIf="data !== undefined">
+            <h2>Horizontales</h2>
+            <ul>
+              <li *ngFor="let elemento of data.pistasH; let i = index">
+                {{ elemento.numero }} {{elemento.texto}}
+              </li>
+            </ul>
+          </div>
+          <div class="row" *ngIf="data !== undefined">
+            <h2>Verticales</h2>
+            <ul>
+              <li *ngFor="let elemento of data.pistasV;let i = index">
+                {{ elemento.numero }} {{elemento.texto}}
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+</app-game-page>
