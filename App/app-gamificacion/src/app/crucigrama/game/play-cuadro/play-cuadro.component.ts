@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { Entrada } from '../../models/Entrada';
 
 @Component({
@@ -10,9 +10,38 @@ export class PlayCuadroComponent implements OnInit {
 
   @ViewChild('miInput', { static: false }) miInput!: ElementRef;
   @Input() cuadro!: Entrada;
+
+  init: boolean = false;
+  @Output() startEvent = new EventEmitter<boolean>();
+  @Output() cambioValor = new EventEmitter<boolean>();
+
+  letra: string = '';
+
   constructor() { }
 
   ngOnInit() {
   }
 
+  private sendInit(): void {
+    this.init = true;
+    this.startEvent.emit(this.init);
+    this.init = false;
+  }
+  valorCambio(event: any) {
+    const caracteresPermitidos = /^[a-zA-ZñÑ]$/;
+    const teclaPresionada = String.fromCharCode(event.keyCode);
+    if (!caracteresPermitidos.test(teclaPresionada)) {
+      event.preventDefault();
+    } else {
+      this.sendInit();
+      this.cuadro.entrada = teclaPresionada;
+      let val = this.cuadro.entrada.toLowerCase() === this.cuadro.letra.toLowerCase();
+      console.log(val);
+      this.cambioValor.emit(val);
+      console.log(this.cuadro);
+    }
+  }
+  seleccionarTexto(input: any) {
+    input.select();
+  }
 }

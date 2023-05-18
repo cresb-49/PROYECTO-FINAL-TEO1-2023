@@ -10,6 +10,8 @@
     </div>
   </div>
   <div class="espacio">
-    <input type="text" class="texto-espacio" maxlength="1" [(ngModel)]="cuadro.entrada" [ngStyle]="{ 'background-color': (cuadro.entrada.length === 0 && cuadro.letra!=='' ? '#22E685' : 'transparent') }"/>
+    <input *ngIf="cuadro.letra!==''" type="text" class="texto-espacio" maxlength="1" [(ngModel)]="letra"
+      [ngStyle]="{ 'background-color': (cuadro.entrada.length === 0 && cuadro.letra!=='' ? '#22E685' : 'transparent') }"
+      (keypress)="valorCambio($event)" />
   </div>
 </div>
