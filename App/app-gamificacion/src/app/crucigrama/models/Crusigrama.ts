@@ -128,12 +128,14 @@ export class Crusigrama {
 
     public verificar(): any {
         let errores: Array<any> = [];
+        let cont: number = 0;
         for (const fila of this.matriz) {
             for (const cuadro of fila) {
                 if (cuadro.getInicio()) {
                     console.log('casilla inicio no hay verificacion');
                 } else {
                     if (cuadro.getLetra() !== "") {
+                        cont++;
                         let izquierda: Cuadro = this.getSiguienteIzquierda(cuadro.getCordenada().x, cuadro.getCordenada().y);
                         let arriba: Cuadro = this.getSiguienteArriba(cuadro.getCordenada().x, cuadro.getCordenada().y);
                         let derecha: Cuadro = this.getSiguienteDerecha(cuadro.getCordenada().x, cuadro.getCordenada().y);
@@ -146,7 +148,7 @@ export class Crusigrama {
 
                         if ((rigth && !left) || (!up && down)) {
                             if (!cuadro.getInicio()) {
-                                let error = { info: `La casilla de la fila ${cuadro.getCordenada().y + 1}, columna ${cuadro.getCordenada().x + 1} parece ser un inicio de paralabra pero no esta marcado`};
+                                let error = { info: `La casilla de la fila ${cuadro.getCordenada().y + 1}, columna ${cuadro.getCordenada().x + 1} parece ser un inicio de paralabra pero no esta marcado` };
                                 errores.push(error);
                             }
                         }
@@ -174,6 +176,10 @@ export class Crusigrama {
                     }
                 }
             }
+        }
+        if (cont < 1) {
+            let error = { info: `No existen las suficientes letras para un crusigrama` };
+            errores.push(error);
         }
         return errores;
     }
