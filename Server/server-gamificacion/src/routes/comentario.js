@@ -7,4 +7,6 @@ router.post('/comentario',comentarioController.registarComentario);
 
 router.get('/comentarios',comentarioController.obtenerComentarios);
 
+router.put('/modificarUsuarioComentario',comentarioController.modificarUsername);
+
 module.exports = router;

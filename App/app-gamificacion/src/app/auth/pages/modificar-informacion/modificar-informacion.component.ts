@@ -108,9 +108,22 @@ export class ModificarInformacionComponent {
               });
               this.usuario.username = username;
               this.usuario.perfil = this.imagenPerfil;
+              this.sessionService.cerrarSesion();
               this.sessionService.iniciarSesion(this.usuario.username, this.usuario.rol);
 
               this.authService.modificarUsuarioResultados(bodyResultados)
+                .subscribe({
+                  next: (result: any) => { console.log(result); },
+                  error: (err) => { console.log(err); }
+                });
+
+              this.authService.modificarUsuarioComentario(bodyResultados)
+                .subscribe({
+                  next: (result: any) => { console.log(result); },
+                  error: (err) => { console.log(err); }
+                });
+
+              this.authService.modificarUsuarioLike(bodyResultados)
                 .subscribe({
                   next: (result: any) => { console.log(result); },
                   error: (err) => { console.log(err); }

@@ -60,6 +60,7 @@ export class AuthService {
   modificarUsuarioResultados(body:any) {
     return this.http.put(`${this.baseUrl}/modificarUsuarioResultados`, body);
   }
+  
 
   obtenerModelosporUsuario(usuario:string) {
     return this.http.get(`${this.baseUrl}/modelosUsuario?usuario=${usuario}`);
@@ -71,5 +72,13 @@ export class AuthService {
 
   borrarModelo(codigo:string) {
     return this.http.delete(`${this.baseUrl}/modelo?codigo=${codigo}`);
+  }
+
+  modificarUsuarioComentario(body:any) {
+    return this.http.put(`${this.baseUrl}/modificarUsuarioComentario`, body);
+  }
+
+  modificarUsuarioLike(body:any) {
+    return this.http.put(`${this.baseUrl}/modificarUsuarioLike`, body);
   }
 }

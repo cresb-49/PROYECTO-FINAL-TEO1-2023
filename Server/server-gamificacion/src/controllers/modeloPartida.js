@@ -81,6 +81,8 @@ const borrarModelo = async (req, res) => {
     }
 }
 
+
+
 module.exports = {
     registroModelo: registroModelo,
     obtenerModelo: obtenerModelo,
