@@ -110,8 +110,8 @@ async function calcularJuego(juego) {
             },
             {
                 $sort: {
-                    jugado: -1,
                     punteo: -1,
+                    jugado: 1,
                     palabrasEncontradas: -1,
                     palabrasFalladas: 1
                 }
