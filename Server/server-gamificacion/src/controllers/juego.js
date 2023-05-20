@@ -141,11 +141,25 @@ const obtenerJuego = async (codigo) => {
     return result;
 }
 
+const modificarUsuarioLike = async (req, res) => {
+    const { nuevoUsername, usernameActual } = req.body;
+    try {
+        const result = await juego.updateMany(
+            { "like.usuario": usernameActual },
+            { $set: { "like.$.usuario": nuevoUsername} }
+        );
+        res.status(200).json(result);
+    } catch (error) {
+        res.status(409).json({ error: error.message });
+    }
+  }
+
 module.exports = {
     getJuego: getJuego,
     getJuegos: getJuegos,
     valorizarJuego: valorizarJuego,
     isLike: isLike,
     elimimarLike: elimimarLike,
-    obtenerImagenJuego: obtenerImagenJuego
+    obtenerImagenJuego: obtenerImagenJuego,
+    modificarUsuarioLike: modificarUsuarioLike
 }

@@ -140,27 +140,39 @@ export class JuegoComponent implements OnInit {
           title: 'Termino el juego',
           text: 'Tu puntuacion es de: ' + this.punteoTotal,
         });
-        if(this.sessionService.verificarSesion()){
-        this.ahorcadoService.obtenerUsuario();
-        const usuario = this.ahorcadoService.getUsuario();
-        const fechaActual = moment().format("YYYY-MM-DD");
-        const data = {
-          palabrasEncontradas: this.palabrasEntontradas,
-          palabrasFalladas: this.palabrasFalladas,
-          punteo: this.punteoTotal
-        }
-        const resultadoBody = {
-          codigo: this.codigoJuego,
-          juego: "J00002",
-          usuario: usuario.username,
-          fecha: fechaActual,
-          data
-        }
-        this.ahorcadoService.guardarResultado(resultadoBody)
-          .subscribe({
-            next: (resultado: any) => {  this.obtenerLogros(usuario.username)},
-            error: (error: any) => { console.log(error); }
-          });
+        if (this.sessionService.verificarSesion()) {
+          this.ahorcadoService.obtenerUsuario();
+          const usuario = this.ahorcadoService.getUsuario();
+          const fechaActual = moment().format("YYYY-MM-DD");
+          const data = {
+            palabrasEncontradas: this.palabrasEntontradas,
+            palabrasFalladas: this.palabrasFalladas,
+            punteo: this.punteoTotal
+          }
+          const resultadoBody = {
+            codigo: this.codigoJuego,
+            juego: "J00002",
+            usuario: usuario.username,
+            fecha: fechaActual,
+            data
+          }
+          this.ahorcadoService.guardarResultado(resultadoBody)
+            .subscribe({
+              next: (resultado: any) => {
+                this.obtenerLogros(usuario.username), this.toast.info({
+                  detail: "Partida Registrada",
+                  summary: 'Se registro con exito la partida',
+                  duration: 5000
+                });
+              },
+              error: (error: any) => {
+                this.toast.error({
+                  detail: "Error",
+                  summary: 'No se registro la partida error con el servidor',
+                  duration: 5000
+                });
+              }
+            });
         } else {
           this.toast.info({
             detail: "Guardado de Resultado?",
@@ -179,7 +191,7 @@ export class JuegoComponent implements OnInit {
   obtenerLogros(username: string) {
     this.authService.obtenerUsuarioDB(username)
       .subscribe({
-        next: (result: any) => { this.logrosService.obtenerLogrosGenerales(result); this.logrosService.obtenerLogrosAhorcado(result)},
+        next: (result: any) => { this.logrosService.obtenerLogrosGenerales(result); this.logrosService.obtenerLogrosAhorcado(result) },
         error: (err) => { console.log(err); }
       });
   }

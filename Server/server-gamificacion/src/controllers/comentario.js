@@ -27,7 +27,21 @@ const obtenerComentarios = async (req, res) => {
   }
 };
 
+const modificarUsername = async (req, res) => {
+  const { nuevoUsername, usernameActual } = req.body;
+  try {
+      const result = await comentario.updateMany(
+          { usuario: usernameActual },
+          { $set: { usuario: nuevoUsername} }
+      );
+      res.status(200).json(result);
+  } catch (error) {
+      res.status(409).json({ error: error.message });
+  }
+}
+
 module.exports = {
   registarComentario: registarComentario,
   obtenerComentarios: obtenerComentarios,
+  modificarUsername: modificarUsername
 };
