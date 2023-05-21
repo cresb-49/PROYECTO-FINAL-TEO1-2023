@@ -5,7 +5,7 @@ import { PreviewGameComponent } from './preview-game/preview-game.component';
 import { ComentarioJuegoComponent } from './comentario-juego/comentario-juego.component';
 import { FormsModule } from '@angular/forms';
 import { GamePageComponent } from './game-page/game-page.component';
-
+import { RankingJuegoComponent } from './ranking-juego/ranking-juego.component';
 
 
 @NgModule({
@@ -13,17 +13,19 @@ import { GamePageComponent } from './game-page/game-page.component';
     MenuComponent,
     PreviewGameComponent,
     ComentarioJuegoComponent,
-    GamePageComponent
+    GamePageComponent,
+    RankingJuegoComponent
   ],
   imports: [
     CommonModule,
     FormsModule
-  ], 
+  ],
   exports: [
     MenuComponent,
     PreviewGameComponent,
     ComentarioJuegoComponent,
-    GamePageComponent
+    GamePageComponent,
+    RankingJuegoComponent
   ]
 })
 export class SharedModule { }

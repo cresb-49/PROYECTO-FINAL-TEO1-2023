@@ -1,0 +1,55 @@
+.pic-profile {
+    height: 75px;
+    border-radius: 4px;
+    margin: 2px;
+    width: auto;
+}
+
+.contenedor-rank {
+    padding: 10px;
+}
+
+.contenedor-ranks {
+    border: 4px solid #EFDB00;
+    background-color: #22e684da;
+    border-radius: 7px;
+    width: 747px;
+    height: 1000px;
+    margin: 5px;
+    overflow-y: scroll;
+}
+
+.cont {
+    text-align: center;
+    vertical-align: middle;
+}
+
+.pill {
+    border: 4px solid #EFDB00;
+    background-color: #22e684da;
+    border-radius: 7px;
+    max-height: 93px;
+    width: 720px;
+}
+
+.parametros {
+    height: 80px;
+    width: 150px;
+    overflow-y: scroll;
+}
+
+.posicion {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+p {
+    font-size: 30px;
+}
+
+h3 {
+    margin-left: 10px;
+    margin-top: 5px;
+    color: #EFDB00;
+}
