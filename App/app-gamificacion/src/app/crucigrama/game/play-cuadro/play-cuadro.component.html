@@ -1,0 +1,18 @@
+<div class="contenedor" [ngStyle]="{ 'background-color': (cuadro.letra !== '' ? 'yellow' : 'green') }">
+  <div class="texto-horizontal">
+    <div *ngIf="cuadro.numeroHorizontal !== 0">
+      H {{ cuadro.numeroHorizontal }}
+    </div>
+  </div>
+  <div class="texto-vertical">
+    <div *ngIf="cuadro.numeroVertical !== 0">
+      V {{ cuadro.numeroVertical }}
+    </div>
+  </div>
+  <div class="espacio">
+    <input *ngIf="cuadro.letra!==''" type="text" class="texto-espacio" maxlength="1" [(ngModel)]="letra"
+      [ngStyle]="{ 'background-color': (cuadro.entrada.length === 0 && cuadro.letra!=='' ? '#22E685' : 'transparent') }"
+      (keypress)="valorCambio($event)" (focus)="seleccionarTexto($event.target)"
+      (ngModelChange)="modelCambio($event)" />
+  </div>
+</div>

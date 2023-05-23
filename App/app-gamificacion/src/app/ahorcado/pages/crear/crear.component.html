@@ -1,21 +1,24 @@
-<div class="divBack">
-    <div class="container my-5">
-        <h1 class="text-center mb-3">Creacion de juego de ahorcado</h1>
-        <h3 class="text-center mb-3">Ingresa las palabras para crear una partida</h3>
-        <div class="form-group">
-            <label for="nuevoItem">Nueva Palabra</label>
-            <input type="text" [(ngModel)]="palabraActual" class="form-control" id="palabraActual"
-                placeholder="Ingresa el nombre de la nueva palabra">
+<div class="contenedor">
+    <div class="divBack">
+        <div class="contenedor my-5">
+            <h1 class="text-center mb-3">Creacion de juego de ahorcado</h1>
+            <h3 class="text-center mb-3">Ingresa las palabras para crear una partida</h3>
+            <div class="form-group">
+                <label for="nuevoItem">Nueva Palabra</label>
+                <input type="text" [(ngModel)]="palabraActual" class="form-control input-palabra" id="palabraActual"
+                    placeholder="Ingresa el nombre de la nueva palabra">
                 <br> <span [hidden]="alertDisabled" class="alert alert-danger"> La palabra ya esta ingresada</span>
             </div>
-            <button type="button" (click)="agregarPalabra()" class="btn btn-primary m-2">Agregar</button>
+            <button type="button" (click)="agregarPalabra()" class="btn m-2 btn-agregar">Agregar</button>
             <h4> Palabras ingresadas</h4>
             <ul class="list-group my-3" id="lista">
-            <li class="list-group-item" *ngFor="let palabra of palabras; let i = index">{{palabra}}
-                <span class="float-end"><button class="btn btn-danger" (click)="borrarPalabra(i)">x</button></span>
-            </li>
-        </ul>
-        <button class="btn btn-success mx-3" (click)="crearPartida()">Crear Partida</button>
-        <button class="btn btn-success" (click)="borrarLista()">Borrar Lista</button>
+                <li class="form-control palabra" *ngFor="let palabra of palabras; let i = index">
+                    {{palabra}}
+                    <span class="float-end"><button class="btn btn-danger" (click)="borrarPalabra(i)">x</button></span>
+                </li>
+            </ul>
+            <button class="btn btn-success mx-3" (click)="crearPartida()">Crear Partida</button>
+            <button class="btn btn-success" (click)="borrarLista()">Borrar Lista</button>
+        </div>
     </div>
 </div>

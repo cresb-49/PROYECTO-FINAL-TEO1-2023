@@ -1,0 +1,27 @@
+<app-game-page>
+    <div style="margin: 5px;">
+        <h1>Sopa de Letras</h1>
+        <div style="display: grid; grid-template-columns: auto auto auto;">
+            <div>
+                <table>
+                    <tr *ngFor="let fila of tablero">
+                        <td *ngFor="let dato of fila">
+                            <div class="container cell" [style.background]="dato.includes(' ')? 'yellow': 'green'">{{dato}}</div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div>
+                <div class="input-group mb-3 mt-3">
+                    <input [(ngModel)]="palabra" />
+                    <button class="btn btn-dark" (click)="onIngresarPalabra()">Ingresar Palabra</button>
+                </div>
+
+
+                <div>Palabras Encontradas: {{palabrasEncontradas.length}} de
+                    {{cantidadPalabras}}
+                </div>
+            </div>
+        </div>
+    </div>
+</app-game-page>

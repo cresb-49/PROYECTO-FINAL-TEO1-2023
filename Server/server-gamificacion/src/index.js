@@ -10,14 +10,14 @@ const cors = require('cors');
 
 //Configuracion de CORS
 const corsOptions = {
-    origin: 'http://localhost:4200', //TODO: puerto del forntend
+    origin: 'http://localhost:4200',
     credentials: true,
     optionSuccessStatus: 200
 }
 
 const app = express();
-app.use(bp.json());
-app.use(bp.urlencoded({ extended: true }));
+app.use(bp.json({limit: "2mb"}));
+app.use(bp.urlencoded({ extended: true, limit: "2mb" }));
 app.use(cors(corsOptions));
 
 
@@ -40,6 +40,7 @@ app.use('/api', require('./routes/juego'));
 app.use('/api', require('./routes/comentario'));
 app.use('/api', require('./routes/modeloPartida'));
 app.use('/api', require('./routes/resultadoPartida'));
+app.use('/api', require('./routes/ranking'));
 
 //Inicio de la conexion con la base de datos
 start()

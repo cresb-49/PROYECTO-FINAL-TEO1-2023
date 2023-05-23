@@ -1,0 +1,41 @@
+.divBack {
+    padding: 5px;
+    border-radius: 1rem;
+    border: 3px solid #e0f04f;
+    background-color: #22e684d3;
+    max-width: 70%;
+    margin: 5px auto;
+}
+
+.contenedor {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.btn-agregar{
+    background-color: #e0f04f;
+    border: 3px solid #69D957;
+}
+
+.input-palabra {
+    background-color: #e0f04f;
+    border-width: 3px 0px 3px 3px;
+    border-style: solid;
+    border-color: #69D957;
+}
+
+.palabra{
+    margin: 2.5px;
+    background-color: #DBBA2E;
+    text-align: center;
+    border-radius: 7px;
+}
+
+.divCruci{
+    background-color: #DBBA2E;
+    width: 500px;
+    height: 50px;
+    margin-left: auto;
+    margin-right: auto;
+    color: white
+}

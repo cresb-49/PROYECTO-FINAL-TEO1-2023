@@ -1,0 +1,56 @@
+<div class="container">
+    <h1>Estadisticas</h1>
+    <h2>Partidas Totales jugadas: <span class="fw-bold"> {{partidasGenerales}}</span></h2>
+    <h3>Partidas realizadas de cada juego</h3>
+    <div class="chartDona">
+        <canvas baseChart class="chart" [data]="doughnutChartData" [type]="doughnutChartType">
+        </canvas>
+    </div>
+    <h1>Estadisticas individuales</h1>
+    <div class="row">
+        <div class="col-3">
+            <button class="btn btn-warning" (click)="verEstadisticasHanoi()">
+                Hanoi
+            </button>
+        </div>
+        <div class="col-3">
+            <button class="btn btn-warning" (click)="verEstadisticasAhorcado()">
+                Ahorcado
+            </button>
+        </div>
+        <div class="col-3">
+            <button class="btn btn-warning" (click)="verEstadisticasCrucigrama()">
+                Crucigrama
+            </button>
+        </div>
+        <div class="col-3">
+            <button class="btn btn-warning" (click)="verEstadisticasSopa()">
+                Sopa de letras
+            </button>
+        </div>
+    </div>
+
+    <h1>
+        Logros:
+    </h1>
+    <div>
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Id</th>
+                    <th scope="col">Logro</th>
+                    <th scope="col">Fecha de Obtencion</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of usuario?.data.logros; let i = index;">
+                    <td>{{i+1}}</td>
+                    <td>{{item.id}}</td>
+                    <td>{{item.nombre}}</td>
+                    <td>{{item.fecha}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

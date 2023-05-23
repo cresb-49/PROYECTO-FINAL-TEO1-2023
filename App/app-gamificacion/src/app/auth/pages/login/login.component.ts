@@ -3,6 +3,8 @@ import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import Swal from 'sweetalert2';
+import { SesionService } from 'src/app/services/sesion.service';
+import { NgToastService } from 'ng-angular-popup';
 
 @Component({
   selector: 'app-login',
@@ -16,7 +18,7 @@ export class LoginComponent {
     password: ["", [Validators.required]]
   })
 
-  constructor(private fb: FormBuilder, private router: Router, private authService: AuthService) { }
+  constructor(private fb: FormBuilder, private router: Router, private toast: NgToastService, private authService: AuthService, private sesionService: SesionService) { }
 
   ngOnInit(): void {
     localStorage.removeItem("carrito");
@@ -50,22 +52,11 @@ export class LoginComponent {
       this.authService.login(body)
         .subscribe({
           next: (result: any) => {
-            localStorage.setItem("usuario", JSON.stringify(result.usuario))
+            this.sesionService.iniciarSesion(result.usuario.username, result.usuario.rol);
+            this.toast.success({ detail: result.mensaje, summary: "Ingreso correcto", duration: 2000 });
             setTimeout(() => {
               this.router.navigate(['/']);
             }, 0);
-            setTimeout(() => {
-              Swal.fire({
-                position: 'top-end',
-                icon: 'success',
-                title: result.mensaje,
-                showConfirmButton: false,
-                timer: 1500
-              })
-            }, 500);
-            setTimeout(() => {
-              window.location.reload();
-            }, 2000);
           },
           error: (error: any) => {
             Swal.fire({

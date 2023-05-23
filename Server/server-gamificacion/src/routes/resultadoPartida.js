@@ -7,4 +7,14 @@ router.post('/partida', resultadoPartidaController.registarPartida);
 
 router.get('/partida', resultadoPartidaController.obtenerPartida);
 
+router.get('/partidasPorJuego', resultadoPartidaController.obtenerPartidasPorJuego);
+
+router.get('/estadisticasGenerales', resultadoPartidaController.estadisticasGenerales);
+
+router.get('/estadisticasAhorcado', resultadoPartidaController.estadisticasAhorcado);
+
+router.get('/estadisticasHanoi', resultadoPartidaController.estadisticasHanoi);
+
+router.put('/modificarUsuarioResultados', resultadoPartidaController.modificarUsername);
+
 module.exports = router;

@@ -1,14 +1,16 @@
 <div>
-    <div class="torre"[style.min-height.px]="altura">
+    <div class="torre" [style.min-height.px]="altura">
         <h4>{{torre.nombre}}</h4>
         <ng-template ngFor let-disco [ngForOf]="torre.discos">
             <app-disco-hanoi [peso]="disco.peso"></app-disco-hanoi>
         </ng-template>
     </div>
-    <button (click)="movimiento()">Mover</button>
-    <select #selector>
-        <ng-template ngFor let-torre [ngForOf]="torresFiltter()">
-            <option [value]="torre.nombre">{{torre.nombre}}</option>
-        </ng-template>
-    </select>      
+    <div class="container" style="display: flex;">
+        <button class="btn btn-primary btn-sm" style="margin-right: 5px;" (click)="movimiento()">Mover</button>
+        <select class="form-select form-select-sm" #selector>
+            <ng-template ngFor let-torre [ngForOf]="torresFiltter()">
+                <option [value]="torre.nombre">{{torre.nombre}}</option>
+            </ng-template>
+        </select>
+    </div>
 </div>

@@ -1,1 +1,46 @@
-<p>main works! Principal</p>
+<div class="container contenedor">
+	<section class="py-5 text-center container">
+		<div class="row py-lg-5">
+			<div class="mx-auto">
+				<h1 class="titulo-pagina">Bienvenidos a Gamificacion</h1>
+				<div style="font-size: 20px; font-style: italic;">
+					<p class="pt-2" style="text-align: justify;">Estamos emocionados de que hayas decidido unirte a nosotros en este viaje
+						de aprendizaje
+						divertido y estimulante. Nuestro objetivo es brindarte una amplia gama de juegos interactivos que no
+						solo te entretengan, sino que también te ayuden a adquirir conocimientos nuevos y fortalecer tus
+						habilidades en diferentes áreas.</p>
+					<p style="text-align: justify;">Explora nuestra colección de juegos cuidadosamente seleccionados, diseñados para
+						desafiar tu pensamiento
+						crítico, mejorar tu vocabulario, estimular tu razonamiento lógico y mucho más. Ya sea que estés
+						interesado en matemáticas, ciencias, historia, idiomas o arte, encontrarás juegos adecuados a tu nivel y
+						preferencias.</p>
+				</div>
+			</div>
+		</div>
+	</section>
+	<div class="contenedor2">
+		<div class="container">
+			<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+				<div class="col" *ngFor="let juego of juegos">
+					<div class="card shadow-sm">
+						<img [src]="'http://localhost:5000/api/juego/imagen?juego='+juego.codigo" alt="imagenJuego"
+							class="bd-placeholder-img card-img-top" width="100%" height="225">
+						<div class="card-body">
+							<h5>{{juego.nombre}}</h5>
+							<p class="card-text p-text overflow-ellipsis"><small>{{juego.descripcion}}</small></p>
+							<div class="d-flex justify-content-between align-items-center">
+								<div class="btn-group">
+									<button *ngIf="usuario===2" type="button" class="btn btn-sm btn-outline-secondary"
+										(click)="crearJuego(juego.codigo)">Crear</button>
+									<button *ngIf="usuario===0||usuario===1" type="button"
+										class="btn btn-sm btn-outline-secondary"
+										(click)="ejecutarJuego(juego.codigo)">Jugar</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

@@ -14,9 +14,11 @@ const juegoSchema = new Schema({
     codigo: {
         type: String,
         unique: true
-    },  
+    },
     nombre: String,
     autores: String,
+    imagen: String,
+    descripcion: String,
     like: {
         type: [like],
         default: []

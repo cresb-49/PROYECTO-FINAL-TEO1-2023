@@ -8,6 +8,9 @@ import { SharedModule } from './shared/shared.module';
 import { HttpClientModule } from '@angular/common/http';
 import { CrearComponent } from './hanoi/pages/crear/crear.component'
 import { FormsModule } from '@angular/forms';
+import { NgToastModule } from 'ng-angular-popup';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {NoopAnimationsModule} from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -19,7 +22,9 @@ import { FormsModule } from '@angular/forms';
     AppRoutingModule,
     SharedModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    NgToastModule,
+    NoopAnimationsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

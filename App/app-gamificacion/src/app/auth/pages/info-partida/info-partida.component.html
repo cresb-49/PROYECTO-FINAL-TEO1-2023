@@ -1,0 +1,58 @@
+<div class="contenedor">
+    <div class="divBack">
+        <div class="contenedor my-5">
+            <h1>
+                <span class="fw-bold"> Partida con el codigo: </span> {{modelo?.codigo}}
+            </h1>
+            <h2>
+                <span class="fw-bold">Juego: </span> {{verNombre(modelo?.juego)}}
+            </h2>
+            <h2>
+                <span class="fw-bold">Usuario creador: </span> {{modelo?.usuario}}
+            </h2>
+            <h1>
+                Data:
+            </h1>
+
+            <div *ngIf="modelo?.juego == 'J00002' || modelo?.juego == 'J00004' ">
+                <h3>Palabras del juego: </h3>
+                <ul class="list-group">
+                    <li class="list-group-item palabra" *ngFor="let item of modelo?.data.palabras">
+                        {{item}}
+                    </li>
+                </ul>
+            </div>
+
+            <div *ngIf="modelo?.juego == 'J00001' ">
+                <h3 class="palabra"><span class="fw-bold">Torres: </span> {{modelo?.data.torres}} </h3>
+                <h3 class="palabra"><span class="fw-bold">Discos: </span> {{modelo?.data.discos}} </h3>
+            </div>
+
+            <div *ngIf="modelo?.juego == 'J00003' ">
+                <h3>Visualizacion de crucigrama</h3>
+                <div *ngFor="let item of modelo?.data.matriz" class="divCruci">
+                    <span [class]="obtenerClaseCruciGrama(i)" *ngFor="let i of item">
+                        {{obtenerLetraCrucigrama(i)}}
+                    </span>
+                </div>
+                <div>
+                    <h2 class="fw-bold">Pistas Horizontales:</h2>
+                    <ul class="list-group">
+                        <li class="list-group-item palabra" *ngFor="let item of modelo?.data.pistasH">
+                            {{item.texto}}
+                        </li>
+                    </ul>
+                    <h2 class="fw-bold">Pistas Verticales:</h2>
+                    <ul class="list-group">
+                        <li class="list-group-item palabra" *ngFor="let item of modelo?.data.pistasV">
+                            {{item.texto}}
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <button class="btn btn-warning mt-3" (click)="regresar()">
+                Regresar
+            </button>
+        </div>
+    </div>
+</div>

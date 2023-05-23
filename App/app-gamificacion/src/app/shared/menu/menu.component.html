@@ -13,9 +13,10 @@
             </li>
         </ul>
     </div>
-    <div class="btn btn-success float-end mx-1">
+    <div class="btn btn-success float-end mx-1" (click)="verInformacion()">
+        <img class="pic-profile" [src]="'http://localhost:5000/api/imgPerfil?username='+nombre()" alt="pic">
         {{nombre()}}
     </div>
     <button *ngIf="!usuario" class="btn btn-primary float-end mx-3" (click)="login()">Ingresar </button>
-    <button *ngIf="usuario" class="btn btn-primary float-end mx-3" (click) = "salir()" >Salir </button>
+    <button *ngIf="usuario" class="btn btn-primary float-end mx-3" (click)="salir()">Salir </button>
 </nav>

@@ -1,0 +1,27 @@
+<div class="contenedor-ranks">
+  <h3>Ranking del Juego</h3>
+  <div class="contenedor-rank">
+    <div *ngFor="let item of this.ranking;let i = index" class="pill">
+      <div class="row">
+        <div class="col container cont posicion">
+          <p class="pos">
+            {{i+1}}
+          </p>
+        </div>
+        <div class="pic-profile">
+          <img class="pic-profile" [src]="'http://localhost:5000/api/imgPerfil?username='+item._id" alt="pic">
+        </div>
+        <div class="col posicion">
+          <p class="pos">
+            {{item._id}}
+          </p>
+        </div>
+        <ul class="col container parametros" style="margin-left: 5px;">
+          <li *ngFor="let item of calcularParametros(item)">
+            {{item}}
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

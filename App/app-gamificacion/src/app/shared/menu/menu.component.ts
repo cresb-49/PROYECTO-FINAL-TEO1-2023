@@ -1,44 +1,49 @@
 import { AfterContentInit, AfterViewInit, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { SesionService } from 'src/app/services/sesion.service';
+import { MenuService } from './services/menu.service';
 
 @Component({
   selector: 'app-menu',
   templateUrl: './menu.component.html',
   styleUrls: ['./menu.component.css']
 })
-export class MenuComponent implements OnInit{
+export class MenuComponent implements OnInit {
 
   usuario: any;
 
   nombre = () => {
-    if(this.usuario){
+    this.usuario = this.sesionService.obtenerSesion();
+    if (this.sesionService.verificarSesion()) {
       return this.usuario.username;
     } else {
-      return 'Guest';
+      return 'Guest'
     }
   }
 
-  constructor(private router: Router){}
+  constructor(private router: Router, private sesionService: SesionService, private menuService: MenuService) { }
 
   ngOnInit(): void {
-    const jsonUsuario = localStorage.getItem("usuario");
-    if(jsonUsuario){
-      this.usuario = JSON.parse(jsonUsuario);
-    }
+    this.usuario = this.sesionService.obtenerSesion();
   }
 
-
-  inicio(){
+  inicio() {
     this.router.navigate(["/principal"]);
   }
 
-  login(){
+  login() {
     this.router.navigate(["/auth/login"]);
-  } 
+  }
 
-  salir(){
+  verInformacion() {
+    if (this.sesionService.verificarSesion()) {
+      this.router.navigate(["/auth/informacion"]);
+    }
+  }
+
+  salir() {
     this.router.navigate(['/principal'])
-    localStorage.removeItem("usuario");
     this.usuario = null;
+    this.sesionService.cerrarSesion();
   }
 }
