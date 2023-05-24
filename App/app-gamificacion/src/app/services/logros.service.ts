@@ -501,6 +501,132 @@ export class LogrosService {
             this.guardarLogro(logro, username);
           }
         }
+      } else if (juego._id == "J00003") {
+        if (partidas == 1) {
+          const logro = {
+            id: "L00014",
+            nombre: "Haz jugado una vez al crucigrama",
+            fecha: moment().format("YYYY-MM-DD")
+          }
+          const verificacion = logros.find(lr => lr.id == logro.id);
+          if (!verificacion) {
+            this.guardarLogro(logro, username);
+          }
+        } else if (partidas == 5) {
+          const logro = {
+            id: "L00015",
+            nombre: "Haz jugado 5 veces al crucigrama",
+            fecha: moment().format("YYYY-MM-DD")
+          }
+          const verificacion = logros.find(lr => lr.id == logro.id);
+          if (!verificacion) {
+            this.guardarLogro(logro, username);
+          }
+        } else if (partidas == 10) {
+          const logro = {
+            id: "L00016",
+            nombre: "Haz jugado 10 veces al crucigrama",
+            fecha: moment().format("YYYY-MM-DD")
+          }
+          const verificacion = logros.find(lr => lr.id == logro.id);
+          if (!verificacion) {
+            this.guardarLogro(logro, username);
+          }
+        } else if (partidas == 50) {
+          const logro = {
+            id: "L00017",
+            nombre: "Haz jugado 50 veces al crucigrama",
+            fecha: moment().format("YYYY-MM-DD")
+          }
+          const verificacion = logros.find(lr => lr.id == logro.id);
+          if (!verificacion) {
+            this.guardarLogro(logro, username);
+          }
+        }
+      } else if (juego._id == "J00003") {
+        if (partidas == 1) {
+          const logro = {
+            id: "L00014",
+            nombre: "Haz jugado una vez al crucigrama",
+            fecha: moment().format("YYYY-MM-DD")
+          }
+          const verificacion = logros.find(lr => lr.id == logro.id);
+          if (!verificacion) {
+            this.guardarLogro(logro, username);
+          }
+        } else if (partidas == 5) {
+          const logro = {
+            id: "L00015",
+            nombre: "Haz jugado 5 veces al crucigrama",
+            fecha: moment().format("YYYY-MM-DD")
+          }
+          const verificacion = logros.find(lr => lr.id == logro.id);
+          if (!verificacion) {
+            this.guardarLogro(logro, username);
+          }
+        } else if (partidas == 10) {
+          const logro = {
+            id: "L00016",
+            nombre: "Haz jugado 10 veces al crucigrama",
+            fecha: moment().format("YYYY-MM-DD")
+          }
+          const verificacion = logros.find(lr => lr.id == logro.id);
+          if (!verificacion) {
+            this.guardarLogro(logro, username);
+          }
+        } else if (partidas == 50) {
+          const logro = {
+            id: "L00017",
+            nombre: "Haz jugado 50 veces al crucigrama",
+            fecha: moment().format("YYYY-MM-DD")
+          }
+          const verificacion = logros.find(lr => lr.id == logro.id);
+          if (!verificacion) {
+            this.guardarLogro(logro, username);
+          }
+        }
+      } else if (juego._id == "J00004") {
+        if (partidas == 1) {
+          const logro = {
+            id: "L00018",
+            nombre: "Haz jugado una vez a la sopa de letras",
+            fecha: moment().format("YYYY-MM-DD")
+          }
+          const verificacion = logros.find(lr => lr.id == logro.id);
+          if (!verificacion) {
+            this.guardarLogro(logro, username);
+          }
+        } else if (partidas == 5) {
+          const logro = {
+            id: "L00019",
+            nombre: "Haz jugado 5 veces a la sopa de letras",
+            fecha: moment().format("YYYY-MM-DD")
+          }
+          const verificacion = logros.find(lr => lr.id == logro.id);
+          if (!verificacion) {
+            this.guardarLogro(logro, username);
+          }
+        } else if (partidas == 10) {
+          const logro = {
+            id: "L00020",
+            nombre: "Haz jugado 10 veces a la sopa de letras",
+            fecha: moment().format("YYYY-MM-DD")
+          }
+          const verificacion = logros.find(lr => lr.id == logro.id);
+          if (!verificacion) {
+            this.guardarLogro(logro, username);
+          }
+        } else if (partidas == 50) {
+          const logro = {
+            id: "L00021",
+            nombre: "Haz jugado 50 veces a la sopa de letras",
+            fecha: moment().format("YYYY-MM-DD")
+          }
+          const verificacion = logros.find(lr => lr.id == logro.id);
+          if (!verificacion) {
+            this.guardarLogro(logro, username);
+          }
+        }
       }
     })
   }

@@ -103,7 +103,7 @@ export class CrearComponent {
         });
       },
       complete: () => {
-        this.router.navigate(["/crucigrama/principal"]);
+        this.router.navigate([""]);
       }
     });
   }
